@@ -1,0 +1,14 @@
+{
+  "name": "node-machina-ffxiv",
+  "version": "0.9.3",
+  "description": "A wrapper for revahn's Machina network capture library.",
+  "main": "node-machina-ffxiv.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "karashiiro",
+  "license": "MIT",
+  "dependencies": {
+    "lodash.isequal": "^4.5.0"
+  }
+}
