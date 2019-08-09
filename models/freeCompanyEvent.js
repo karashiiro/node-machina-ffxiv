@@ -1,7 +1,7 @@
 const MachinaModels = require('./_MachinaModels.js');
 
 module.exports = (struct) => {
-    struct.supertype = "freeCompanyMemberLogInOut";
+    struct.supertype = "freeCompanyEvent";
     struct.fc = String.fromCodePoint(...struct.data.slice(0x1A, 0x48)).replace(/\0/g, "");
     struct.character = String.fromCodePoint(...struct.data.slice(0x68)).replace(/\0/g, "");
 

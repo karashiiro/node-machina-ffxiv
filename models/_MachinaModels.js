@@ -4,9 +4,10 @@
 this.chat                          = require('./chat.js');
 this.directorPopUp                 = require('./directorPopUp.js');
 this.examineSearchInfo             = require('./examineSearchInfo.js');
-this.freeCompanyMemberLogInOut     = require('./freeCompanyMemberLogInOut.js');
+this.freeCompanyEvent              = require('./freeCompanyEvent.js');
 this.freeCompanyUpdateShortMessage = require('./freeCompanyUpdateShortMessage.js');
 this.logMessage                    = require('./logMessage.js');
+this.marketBoardSearchResult       = require('./marketBoardSearchResult.js'); // Market board search results, will fix name later
 this.messageFC                     = require('./messageFC.js');
 this.playtime                      = require('./playtime.js');
 this.playerSpawn                   = require('./playerSpawn.js');
@@ -26,13 +27,12 @@ module.exports.parse = (struct) => {
     if (hasSubArray(struct.data, testSequence)) {
         if (struct.type === "unknown") {
             console.log(`Found data in IPC ${struct.operation} type ${struct.type} (${this.getUint16(struct.data, 0x12)})`);
-            console.log(struct.data.slice(0x20).toString());
-            console.log(String.fromCodePoint(...struct.data.slice(0x20)));
         } else {
             console.log(`Found data in IPC ${struct.operation} type ${struct.type}`);
-            console.log(struct.data.toString());
-            console.log(String.fromCodePoint(...struct.data));
         }
+
+        console.log(struct.data.toString());
+        console.log(String.fromCodePoint(...struct.data));
     }
 
     /*switch (this.getUint16(struct.data, 0x12)) {
