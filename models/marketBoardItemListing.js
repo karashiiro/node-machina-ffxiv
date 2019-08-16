@@ -42,7 +42,7 @@ module.exports = async (struct) => {
 
     // Max length 10 listings per packet
     for (let i = 0; i < 10; i++) {
-        let quality = struct.data[0x8C + (LISTING_LENGTH * i)];
+        let hq = struct.data[0x8C + (LISTING_LENGTH * i)];
         let materiaCount = struct.data[0x8D + (LISTING_LENGTH * i)];
         let materia = [];
         for (let j = 0; j < 5; j++) {
@@ -50,22 +50,22 @@ module.exports = async (struct) => {
             let materiaName = await MateriaHelper.materiaValueToItemName(materiaSlot);
             if (materiaName) materia.push(materiaName);
         }
-        let price = MachinaModels.getUint32(struct.data, 0x20 + (LISTING_LENGTH * i));
+        let pricePerUnit = MachinaModels.getUint32(struct.data, 0x20 + (LISTING_LENGTH * i));
         let quantity = MachinaModels.getUint32(struct.data, 0x28 + (LISTING_LENGTH * i));
-        let total = price * quantity; // Just for convenience; this value isn't in the packet.
+        let total = pricePerUnit * quantity; // Just for convenience; this value isn't in the packet.
         let city = MachinaModels.cityIDList[struct.data[0x8F + (LISTING_LENGTH * i)]];
-        let retainer = String.fromCodePoint(...struct.data.slice(0x4C + (LISTING_LENGTH * i), 0x8C + (LISTING_LENGTH * i))).replace(/\0/g, "");
+        let retainerName = String.fromCodePoint(...struct.data.slice(0x4C + (LISTING_LENGTH * i), 0x8C + (LISTING_LENGTH * i))).replace(/\0/g, "");
 
-        if (price === 0) break;
+        if (pricePerUnit === 0) break;
 
         struct[`itemListing${i + 1}`] = {};
-        struct[`itemListing${i + 1}`].quality = quality;
+        struct[`itemListing${i + 1}`].hq = hq;
         struct[`itemListing${i + 1}`].materiaCount = materiaCount;
         struct[`itemListing${i + 1}`].materia = materia;
-        struct[`itemListing${i + 1}`].pricePerUnit = price;
+        struct[`itemListing${i + 1}`].pricePerUnit = pricePerUnit;
         struct[`itemListing${i + 1}`].quantity = quantity;
         struct[`itemListing${i + 1}`].total = total;
         struct[`itemListing${i + 1}`].city = city;
-        struct[`itemListing${i + 1}`].retainerName = retainer;
+        struct[`itemListing${i + 1}`].retainerName = retainerName;
     }
 };
