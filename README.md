@@ -3,9 +3,11 @@ A WIP Node.js wrapper for revahn's [Machina](https://github.com/ravahn/machina) 
 
 Many features are unimplemented, and chat-related messages aren't completely working, but besides that what is implemented is probably usable.
 
-If you so choose, you can use it exclusively as a wrapper for Machina with minimal data processing by assigning the `raw` event as shown below.
+If you so choose, you can use it exclusively as a wrapper for Machina with minimal data processing by assigning the `raw` data event as shown below.
 
 Event types and some packet structures are taken from the [Sapphire](https://github.com/SapphireServer/Sapphire) project.
+
+NOTE: Most features besides the `raw` data event will break after every major patch release (4.5, 5.0, 5.1 etc., NOT 5.01, 5.05 etc.).
 
 ## Usage
 When using this module, your application must be run in Administrator mode, and the .exe needs firewall in/out privileges, since it works with FFXIV's network data.
