@@ -12,6 +12,9 @@ NOTE: Most features besides the `raw` data event will break after every major pa
 ## Usage
 When using this module, your application must be run in Administrator mode, and the .exe needs firewall in/out privileges, since it works with FFXIV's network data.
 
+Please refer to the [wiki](https://github.com/karashiiro/node-machina-ffxiv/wiki) for usage.
+
+## Example
 ```
 const MachinaFFXIV = require('node-machina-ffxiv');
 const Machina = new MachinaFFXIV();
@@ -20,10 +23,6 @@ Machina.start(() => {
 });
 
 // Assign event handlers
-Machina.on('raw', (content) => {
-    console.log(content.data);
-});
-
 Machina.on('cFCommence', (content) => {
     console.log(`[${getTime()}]Duty commenced!`);
 });
@@ -38,6 +37,14 @@ Machina.on('examineSearchInfo', (content) => {
         Search Comment: ${content.searchComment}
         World: ${content.world}
     `);
+});
+
+Machina.on('freeCompanyMemberLogin', (content) => {
+    console.log(`[${getTime()}][FC]${content.character} has logged in.`);
+});
+
+Machina.on('freeCompanyMemberLogout', (content) => {
+    console.log(`[${getTime()}][FC]${content.character} has logged out.`);
 });
 
 Machina.on('initZone', (content) => {
@@ -56,43 +63,5 @@ Machina.on('marketBoardItemListing', (content) => {
 
 Machina.on('message', (content) => { // Using a supertype event to streamline code
     console.log(`[${getTime()}][${content.type.slice(7)}]<${content.character}> ${content.message}`);
-});
-
-Machina.on('playerSpawn', (content) => {
-    console.log(`Player spawned: ${content.character}`);
-});
-
-Machina.on('playerStats', (content) => {
-    console.log(`Actor ${content.sourceActorSessionID}'s' stats:
-        HP: ${content.hp}
-        MP: ${content.mp}
-        CP: ${content.cp}
-        GP: ${content.gp}
-        Strength: ${content.strength}
-        Dexterity: ${content.dexterity}
-        Vitality: ${content.vitality}
-        Intelligence: ${content.intelligence}
-        Mind: ${content.mind}
-        Critical Hit: ${content.criticalHit}
-        Determination: ${content.determination}
-        Direct Hit: ${content.directHit}
-        Defense: ${content.defense}
-        Magic Defense: ${content.magicDefense}
-        Attack Power: ${content.attackPower}
-        Skill Speed: ${content.skillSpeed}
-        Attack Magic Potency: ${content.attackMagicPotency}
-        Healing Magic Potency: ${content.healingMagicPotency}
-        Spell Speed: ${content.spellSpeed}
-        Tenacity: ${content.tenacity}
-        Piety: ${content.piety}
-        Craftsmanship: ${content.craftsmanship}
-        Control: ${content.control}
-        Gathering: ${content.gathering}
-        Perception: ${content.perception}
-    `);
-});
-
-Machina.on('playtime', (content) => {
-    console.log(`Total Play Time: ${content.days} days, ${content.hours} hours, ${content.minutes} minutes`);
 });
 ```
