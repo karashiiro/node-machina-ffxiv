@@ -12,6 +12,7 @@ module.exports = async (struct) => {
     //}
     //console.log(LISTING_LENGTH);
 
+    struct.itemID = MachinaModels.getUint32(struct.data, 0x2C);
     struct.qualities = [];
     struct.materiaCounts = [];
     struct.materia = [];
@@ -20,6 +21,20 @@ module.exports = async (struct) => {
     struct.totals = [];
     struct.cities = [];
     struct.retainers = [];
+
+    /*console.log(struct.data.toString());
+    console.log(`unknown2_1:  ${MachinaModels.getUint16(struct.data, 0x06)}`);
+    console.log(`unknown3_1:  ${MachinaModels.getUint32(struct.data, 0x10)}`);
+    console.log(`unknown4_1:  ${MachinaModels.getUint16(struct.data, 0x14)}`);
+    console.log(`unknown5_1:  ${MachinaModels.getUint16(struct.data, 0x16)}`);
+    console.log(`unknown3_2:  ${MachinaModels.getUint32(struct.data, 0x18)}`);
+    console.log(`unknown4_2:  ${MachinaModels.getUint16(struct.data, 0x1C)}`);
+    console.log(`unknown5_2:  ${MachinaModels.getUint16(struct.data, 0x1E)}`);
+    console.log(`unknown7_1:  ${MachinaModels.getUint32(struct.data, 0x24)}`);
+    console.log(`unknown8_1:  ${MachinaModels.getUint16(struct.data, 0x32)}`);
+    console.log(`unknown9_1:  ${MachinaModels.getUint16(struct.data, 0x34)}`);
+    console.log(`unknown10_1: ${MachinaModels.getUint16(struct.data, 0x36)}`);
+    console.log(`unknown11_1: ${MachinaModels.getUint16(struct.data, 0x38)}`);*/
 
     // Max length 10 listings per packet
     for (let i = 0; i < 10; i++) {
