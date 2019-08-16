@@ -3,6 +3,8 @@ A WIP Node.js wrapper for revahn's [Machina](https://github.com/ravahn/machina) 
 
 Many features are unimplemented, and chat-related messages aren't completely working, but besides that what is implemented is probably usable.
 
+If you so choose, you can use it exclusively as a wrapper for Machina with minimal data processing by assigning the `raw` event as shown below.
+
 Event types and some packet structures are taken from the [Sapphire](https://github.com/SapphireServer/Sapphire) project.
 
 ## Usage
