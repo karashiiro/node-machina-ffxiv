@@ -1,11 +1,18 @@
 'use strict';
 
 const EventEmitter = require('events');
+const fs = require('fs');
 const readline = require('readline');
 const path = require('path');
 const{spawn} = require('child_process');
 
+const localUtil = require('./util.js')
 const MachinaModels = require('./models/_MachinaModels.js');
+
+// Folders
+if (!fs.existsSync(path.join(__dirname, "./remote-data"))) {
+    fs.mkdirSync("./remote-data");
+}
 
 // Private module members
 var _monitor;
@@ -77,10 +84,8 @@ class MachinaFFXIV extends EventEmitter {
                 content.data = new Uint8Array(content.data); // Why store bytes as 32-bit integers?
 
                 this.emit('raw', content); // Emit a catch-all event
-                MachinaModels.parse(content); // Parse packet data
+                MachinaModels.parseAndEmit(content, this); // Parse packet data
 
-                this.emit(content.type, content); // Emit a parsed event
-                if (content.superType) this.emit(content.superType, content); // Emit another event so you can write catch-alls
                 _stdoutQueue = ""; // Clear the queue
             }
         });

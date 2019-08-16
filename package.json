@@ -1,6 +1,6 @@
 {
   "name": "node-machina-ffxiv",
-  "version": "0.10.1",
+  "version": "1.0.0",
   "description": "A wrapper for revahn's Machina network capture library.",
   "main": "node-machina-ffxiv.js",
   "scripts": {
@@ -9,6 +9,9 @@
   "author": "karashiiro",
   "license": "MIT",
   "dependencies": {
-    "lodash.isequal": "^4.5.0"
+    "csv-parse": "^4.4.5",
+    "lodash.isequal": "^4.5.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
   }
 }

@@ -22,6 +22,25 @@ this.inventoryModifyHandler        = require('./inventoryModifyHandler.js');
 module.exports.parse = (struct) => {
     if (struct.segmentType !== 0x03) return; // No IPC data
 
+    // FC message opcodes overlap with Ping/PingHandler, and Machina cuts off
+    // the header that tells us whether a packet is a zone packet or a chat
+    // packet, so we use a different marker. Further, FC chat doesn't have the
+    // same packet structure as a regular chat packet, so it gets miscategorized
+    // as CharProgress if you feed it through the chat event handler.
+    if (struct.type.startsWith("ping") && (struct.packetSize === 1064 /* pingHandler */ || struct.packetSize === 1112 /* ping */)) {
+        struct.superType = "message";
+        struct.type = "messageFC";
+    }
+
+    // Read IPC data
+    if (this[struct.type]) {
+        this[struct.type](struct);
+    }
+};
+
+module.exports.parseAndEmit = async (struct, context) => {
+    if (struct.segmentType !== 0x03) return; // No IPC data
+
     // Testing
     /*let testSequence = new Uint8Array([]);
     if (hasSubArray(struct.data, testSequence)) {
@@ -44,11 +63,6 @@ module.exports.parse = (struct) => {
             break;
     }*/
 
-    // FC message opcodes overlap with Ping/PingHandler, and Machina cuts off
-    // the header that tells us whether a packet is a zone packet or a chat
-    // packet, so we use a different marker. Further, FC chat doesn't have the
-    // same packet structure as a regular chat packet, so it gets miscategorized
-    // as CharProgress if you feed it through the chat event handler.
     if (struct.type.startsWith("ping") && (struct.packetSize === 1064 /* pingHandler */ || struct.packetSize === 1112 /* ping */)) {
         struct.superType = "message";
         struct.type = "messageFC";
@@ -56,8 +70,11 @@ module.exports.parse = (struct) => {
 
     // Read IPC data
     if (this[struct.type]) {
-        this[struct.type](struct);
+        await this[struct.type](struct);
     }
+
+    context.emit(struct.type, struct); // Emit a parsed event
+    if (struct.superType) context.emit(struct.superType, struct); // Emit another event so you can write catch-alls
 };
 
 module.exports.uint8ArrayToHexArray = (array) => {
@@ -71,6 +88,8 @@ module.exports.uint8ArrayToHexArray = (array) => {
 };
 
 module.exports.getUint16 = (uint8Array, offset) => {
+    if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
+
     let buffer = new DataView(new ArrayBuffer(2));
     for (let i = 0; i < 2; i++) {
         buffer.setUint8(i, uint8Array[offset + i]);
@@ -79,6 +98,8 @@ module.exports.getUint16 = (uint8Array, offset) => {
 };
 
 module.exports.getUint32 = (uint8Array, offset) => {
+    if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
+
     let buffer = new DataView(new ArrayBuffer(4));
     for (let i = 0; i < 4; i++) {
         buffer.setUint8(i, uint8Array[offset + i]);
@@ -89,6 +110,15 @@ module.exports.getUint32 = (uint8Array, offset) => {
 function hasSubArray(master, sub) {
     return sub.every((i => v => i = master.indexOf(v, i) + 1)(0));
 }
+
+module.exports.cityIDList = {
+    0x01: "Limsa Lominsa",
+    0x02: "Gridania",
+    0x03: "Ul'dah",
+    0x04: "Ishgard",
+    0x07: "Kugane",
+    0x0A: "Crystarium"
+};
 
 // https://github.com/SapphireServer/Sapphire/blob/develop/src/common/Common.h#L731-L834
 module.exports.chatType = [

@@ -82,3 +82,6 @@ MachinaWrapper/Machina.FFXIV.dll
 MachinaWrapper/MachinaWrapper.exe
 MachinaWrapper/MachinaWrapper.exe.config
 MachinaWrapper/MachinaWrapper.pdb
+
+# Remote files
+remote-data/
