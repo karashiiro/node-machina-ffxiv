@@ -7,7 +7,7 @@ If you so choose, you can use it exclusively as a wrapper for Machina with minim
 
 Event types and some packet structures are taken from the [Sapphire](https://github.com/SapphireServer/Sapphire) project.
 
-NOTE: Most features besides the `raw` data event will break after every major patch release (4.5, 5.0, 5.1 etc., NOT 5.01, 5.05 etc.).
+NOTE: Most features besides the `raw` data event will break after every major patch release until the opcodes are updated in the Sapphire repo (4.5, 5.0, 5.1 etc., NOT 5.01, 5.05 etc.).
 
 ## Usage
 When using this module, your application must be run in Administrator mode, and the .exe needs firewall in/out privileges, since it works with FFXIV's network data.
