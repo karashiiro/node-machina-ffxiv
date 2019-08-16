@@ -1,7 +1,9 @@
 # node-machina-ffxiv
-A wrapper for revahn's Machina network capture library.
+A WIP Node.js wrapper for revahn's [Machina](https://github.com/ravahn/machina) network capture library.
 
-Event types and some packet structures are taken from the Sapphire project.
+Many features are unimplemented, and chat-related messages aren't completely working, but besides that what is implemented is probably usable.
+
+Event types and some packet structures are taken from the [Sapphire](https://github.com/SapphireServer/Sapphire) project.
 
 ## Usage
 When using this module, your application must be run in Administrator mode, and the .exe needs firewall in/out privileges, since it works with FFXIV's network data.
