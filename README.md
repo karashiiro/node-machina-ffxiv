@@ -38,6 +38,16 @@ Machina.on('initZone', (content) => {
     console.log(`[${getTime()}]Zone loaded.`);
 });
 
+Machina.on('marketBoardItemListing', (content) => {
+    var output = "HQ\tMateria\tPrice\tQuantity\tTotal\tCity\t\tRetainer\n";
+    for (let i = 0; i < content.prices.length; i++) {
+        output += `${content.qualities[i]}\t${content.materiaCounts[i]}\t${content.prices[i]}\t${content.quantities[i]}\t\t${content.totals[i]}\t${content.cities[i] !== "Ul'dah" && content.cities[i] !== "Kugane" && content.cities[i] !== "Ishgard" ? content.cities[i] :
+                    (content.cities[i] === "Kugane" ? "Kugane\t" : (content.cities[i] === "Ishgard" ? "Ishgard\t" : "Ul'dah\t"))}\t${content.retainers[i]}\n`;
+        if (content.materia[i].length > 0) output += `Materia: ${content.materia[i].toString()}\n`;
+    }
+    console.log(output);
+});
+
 Machina.on('message', (content) => { // Using a supertype event to streamline code
     console.log(`[${getTime()}][${content.type.slice(7)}]<${content.character}> ${content.message}`);
 });
