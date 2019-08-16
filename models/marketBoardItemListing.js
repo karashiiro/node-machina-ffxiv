@@ -13,28 +13,32 @@ module.exports = async (struct) => {
     //console.log(LISTING_LENGTH);
 
     struct.itemID = MachinaModels.getUint32(struct.data, 0x2C);
-    struct.qualities = [];
-    struct.materiaCounts = [];
-    struct.materia = [];
-    struct.prices = [];
-    struct.quantities = [];
-    struct.totals = [];
-    struct.cities = [];
-    struct.retainers = [];
 
     /*console.log(struct.data.toString());
-    console.log(`unknown2_1:  ${MachinaModels.getUint16(struct.data, 0x06)}`);
-    console.log(`unknown3_1:  ${MachinaModels.getUint32(struct.data, 0x10)}`);
-    console.log(`unknown4_1:  ${MachinaModels.getUint16(struct.data, 0x14)}`);
-    console.log(`unknown5_1:  ${MachinaModels.getUint16(struct.data, 0x16)}`);
-    console.log(`unknown3_2:  ${MachinaModels.getUint32(struct.data, 0x18)}`);
-    console.log(`unknown4_2:  ${MachinaModels.getUint16(struct.data, 0x1C)}`);
-    console.log(`unknown5_2:  ${MachinaModels.getUint16(struct.data, 0x1E)}`);
-    console.log(`unknown7_1:  ${MachinaModels.getUint32(struct.data, 0x24)}`);
-    console.log(`unknown8_1:  ${MachinaModels.getUint16(struct.data, 0x32)}`);
-    console.log(`unknown9_1:  ${MachinaModels.getUint16(struct.data, 0x34)}`);
-    console.log(`unknown10_1: ${MachinaModels.getUint16(struct.data, 0x36)}`);
-    console.log(`unknown11_1: ${MachinaModels.getUint16(struct.data, 0x38)}`);*/
+    console.log(`1_unknown2_1:  ${MachinaModels.getUint16(struct.data, 0x06)}`);
+    console.log(`1_unknown3_1:  ${MachinaModels.getUint32(struct.data, 0x10)}`);
+    console.log(`1_unknown4_1:  ${MachinaModels.getUint16(struct.data, 0x14)}`);
+    console.log(`1_unknown5_1:  ${MachinaModels.getUint16(struct.data, 0x16)}`);
+    console.log(`1_unknown3_2:  ${MachinaModels.getUint32(struct.data, 0x18)}`);
+    console.log(`1_unknown4_2:  ${MachinaModels.getUint16(struct.data, 0x1C)}`);
+    console.log(`1_unknown5_2:  ${MachinaModels.getUint16(struct.data, 0x1E)}`);
+    console.log(`1_unknown7_1:  ${MachinaModels.getUint32(struct.data, 0x24)}`);
+    console.log(`1_unknown8_1:  ${MachinaModels.getUint16(struct.data, 0x32)}`);
+    console.log(`1_unknown9_1:  ${MachinaModels.getUint16(struct.data, 0x34)}`);
+    console.log(`1_unknown10_1: ${MachinaModels.getUint16(struct.data, 0x36)}`);
+    console.log(`1_unknown11_1: ${MachinaModels.getUint16(struct.data, 0x38)}`);
+    console.log(`2_unknown2_1:  ${MachinaModels.getUint16(struct.data, 0x06 + LISTING_LENGTH)}`);
+    console.log(`2_unknown3_1:  ${MachinaModels.getUint32(struct.data, 0x10 + LISTING_LENGTH)}`);
+    console.log(`2_unknown4_1:  ${MachinaModels.getUint16(struct.data, 0x14 + LISTING_LENGTH)}`);
+    console.log(`2_unknown5_1:  ${MachinaModels.getUint16(struct.data, 0x16 + LISTING_LENGTH)}`);
+    console.log(`2_unknown3_2:  ${MachinaModels.getUint32(struct.data, 0x18 + LISTING_LENGTH)}`);
+    console.log(`2_unknown4_2:  ${MachinaModels.getUint16(struct.data, 0x1C + LISTING_LENGTH)}`);
+    console.log(`2_unknown5_2:  ${MachinaModels.getUint16(struct.data, 0x1E + LISTING_LENGTH)}`);
+    console.log(`2_unknown7_1:  ${MachinaModels.getUint32(struct.data, 0x24 + LISTING_LENGTH)}`);
+    console.log(`2_unknown8_1:  ${MachinaModels.getUint16(struct.data, 0x32 + LISTING_LENGTH)}`);
+    console.log(`2_unknown9_1:  ${MachinaModels.getUint16(struct.data, 0x34 + LISTING_LENGTH)}`);
+    console.log(`2_unknown10_1: ${MachinaModels.getUint16(struct.data, 0x36 + LISTING_LENGTH)}`);
+    console.log(`2_unknown11_1: ${MachinaModels.getUint16(struct.data, 0x38 + LISTING_LENGTH)}`);*/
 
     // Max length 10 listings per packet
     for (let i = 0; i < 10; i++) {
@@ -54,13 +58,14 @@ module.exports = async (struct) => {
 
         if (price === 0) break;
 
-        struct.qualities.push(quality);
-        struct.materiaCounts.push(materiaCount);
-        struct.materia.push(materia);
-        struct.prices.push(price);
-        struct.quantities.push(quantity);
-        struct.totals.push(total);
-        struct.cities.push(city);
-        struct.retainers.push(retainer);
+        struct[`itemListing${i + 1}`] = {};
+        struct[`itemListing${i + 1}`].quality = quality;
+        struct[`itemListing${i + 1}`].materiaCount = materiaCount;
+        struct[`itemListing${i + 1}`].materia = materia;
+        struct[`itemListing${i + 1}`].pricePerUnit = price;
+        struct[`itemListing${i + 1}`].quantity = quantity;
+        struct[`itemListing${i + 1}`].total = total;
+        struct[`itemListing${i + 1}`].city = city;
+        struct[`itemListing${i + 1}`].retainerName = retainer;
     }
 };
