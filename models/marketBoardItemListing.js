@@ -50,8 +50,4 @@ module.exports = async (struct) => {
         struct[itemListing].city = MachinaModels.cityIDList[struct.data[0x8F + (LISTING_LENGTH * i)]];
         struct[itemListing].dyeID = MachinaModels.getUint16(struct.data, 0x90 + (LISTING_LENGTH * i));
     }
-
-    struct.listingIndexEnd = struct.data[0x96 + (LISTING_LENGTH * 10)];
-    struct.listingIndexStart = struct.data[0x97 + (LISTING_LENGTH * 10)];
-    struct.requestID = MachinaModels.getUint16(struct.data, 0x98 + (LISTING_LENGTH * 10));
 };
