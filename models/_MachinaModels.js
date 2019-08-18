@@ -5,7 +5,6 @@ const path = require('path');
 
 // Server-zone packets
 this.chat                          = require('./chat.js');
-this.directorPopUp                 = require('./directorPopUp.js');
 this.examineSearchInfo             = require('./examineSearchInfo.js');
 this.freeCompanyEvent              = require('./freeCompanyEvent.js');
 this.freeCompanyUpdateShortMessage = require('./freeCompanyUpdateShortMessage.js');
@@ -13,14 +12,11 @@ this.logMessage                    = require('./logMessage.js');
 this.marketBoardItemListing        = require('./marketBoardItemListing.js');
 this.messageFC                     = require('./messageFC.js');
 this.playtime                      = require('./playtime.js');
-this.playerSpawn                   = require('./playerSpawn.js');
 this.playerStats                   = require('./playerStats.js');
-this.updateHpMpTp                  = require('./updateHpMpTp.js');
 
 // Client-zone packets
 this.chatHandler                   = require('./chatHandler.js');
 this.emoteEventHandler             = require('./emoteEventHandler.js');
-this.inventoryModifyHandler        = require('./inventoryModifyHandler.js');
 
 // Auto-generated processing definitions; not necessarily low on size
 // or as rich as we can make them so we deprioritize them.
