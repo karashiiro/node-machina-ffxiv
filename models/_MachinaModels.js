@@ -22,7 +22,8 @@ this.chatHandler                   = require('./chatHandler.js');
 this.emoteEventHandler             = require('./emoteEventHandler.js');
 this.inventoryModifyHandler        = require('./inventoryModifyHandler.js');
 
-// Auto-generated processing definitions; not necessarily low on size so we deprioritize them
+// Auto-generated processing definitions; not necessarily low on size
+// or as rich as we can make them so we deprioritize them.
 let dir = fs.readdirSync(path.join(__dirname, "./default"));
 for (let def of dir) {
     let packetDef = def.substr(0, def.indexOf("."));
