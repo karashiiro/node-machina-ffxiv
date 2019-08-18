@@ -1,6 +1,6 @@
 {
   "name": "node-machina-ffxiv",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "A wrapper for revahn's Machina network capture library.",
   "main": "node-machina-ffxiv.js",
   "scripts": {

@@ -12,6 +12,7 @@ this.logMessage                    = require('./logMessage.js');
 this.marketBoardItemListing        = require('./marketBoardItemListing.js');
 this.messageFC                     = require('./messageFC.js');
 this.playtime                      = require('./playtime.js');
+this.playerSpawn                   = require('./playerSpawn.js');
 this.playerStats                   = require('./playerStats.js');
 
 // Client-zone packets
