@@ -9,6 +9,13 @@ Event type names and all packet structures are taken from the [Sapphire](https:/
 
 NOTE: Most features besides the `raw` data event will break after every major patch release (4.5, 5.0, 5.1 etc., NOT 5.01, 5.05 etc.) until the [IPC opcodes](https://github.com/SapphireServer/Sapphire/blob/develop/src/common/Network/PacketDef/Ipcs.h) are updated in the Sapphire repo.
 
+## Installation
+```
+npm install node-machina-ffxiv
+```
+
+Be sure to also install [Visual Studio 2017 Community Edition](https://docs.microsoft.com/en-us/visualstudio/releasenotes/vs2017-relnotes) to build [MachinaWrapperJSON](https://github.com/karashiiro/MachinaWrapperJSON) and place the output in the MachinaWrapper folder.
+
 ## Usage
 When using this module, your application must be run in Administrator mode, and the .exe needs firewall in/out privileges, since it works with FFXIV's network data.
 
