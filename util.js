@@ -19,6 +19,7 @@ const remoteFileMap = new Map();
 // HTTP requests.
 const urlDictionary = {
     "ClientZoneDef.h": "https://raw.githubusercontent.com/SapphireServer/Sapphire/develop/src/common/Network/PacketDef/Zone/ClientZoneDef.h",
+    "Ipcs.h": "https://raw.githubusercontent.com/karashiiro/Sapphire/develop/src/common/Network/PacketDef/Ipcs.h",
     "Materia.csv": "https://raw.githubusercontent.com/xivapi/ffxiv-datamining/master/csv/Materia.csv",
     "ServerChatDef.h": "https://raw.githubusercontent.com/SapphireServer/Sapphire/develop/src/common/Network/PacketDef/Chat/ServerChatDef.h",
     "ServerLobbyDef.h": "https://raw.githubusercontent.com/SapphireServer/Sapphire/develop/src/common/Network/PacketDef/Lobby/ServerLobbyDef.h",

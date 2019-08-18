@@ -6,7 +6,7 @@ const fs = require("fs");
 const path = require("path");
 const localUtil = require("../util.js");
 
-module.exports = async (outDir = "../models/default") => {
+(async (outDir = "../models/default") => {
     let packetDef = [
         await localUtil.fetchFileNoSave("ClientZoneDef.h"),
         await localUtil.fetchFileNoSave("ServerChatDef.h"),
@@ -83,7 +83,7 @@ module.exports = async (outDir = "../models/default") => {
     }
 
     await Promise.all(promises);
-};
+})();
 
 const process = (line, lastIndex, index, struct, isNestedStruct = false, debugID = "") => {
     let loops = 1; // Looped properties
