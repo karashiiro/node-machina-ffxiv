@@ -7,6 +7,6 @@ module.exports = async (struct) => {
     struct.char2ContentId = MachinaModels.getUint64(struct.data, 8);
     struct.char3ContentId = MachinaModels.getUint64(struct.data, 16);
     struct.char1Permissions = struct.data[24];
-    struct.char2Permissions = struct.data[32];
-    struct.char3Permissions = struct.data[40];
+    struct.char2Permissions = struct.data[25];
+    struct.char3Permissions = struct.data[26];
 };

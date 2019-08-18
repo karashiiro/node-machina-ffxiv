@@ -3,5 +3,5 @@
 const MachinaModels = require("../_MachinaModels.js")
 
 module.exports = async (struct) => {
-    struct.houseName = String.fromCodePoint(struct.data.slice(12, 32));
+    struct.houseName = String.fromCodePoint(struct.data.slice(0, 1));
 };

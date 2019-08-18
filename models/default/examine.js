@@ -3,247 +3,247 @@
 const MachinaModels = require("../_MachinaModels.js")
 
 module.exports = async (struct) => {
-    struct.classJob = String.fromCodePoint(struct.data.slice(2, 3));
-    struct.level = String.fromCodePoint(struct.data.slice(3, 4));
-    struct.titleId = MachinaModels.getUint16(struct.data, 6);
-    struct.grandCompany = String.fromCodePoint(struct.data.slice(8, 9));
-    struct.grandCompanyRank = String.fromCodePoint(struct.data.slice(9, 10));
-    struct.u6_fromPSpawn = MachinaModels.getUint32(struct.data, 16);
-    struct.u7_fromPSpawn = MachinaModels.getUint32(struct.data, 20);
-    struct.mainWeaponModel = MachinaModels.getUint64(struct.data, 32);
-    struct.secWeaponModel = MachinaModels.getUint64(struct.data, 40);
-    struct.worldId = MachinaModels.getUint16(struct.data, 49);
+    struct.classJob = String.fromCodePoint(struct.data.slice(0, 1));
+    struct.level = String.fromCodePoint(struct.data.slice(1, 2));
+    struct.titleId = MachinaModels.getUint16(struct.data, 2);
+    struct.grandCompany = String.fromCodePoint(struct.data.slice(4, 5));
+    struct.grandCompanyRank = String.fromCodePoint(struct.data.slice(5, 6));
+    struct.u6_fromPSpawn = MachinaModels.getUint32(struct.data, 6);
+    struct.u7_fromPSpawn = MachinaModels.getUint32(struct.data, 10);
+    struct.mainWeaponModel = MachinaModels.getUint64(struct.data, 14);
+    struct.secWeaponModel = MachinaModels.getUint64(struct.data, 22);
+    struct.worldId = MachinaModels.getUint16(struct.data, 30);
     struct.entries_1 = {
-        catalogId: MachinaModels.getUint32(struct.data, 63),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 67),
-        crafterId: MachinaModels.getUint64(struct.data, 71),
-        quality: struct.data[79],
-        materiaId: MachinaModels.getUint16(struct.data, 83),
-        tier: MachinaModels.getUint16(struct.data, 85),
+        catalogId: MachinaModels.getUint32(struct.data, 32),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 36),
+        crafterId: MachinaModels.getUint64(struct.data, 40),
+        quality: struct.data[48],
+        materiaId: MachinaModels.getUint16(struct.data, 49),
+        tier: MachinaModels.getUint16(struct.data, 51),
     };
     struct.entries_2 = {
-        catalogId: MachinaModels.getUint32(struct.data, 87),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 91),
-        crafterId: MachinaModels.getUint64(struct.data, 95),
-        quality: struct.data[103],
-        materiaId: MachinaModels.getUint16(struct.data, 107),
-        tier: MachinaModels.getUint16(struct.data, 109),
+        catalogId: MachinaModels.getUint32(struct.data, 53),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 57),
+        crafterId: MachinaModels.getUint64(struct.data, 61),
+        quality: struct.data[69],
+        materiaId: MachinaModels.getUint16(struct.data, 70),
+        tier: MachinaModels.getUint16(struct.data, 72),
     };
     struct.entries_3 = {
-        catalogId: MachinaModels.getUint32(struct.data, 111),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 115),
-        crafterId: MachinaModels.getUint64(struct.data, 119),
-        quality: struct.data[127],
-        materiaId: MachinaModels.getUint16(struct.data, 131),
-        tier: MachinaModels.getUint16(struct.data, 133),
+        catalogId: MachinaModels.getUint32(struct.data, 74),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 78),
+        crafterId: MachinaModels.getUint64(struct.data, 82),
+        quality: struct.data[90],
+        materiaId: MachinaModels.getUint16(struct.data, 91),
+        tier: MachinaModels.getUint16(struct.data, 93),
     };
     struct.entries_4 = {
-        catalogId: MachinaModels.getUint32(struct.data, 135),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 139),
-        crafterId: MachinaModels.getUint64(struct.data, 143),
-        quality: struct.data[151],
-        materiaId: MachinaModels.getUint16(struct.data, 155),
-        tier: MachinaModels.getUint16(struct.data, 157),
+        catalogId: MachinaModels.getUint32(struct.data, 95),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 99),
+        crafterId: MachinaModels.getUint64(struct.data, 103),
+        quality: struct.data[111],
+        materiaId: MachinaModels.getUint16(struct.data, 112),
+        tier: MachinaModels.getUint16(struct.data, 114),
     };
     struct.entries_5 = {
-        catalogId: MachinaModels.getUint32(struct.data, 159),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 163),
-        crafterId: MachinaModels.getUint64(struct.data, 167),
-        quality: struct.data[175],
-        materiaId: MachinaModels.getUint16(struct.data, 179),
-        tier: MachinaModels.getUint16(struct.data, 181),
+        catalogId: MachinaModels.getUint32(struct.data, 116),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 120),
+        crafterId: MachinaModels.getUint64(struct.data, 124),
+        quality: struct.data[132],
+        materiaId: MachinaModels.getUint16(struct.data, 133),
+        tier: MachinaModels.getUint16(struct.data, 135),
     };
     struct.entries_6 = {
-        catalogId: MachinaModels.getUint32(struct.data, 183),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 187),
-        crafterId: MachinaModels.getUint64(struct.data, 191),
-        quality: struct.data[199],
-        materiaId: MachinaModels.getUint16(struct.data, 203),
-        tier: MachinaModels.getUint16(struct.data, 205),
+        catalogId: MachinaModels.getUint32(struct.data, 137),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 141),
+        crafterId: MachinaModels.getUint64(struct.data, 145),
+        quality: struct.data[153],
+        materiaId: MachinaModels.getUint16(struct.data, 154),
+        tier: MachinaModels.getUint16(struct.data, 156),
     };
     struct.entries_7 = {
-        catalogId: MachinaModels.getUint32(struct.data, 207),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 211),
-        crafterId: MachinaModels.getUint64(struct.data, 215),
-        quality: struct.data[223],
-        materiaId: MachinaModels.getUint16(struct.data, 227),
-        tier: MachinaModels.getUint16(struct.data, 229),
+        catalogId: MachinaModels.getUint32(struct.data, 158),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 162),
+        crafterId: MachinaModels.getUint64(struct.data, 166),
+        quality: struct.data[174],
+        materiaId: MachinaModels.getUint16(struct.data, 175),
+        tier: MachinaModels.getUint16(struct.data, 177),
     };
     struct.entries_8 = {
-        catalogId: MachinaModels.getUint32(struct.data, 231),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 235),
-        crafterId: MachinaModels.getUint64(struct.data, 239),
-        quality: struct.data[247],
-        materiaId: MachinaModels.getUint16(struct.data, 251),
-        tier: MachinaModels.getUint16(struct.data, 253),
+        catalogId: MachinaModels.getUint32(struct.data, 179),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 183),
+        crafterId: MachinaModels.getUint64(struct.data, 187),
+        quality: struct.data[195],
+        materiaId: MachinaModels.getUint16(struct.data, 196),
+        tier: MachinaModels.getUint16(struct.data, 198),
     };
     struct.entries_9 = {
-        catalogId: MachinaModels.getUint32(struct.data, 255),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 259),
-        crafterId: MachinaModels.getUint64(struct.data, 263),
-        quality: struct.data[271],
-        materiaId: MachinaModels.getUint16(struct.data, 275),
-        tier: MachinaModels.getUint16(struct.data, 277),
+        catalogId: MachinaModels.getUint32(struct.data, 200),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 204),
+        crafterId: MachinaModels.getUint64(struct.data, 208),
+        quality: struct.data[216],
+        materiaId: MachinaModels.getUint16(struct.data, 217),
+        tier: MachinaModels.getUint16(struct.data, 219),
     };
     struct.entries_10 = {
-        catalogId: MachinaModels.getUint32(struct.data, 279),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 283),
-        crafterId: MachinaModels.getUint64(struct.data, 287),
-        quality: struct.data[295],
-        materiaId: MachinaModels.getUint16(struct.data, 299),
-        tier: MachinaModels.getUint16(struct.data, 301),
+        catalogId: MachinaModels.getUint32(struct.data, 221),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 225),
+        crafterId: MachinaModels.getUint64(struct.data, 229),
+        quality: struct.data[237],
+        materiaId: MachinaModels.getUint16(struct.data, 238),
+        tier: MachinaModels.getUint16(struct.data, 240),
     };
     struct.entries_11 = {
-        catalogId: MachinaModels.getUint32(struct.data, 303),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 307),
-        crafterId: MachinaModels.getUint64(struct.data, 311),
-        quality: struct.data[319],
-        materiaId: MachinaModels.getUint16(struct.data, 323),
-        tier: MachinaModels.getUint16(struct.data, 325),
+        catalogId: MachinaModels.getUint32(struct.data, 242),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 246),
+        crafterId: MachinaModels.getUint64(struct.data, 250),
+        quality: struct.data[258],
+        materiaId: MachinaModels.getUint16(struct.data, 259),
+        tier: MachinaModels.getUint16(struct.data, 261),
     };
     struct.entries_12 = {
-        catalogId: MachinaModels.getUint32(struct.data, 327),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 331),
-        crafterId: MachinaModels.getUint64(struct.data, 335),
-        quality: struct.data[343],
-        materiaId: MachinaModels.getUint16(struct.data, 347),
-        tier: MachinaModels.getUint16(struct.data, 349),
+        catalogId: MachinaModels.getUint32(struct.data, 263),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 267),
+        crafterId: MachinaModels.getUint64(struct.data, 271),
+        quality: struct.data[279],
+        materiaId: MachinaModels.getUint16(struct.data, 280),
+        tier: MachinaModels.getUint16(struct.data, 282),
     };
     struct.entries_13 = {
-        catalogId: MachinaModels.getUint32(struct.data, 351),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 355),
-        crafterId: MachinaModels.getUint64(struct.data, 359),
-        quality: struct.data[367],
-        materiaId: MachinaModels.getUint16(struct.data, 371),
-        tier: MachinaModels.getUint16(struct.data, 373),
+        catalogId: MachinaModels.getUint32(struct.data, 284),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 288),
+        crafterId: MachinaModels.getUint64(struct.data, 292),
+        quality: struct.data[300],
+        materiaId: MachinaModels.getUint16(struct.data, 301),
+        tier: MachinaModels.getUint16(struct.data, 303),
     };
     struct.entries_14 = {
+        catalogId: MachinaModels.getUint32(struct.data, 305),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 309),
+        crafterId: MachinaModels.getUint64(struct.data, 313),
+        quality: struct.data[321],
+        materiaId: MachinaModels.getUint16(struct.data, 322),
+        tier: MachinaModels.getUint16(struct.data, 324),
+    };
+    struct.catalogId = MachinaModels.getUint32(struct.data, 358);
+    struct.appearanceCatalogId = MachinaModels.getUint32(struct.data, 362);
+    struct.crafterId = MachinaModels.getUint64(struct.data, 366);
+    struct.quality = struct.data[374];
+    struct.entries_1 = {
         catalogId: MachinaModels.getUint32(struct.data, 375),
         appearanceCatalogId: MachinaModels.getUint32(struct.data, 379),
         crafterId: MachinaModels.getUint64(struct.data, 383),
         quality: struct.data[391],
-        materiaId: MachinaModels.getUint16(struct.data, 395),
-        tier: MachinaModels.getUint16(struct.data, 397),
-    };
-    struct.catalogId = MachinaModels.getUint32(struct.data, 462);
-    struct.appearanceCatalogId = MachinaModels.getUint32(struct.data, 466);
-    struct.crafterId = MachinaModels.getUint64(struct.data, 470);
-    struct.quality = struct.data[478];
-    struct.entries_1 = {
-        catalogId: MachinaModels.getUint32(struct.data, 482),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 486),
-        crafterId: MachinaModels.getUint64(struct.data, 490),
-        quality: struct.data[498],
-        materiaId: MachinaModels.getUint16(struct.data, 502),
-        tier: MachinaModels.getUint16(struct.data, 504),
+        materiaId: MachinaModels.getUint16(struct.data, 392),
+        tier: MachinaModels.getUint16(struct.data, 394),
     };
     struct.entries_2 = {
-        catalogId: MachinaModels.getUint32(struct.data, 506),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 510),
-        crafterId: MachinaModels.getUint64(struct.data, 514),
-        quality: struct.data[522],
-        materiaId: MachinaModels.getUint16(struct.data, 526),
-        tier: MachinaModels.getUint16(struct.data, 528),
+        catalogId: MachinaModels.getUint32(struct.data, 396),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 400),
+        crafterId: MachinaModels.getUint64(struct.data, 404),
+        quality: struct.data[412],
+        materiaId: MachinaModels.getUint16(struct.data, 413),
+        tier: MachinaModels.getUint16(struct.data, 415),
     };
     struct.entries_3 = {
-        catalogId: MachinaModels.getUint32(struct.data, 530),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 534),
-        crafterId: MachinaModels.getUint64(struct.data, 538),
-        quality: struct.data[546],
-        materiaId: MachinaModels.getUint16(struct.data, 550),
-        tier: MachinaModels.getUint16(struct.data, 552),
+        catalogId: MachinaModels.getUint32(struct.data, 417),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 421),
+        crafterId: MachinaModels.getUint64(struct.data, 425),
+        quality: struct.data[433],
+        materiaId: MachinaModels.getUint16(struct.data, 434),
+        tier: MachinaModels.getUint16(struct.data, 436),
     };
     struct.entries_4 = {
-        catalogId: MachinaModels.getUint32(struct.data, 554),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 558),
-        crafterId: MachinaModels.getUint64(struct.data, 562),
-        quality: struct.data[570],
-        materiaId: MachinaModels.getUint16(struct.data, 574),
-        tier: MachinaModels.getUint16(struct.data, 576),
+        catalogId: MachinaModels.getUint32(struct.data, 438),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 442),
+        crafterId: MachinaModels.getUint64(struct.data, 446),
+        quality: struct.data[454],
+        materiaId: MachinaModels.getUint16(struct.data, 455),
+        tier: MachinaModels.getUint16(struct.data, 457),
     };
     struct.entries_5 = {
-        catalogId: MachinaModels.getUint32(struct.data, 578),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 582),
-        crafterId: MachinaModels.getUint64(struct.data, 586),
-        quality: struct.data[594],
-        materiaId: MachinaModels.getUint16(struct.data, 598),
-        tier: MachinaModels.getUint16(struct.data, 600),
+        catalogId: MachinaModels.getUint32(struct.data, 459),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 463),
+        crafterId: MachinaModels.getUint64(struct.data, 467),
+        quality: struct.data[475],
+        materiaId: MachinaModels.getUint16(struct.data, 476),
+        tier: MachinaModels.getUint16(struct.data, 478),
     };
     struct.entries_6 = {
-        catalogId: MachinaModels.getUint32(struct.data, 602),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 606),
-        crafterId: MachinaModels.getUint64(struct.data, 610),
-        quality: struct.data[618],
-        materiaId: MachinaModels.getUint16(struct.data, 622),
-        tier: MachinaModels.getUint16(struct.data, 624),
+        catalogId: MachinaModels.getUint32(struct.data, 480),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 484),
+        crafterId: MachinaModels.getUint64(struct.data, 488),
+        quality: struct.data[496],
+        materiaId: MachinaModels.getUint16(struct.data, 497),
+        tier: MachinaModels.getUint16(struct.data, 499),
     };
     struct.entries_7 = {
-        catalogId: MachinaModels.getUint32(struct.data, 626),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 630),
-        crafterId: MachinaModels.getUint64(struct.data, 634),
-        quality: struct.data[642],
-        materiaId: MachinaModels.getUint16(struct.data, 646),
-        tier: MachinaModels.getUint16(struct.data, 648),
+        catalogId: MachinaModels.getUint32(struct.data, 501),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 505),
+        crafterId: MachinaModels.getUint64(struct.data, 509),
+        quality: struct.data[517],
+        materiaId: MachinaModels.getUint16(struct.data, 518),
+        tier: MachinaModels.getUint16(struct.data, 520),
     };
     struct.entries_8 = {
-        catalogId: MachinaModels.getUint32(struct.data, 650),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 654),
-        crafterId: MachinaModels.getUint64(struct.data, 658),
-        quality: struct.data[666],
-        materiaId: MachinaModels.getUint16(struct.data, 670),
-        tier: MachinaModels.getUint16(struct.data, 672),
+        catalogId: MachinaModels.getUint32(struct.data, 522),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 526),
+        crafterId: MachinaModels.getUint64(struct.data, 530),
+        quality: struct.data[538],
+        materiaId: MachinaModels.getUint16(struct.data, 539),
+        tier: MachinaModels.getUint16(struct.data, 541),
     };
     struct.entries_9 = {
-        catalogId: MachinaModels.getUint32(struct.data, 674),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 678),
-        crafterId: MachinaModels.getUint64(struct.data, 682),
-        quality: struct.data[690],
-        materiaId: MachinaModels.getUint16(struct.data, 694),
-        tier: MachinaModels.getUint16(struct.data, 696),
+        catalogId: MachinaModels.getUint32(struct.data, 543),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 547),
+        crafterId: MachinaModels.getUint64(struct.data, 551),
+        quality: struct.data[559],
+        materiaId: MachinaModels.getUint16(struct.data, 560),
+        tier: MachinaModels.getUint16(struct.data, 562),
     };
     struct.entries_10 = {
-        catalogId: MachinaModels.getUint32(struct.data, 698),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 702),
-        crafterId: MachinaModels.getUint64(struct.data, 706),
-        quality: struct.data[714],
-        materiaId: MachinaModels.getUint16(struct.data, 718),
-        tier: MachinaModels.getUint16(struct.data, 720),
+        catalogId: MachinaModels.getUint32(struct.data, 564),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 568),
+        crafterId: MachinaModels.getUint64(struct.data, 572),
+        quality: struct.data[580],
+        materiaId: MachinaModels.getUint16(struct.data, 581),
+        tier: MachinaModels.getUint16(struct.data, 583),
     };
     struct.entries_11 = {
-        catalogId: MachinaModels.getUint32(struct.data, 722),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 726),
-        crafterId: MachinaModels.getUint64(struct.data, 730),
-        quality: struct.data[738],
-        materiaId: MachinaModels.getUint16(struct.data, 742),
-        tier: MachinaModels.getUint16(struct.data, 744),
+        catalogId: MachinaModels.getUint32(struct.data, 585),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 589),
+        crafterId: MachinaModels.getUint64(struct.data, 593),
+        quality: struct.data[601],
+        materiaId: MachinaModels.getUint16(struct.data, 602),
+        tier: MachinaModels.getUint16(struct.data, 604),
     };
     struct.entries_12 = {
-        catalogId: MachinaModels.getUint32(struct.data, 746),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 750),
-        crafterId: MachinaModels.getUint64(struct.data, 754),
-        quality: struct.data[762],
-        materiaId: MachinaModels.getUint16(struct.data, 766),
-        tier: MachinaModels.getUint16(struct.data, 768),
+        catalogId: MachinaModels.getUint32(struct.data, 606),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 610),
+        crafterId: MachinaModels.getUint64(struct.data, 614),
+        quality: struct.data[622],
+        materiaId: MachinaModels.getUint16(struct.data, 623),
+        tier: MachinaModels.getUint16(struct.data, 625),
     };
     struct.entries_13 = {
-        catalogId: MachinaModels.getUint32(struct.data, 770),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 774),
-        crafterId: MachinaModels.getUint64(struct.data, 778),
-        quality: struct.data[786],
-        materiaId: MachinaModels.getUint16(struct.data, 790),
-        tier: MachinaModels.getUint16(struct.data, 792),
+        catalogId: MachinaModels.getUint32(struct.data, 627),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 631),
+        crafterId: MachinaModels.getUint64(struct.data, 635),
+        quality: struct.data[643],
+        materiaId: MachinaModels.getUint16(struct.data, 644),
+        tier: MachinaModels.getUint16(struct.data, 646),
     };
     struct.entries_14 = {
-        catalogId: MachinaModels.getUint32(struct.data, 794),
-        appearanceCatalogId: MachinaModels.getUint32(struct.data, 798),
-        crafterId: MachinaModels.getUint64(struct.data, 802),
-        quality: struct.data[810],
-        materiaId: MachinaModels.getUint16(struct.data, 814),
-        tier: MachinaModels.getUint16(struct.data, 816),
+        catalogId: MachinaModels.getUint32(struct.data, 648),
+        appearanceCatalogId: MachinaModels.getUint32(struct.data, 652),
+        crafterId: MachinaModels.getUint64(struct.data, 656),
+        quality: struct.data[664],
+        materiaId: MachinaModels.getUint16(struct.data, 665),
+        tier: MachinaModels.getUint16(struct.data, 667),
     };
-    struct.materiaId = MachinaModels.getUint16(struct.data, 1300);
-    struct.tier = MachinaModels.getUint16(struct.data, 1302);
-    struct.name = String.fromCodePoint(struct.data.slice(1304, 1336));
-    struct.look = String.fromCodePoint(struct.data.slice(1353, 1379));
-    struct.models_1 = MachinaModels.getUint32(struct.data, 1384);    struct.models_2 = MachinaModels.getUint32(struct.data, 1384);    struct.models_3 = MachinaModels.getUint32(struct.data, 1384);    struct.models_4 = MachinaModels.getUint32(struct.data, 1384);    struct.models_5 = MachinaModels.getUint32(struct.data, 1384);    struct.models_6 = MachinaModels.getUint32(struct.data, 1384);    struct.models_7 = MachinaModels.getUint32(struct.data, 1384);    struct.models_8 = MachinaModels.getUint32(struct.data, 1384);    struct.models_9 = MachinaModels.getUint32(struct.data, 1384);    struct.models_10 = MachinaModels.getUint32(struct.data, 1384);
+    struct.materiaId = MachinaModels.getUint16(struct.data, 1044);
+    struct.tier = MachinaModels.getUint16(struct.data, 1046);
+    struct.name = String.fromCodePoint(struct.data.slice(1048, 1049));
+    struct.look = String.fromCodePoint(struct.data.slice(1049, 1050));
+    struct.models_1 = MachinaModels.getUint32(struct.data, 1050);    struct.models_2 = MachinaModels.getUint32(struct.data, 1054);    struct.models_3 = MachinaModels.getUint32(struct.data, 1058);    struct.models_4 = MachinaModels.getUint32(struct.data, 1062);    struct.models_5 = MachinaModels.getUint32(struct.data, 1066);    struct.models_6 = MachinaModels.getUint32(struct.data, 1070);    struct.models_7 = MachinaModels.getUint32(struct.data, 1074);    struct.models_8 = MachinaModels.getUint32(struct.data, 1078);    struct.models_9 = MachinaModels.getUint32(struct.data, 1082);    struct.models_10 = MachinaModels.getUint32(struct.data, 1086);
 };

@@ -4,43 +4,43 @@ const MachinaModels = require("../_MachinaModels.js")
 
 module.exports = async (struct) => {
     struct.letter_1 = {
-        timeStamp: MachinaModels.getUint32(struct.data, 8),
-        read: struct.data[60],
-        type: struct.data[61],
-        senderName: String.fromCodePoint(struct.data.slice(63, 95)),
-        summary: String.fromCodePoint(struct.data.slice(95, 155)),
+        timeStamp: MachinaModels.getUint32(struct.data, 0),
+        read: struct.data[4],
+        type: struct.data[5],
+        senderName: String.fromCodePoint(struct.data.slice(6, 7)),
+        summary: String.fromCodePoint(struct.data.slice(7, 8)),
     };
     struct.letter_2 = {
-        timeStamp: MachinaModels.getUint32(struct.data, 168),
-        read: struct.data[220],
-        type: struct.data[221],
-        senderName: String.fromCodePoint(struct.data.slice(223, 255)),
-        summary: String.fromCodePoint(struct.data.slice(255, 315)),
+        timeStamp: MachinaModels.getUint32(struct.data, 8),
+        read: struct.data[12],
+        type: struct.data[13],
+        senderName: String.fromCodePoint(struct.data.slice(14, 15)),
+        summary: String.fromCodePoint(struct.data.slice(15, 16)),
     };
     struct.letter_3 = {
-        timeStamp: MachinaModels.getUint32(struct.data, 328),
-        read: struct.data[380],
-        type: struct.data[381],
-        senderName: String.fromCodePoint(struct.data.slice(383, 415)),
-        summary: String.fromCodePoint(struct.data.slice(415, 475)),
+        timeStamp: MachinaModels.getUint32(struct.data, 16),
+        read: struct.data[20],
+        type: struct.data[21],
+        senderName: String.fromCodePoint(struct.data.slice(22, 23)),
+        summary: String.fromCodePoint(struct.data.slice(23, 24)),
     };
     struct.letter_4 = {
-        timeStamp: MachinaModels.getUint32(struct.data, 488),
-        read: struct.data[540],
-        type: struct.data[541],
-        senderName: String.fromCodePoint(struct.data.slice(543, 575)),
-        summary: String.fromCodePoint(struct.data.slice(575, 635)),
+        timeStamp: MachinaModels.getUint32(struct.data, 24),
+        read: struct.data[28],
+        type: struct.data[29],
+        senderName: String.fromCodePoint(struct.data.slice(30, 31)),
+        summary: String.fromCodePoint(struct.data.slice(31, 32)),
     };
     struct.letter_5 = {
-        timeStamp: MachinaModels.getUint32(struct.data, 648),
-        read: struct.data[700],
-        type: struct.data[701],
-        senderName: String.fromCodePoint(struct.data.slice(703, 735)),
-        summary: String.fromCodePoint(struct.data.slice(735, 795)),
+        timeStamp: MachinaModels.getUint32(struct.data, 32),
+        read: struct.data[36],
+        type: struct.data[37],
+        senderName: String.fromCodePoint(struct.data.slice(38, 39)),
+        summary: String.fromCodePoint(struct.data.slice(39, 40)),
     };
-    struct.timeStamp = MachinaModels.getUint32(struct.data, 808);
-    struct.read = struct.data[860];
-    struct.type = struct.data[861];
-    struct.senderName = String.fromCodePoint(struct.data.slice(863, 895));
-    struct.summary = String.fromCodePoint(struct.data.slice(895, 955));
+    struct.timeStamp = MachinaModels.getUint32(struct.data, 40);
+    struct.read = struct.data[44];
+    struct.type = struct.data[45];
+    struct.senderName = String.fromCodePoint(struct.data.slice(46, 47));
+    struct.summary = String.fromCodePoint(struct.data.slice(47, 48));
 };

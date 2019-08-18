@@ -3,6 +3,6 @@
 const MachinaModels = require("../_MachinaModels.js")
 
 module.exports = async (struct) => {
-    struct.rouletteId = struct.data[4];
-    struct.contentId = MachinaModels.getUint16(struct.data, 6);
+    struct.rouletteId = struct.data[0];
+    struct.contentId = MachinaModels.getUint16(struct.data, 1);
 };

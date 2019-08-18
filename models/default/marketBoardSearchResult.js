@@ -107,6 +107,6 @@ module.exports = async (struct) => {
     struct.quantity = MachinaModels.getUint16(struct.data, 164);
     struct.demand = MachinaModels.getUint16(struct.data, 166);
     struct.itemIndexEnd = MachinaModels.getUint32(struct.data, 168);
-    struct.itemIndexStart = MachinaModels.getUint32(struct.data, 176);
-    struct.requestId = MachinaModels.getUint32(struct.data, 180);
+    struct.itemIndexStart = MachinaModels.getUint32(struct.data, 172);
+    struct.requestId = MachinaModels.getUint32(struct.data, 176);
 };

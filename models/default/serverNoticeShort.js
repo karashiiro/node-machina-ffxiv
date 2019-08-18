@@ -3,5 +3,5 @@
 const MachinaModels = require("../_MachinaModels.js")
 
 module.exports = async (struct) => {
-    struct.message = String.fromCodePoint(struct.data.slice(1, 539));
+    struct.message = String.fromCodePoint(struct.data.slice(0, 1));
 };

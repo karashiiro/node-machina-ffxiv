@@ -5,85 +5,85 @@ const MachinaModels = require("../_MachinaModels.js")
 module.exports = async (struct) => {
     struct.entry_1 = {
         contentId: MachinaModels.getUint64(struct.data, 0),
-        name: String.fromCodePoint(struct.data.slice(8, 40)),
+        name: String.fromCodePoint(struct.data.slice(8, 9)),
     };
     struct.entry_2 = {
-        contentId: MachinaModels.getUint64(struct.data, 40),
-        name: String.fromCodePoint(struct.data.slice(48, 80)),
+        contentId: MachinaModels.getUint64(struct.data, 9),
+        name: String.fromCodePoint(struct.data.slice(17, 18)),
     };
     struct.entry_3 = {
-        contentId: MachinaModels.getUint64(struct.data, 80),
-        name: String.fromCodePoint(struct.data.slice(88, 120)),
+        contentId: MachinaModels.getUint64(struct.data, 18),
+        name: String.fromCodePoint(struct.data.slice(26, 27)),
     };
     struct.entry_4 = {
-        contentId: MachinaModels.getUint64(struct.data, 120),
-        name: String.fromCodePoint(struct.data.slice(128, 160)),
+        contentId: MachinaModels.getUint64(struct.data, 27),
+        name: String.fromCodePoint(struct.data.slice(35, 36)),
     };
     struct.entry_5 = {
-        contentId: MachinaModels.getUint64(struct.data, 160),
-        name: String.fromCodePoint(struct.data.slice(168, 200)),
+        contentId: MachinaModels.getUint64(struct.data, 36),
+        name: String.fromCodePoint(struct.data.slice(44, 45)),
     };
     struct.entry_6 = {
-        contentId: MachinaModels.getUint64(struct.data, 200),
-        name: String.fromCodePoint(struct.data.slice(208, 240)),
+        contentId: MachinaModels.getUint64(struct.data, 45),
+        name: String.fromCodePoint(struct.data.slice(53, 54)),
     };
     struct.entry_7 = {
-        contentId: MachinaModels.getUint64(struct.data, 240),
-        name: String.fromCodePoint(struct.data.slice(248, 280)),
+        contentId: MachinaModels.getUint64(struct.data, 54),
+        name: String.fromCodePoint(struct.data.slice(62, 63)),
     };
     struct.entry_8 = {
-        contentId: MachinaModels.getUint64(struct.data, 280),
-        name: String.fromCodePoint(struct.data.slice(288, 320)),
+        contentId: MachinaModels.getUint64(struct.data, 63),
+        name: String.fromCodePoint(struct.data.slice(71, 72)),
     };
     struct.entry_9 = {
-        contentId: MachinaModels.getUint64(struct.data, 320),
-        name: String.fromCodePoint(struct.data.slice(328, 360)),
+        contentId: MachinaModels.getUint64(struct.data, 72),
+        name: String.fromCodePoint(struct.data.slice(80, 81)),
     };
     struct.entry_10 = {
-        contentId: MachinaModels.getUint64(struct.data, 360),
-        name: String.fromCodePoint(struct.data.slice(368, 400)),
+        contentId: MachinaModels.getUint64(struct.data, 81),
+        name: String.fromCodePoint(struct.data.slice(89, 90)),
     };
     struct.entry_11 = {
-        contentId: MachinaModels.getUint64(struct.data, 400),
-        name: String.fromCodePoint(struct.data.slice(408, 440)),
+        contentId: MachinaModels.getUint64(struct.data, 90),
+        name: String.fromCodePoint(struct.data.slice(98, 99)),
     };
     struct.entry_12 = {
-        contentId: MachinaModels.getUint64(struct.data, 440),
-        name: String.fromCodePoint(struct.data.slice(448, 480)),
+        contentId: MachinaModels.getUint64(struct.data, 99),
+        name: String.fromCodePoint(struct.data.slice(107, 108)),
     };
     struct.entry_13 = {
-        contentId: MachinaModels.getUint64(struct.data, 480),
-        name: String.fromCodePoint(struct.data.slice(488, 520)),
+        contentId: MachinaModels.getUint64(struct.data, 108),
+        name: String.fromCodePoint(struct.data.slice(116, 117)),
     };
     struct.entry_14 = {
-        contentId: MachinaModels.getUint64(struct.data, 520),
-        name: String.fromCodePoint(struct.data.slice(528, 560)),
+        contentId: MachinaModels.getUint64(struct.data, 117),
+        name: String.fromCodePoint(struct.data.slice(125, 126)),
     };
     struct.entry_15 = {
-        contentId: MachinaModels.getUint64(struct.data, 560),
-        name: String.fromCodePoint(struct.data.slice(568, 600)),
+        contentId: MachinaModels.getUint64(struct.data, 126),
+        name: String.fromCodePoint(struct.data.slice(134, 135)),
     };
     struct.entry_16 = {
-        contentId: MachinaModels.getUint64(struct.data, 600),
-        name: String.fromCodePoint(struct.data.slice(608, 640)),
+        contentId: MachinaModels.getUint64(struct.data, 135),
+        name: String.fromCodePoint(struct.data.slice(143, 144)),
     };
     struct.entry_17 = {
-        contentId: MachinaModels.getUint64(struct.data, 640),
-        name: String.fromCodePoint(struct.data.slice(648, 680)),
+        contentId: MachinaModels.getUint64(struct.data, 144),
+        name: String.fromCodePoint(struct.data.slice(152, 153)),
     };
     struct.entry_18 = {
-        contentId: MachinaModels.getUint64(struct.data, 680),
-        name: String.fromCodePoint(struct.data.slice(688, 720)),
+        contentId: MachinaModels.getUint64(struct.data, 153),
+        name: String.fromCodePoint(struct.data.slice(161, 162)),
     };
     struct.entry_19 = {
-        contentId: MachinaModels.getUint64(struct.data, 720),
-        name: String.fromCodePoint(struct.data.slice(728, 760)),
+        contentId: MachinaModels.getUint64(struct.data, 162),
+        name: String.fromCodePoint(struct.data.slice(170, 171)),
     };
     struct.entry_20 = {
-        contentId: MachinaModels.getUint64(struct.data, 760),
-        name: String.fromCodePoint(struct.data.slice(768, 800)),
+        contentId: MachinaModels.getUint64(struct.data, 171),
+        name: String.fromCodePoint(struct.data.slice(179, 180)),
     };
-    struct.contentId = MachinaModels.getUint64(struct.data, 800);
-    struct.name = String.fromCodePoint(struct.data.slice(808, 840));
-    struct.sequence = MachinaModels.getUint16(struct.data, 842);
+    struct.contentId = MachinaModels.getUint64(struct.data, 180);
+    struct.name = String.fromCodePoint(struct.data.slice(188, 189));
+    struct.sequence = MachinaModels.getUint16(struct.data, 189);
 };

@@ -9,5 +9,5 @@ module.exports = async (struct) => {
     struct.shouldCheckClassJobId = struct.data[7];
     struct.maxEquipLevel = struct.data[8];
     struct.classJobId = struct.data[9];
-    struct.searchStr = String.fromCodePoint(struct.data.slice(10, 50));
+    struct.searchStr = String.fromCodePoint(struct.data.slice(10, 11));
 };

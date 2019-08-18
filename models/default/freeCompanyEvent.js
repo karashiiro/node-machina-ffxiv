@@ -3,5 +3,5 @@
 const MachinaModels = require("../_MachinaModels.js")
 
 module.exports = async (struct) => {
-    struct.eventID = struct.data[16];
+    struct.eventID = struct.data[0];
 };

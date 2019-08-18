@@ -104,25 +104,19 @@ const process = (line, lastIndex, index, struct, isNestedStruct = false, debugID
     let flags = [false, false, false, false, false, false];
 
     if (line.startsWith("uint8_t") || line.startsWith("bool")) {
-        index += loops;
         flags[0] = true;
     } else if (line.startsWith("uint16_t")) {
-        index += 2 * loops;
         flags[1] = true;
     } else if (line.startsWith("uint32_t")) {
-        index += 4 * loops;
         flags[2] = true;
     } else if (line.startsWith("uint64_t")) {
-        index += 8 * loops;
         flags[3] = true;
     } else if (line.startsWith("char")) {
-        index += loops;
         loops = 1;
         flags[4] = true;
     } else if (line.startsWith("struct")) {
         flags[5] = true;
     } else if (line.startsWith("Common::")) {
-        index += 2 * loops;
         flags[1] = true;
     }
 
@@ -146,14 +140,19 @@ const process = (line, lastIndex, index, struct, isNestedStruct = false, debugID
         if (!isNestedStruct) line += "    struct.";
 
         if (flags[0]) {
+            index++;
             line += `${variableName}${append} = struct.data[${lastIndex}];`;
         } else if (flags[1]) {
+            index += 2;
             line += `${variableName}${append} = MachinaModels.getUint16(struct.data, ${lastIndex});`;
         } else if (flags[2]) {
+            index += 4;
             line += `${variableName}${append} = MachinaModels.getUint32(struct.data, ${lastIndex});`;
         } else if (flags[3]) {
+            index += 8;
             line += `${variableName}${append} = MachinaModels.getUint64(struct.data, ${lastIndex});`;
         } else if (flags[4]) {
+            index++;
             line += `${variableName}${append} = String.fromCodePoint(struct.data.slice(${lastIndex}, ${index}));`;
         } else if (flags[5]) {
             let processed = embeddedStructToJS(struct, lastIndex, index, debugID);
@@ -163,6 +162,8 @@ const process = (line, lastIndex, index, struct, isNestedStruct = false, debugID
         } else {
             line = "";
         }
+
+        lastIndex = parseInt("" + index);
     }
 
     return {
@@ -205,6 +206,7 @@ const embeddedStructToJS = (_struct, _lastIndex, _index, debugID = "") => {
             let variableData = processedData.code.replace(/ =/g, ":");
             variableData = variableData.replace(/;/g, ",");
             index = processedData.indexSize;
+
             lineCount += processedData.lineCount;
 
             if (variableData !== "") output.push(`        ${variableData}`);

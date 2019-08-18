@@ -9,6 +9,6 @@ module.exports = async (struct) => {
     struct.u0C = MachinaModels.getUint32(struct.data, 12);
     struct.worldId1 = MachinaModels.getUint16(struct.data, 16);
     struct.preName = struct.data[18];
-    struct.targetPCName = String.fromCodePoint(struct.data.slice(19, 51));
-    struct.message = String.fromCodePoint(struct.data.slice(51, 1080));
+    struct.targetPCName = String.fromCodePoint(struct.data.slice(19, 20));
+    struct.message = String.fromCodePoint(struct.data.slice(20, 21));
 };

@@ -12,8 +12,8 @@ module.exports = async (struct) => {
     struct.actionAnimationId = MachinaModels.getUint16(struct.data, 24);
     struct.variation = struct.data[26];
     struct.effectDisplayType = MachinaModels.getUint16(struct.data, 27);
-    struct.effectCount = struct.data[30];
-    struct.effects_1 = struct.data[39];    struct.effects_2 = struct.data[39];    struct.effects_3 = struct.data[39];    struct.effects_4 = struct.data[39];    struct.effects_5 = struct.data[39];    struct.effects_6 = struct.data[39];    struct.effects_7 = struct.data[39];    struct.effects_8 = struct.data[39];
-    struct.effectTargetId = MachinaModels.getUint32(struct.data, 53);
-    struct.effectFlags = MachinaModels.getUint32(struct.data, 57);
+    struct.effectCount = struct.data[29];
+    struct.effects_1 = struct.data[30];    struct.effects_2 = struct.data[31];    struct.effects_3 = struct.data[32];    struct.effects_4 = struct.data[33];    struct.effects_5 = struct.data[34];    struct.effects_6 = struct.data[35];    struct.effects_7 = struct.data[36];    struct.effects_8 = struct.data[37];
+    struct.effectTargetId = MachinaModels.getUint32(struct.data, 38);
+    struct.effectFlags = MachinaModels.getUint32(struct.data, 42);
 };

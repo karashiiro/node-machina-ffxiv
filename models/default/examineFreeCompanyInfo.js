@@ -3,11 +3,11 @@
 const MachinaModels = require("../_MachinaModels.js")
 
 module.exports = async (struct) => {
-    struct.charId = MachinaModels.getUint32(struct.data, 32);
-    struct.fcTimeCreated = MachinaModels.getUint32(struct.data, 36);
-    struct.fcName = String.fromCodePoint(struct.data.slice(58, 78));
-    struct.fcTag = String.fromCodePoint(struct.data.slice(80, 85));
-    struct.fcLeader = String.fromCodePoint(struct.data.slice(87, 119));
-    struct.fcSlogan = String.fromCodePoint(struct.data.slice(119, 311));
-    struct.fcEstateProfile = String.fromCodePoint(struct.data.slice(312, 332));
+    struct.charId = MachinaModels.getUint32(struct.data, 0);
+    struct.fcTimeCreated = MachinaModels.getUint32(struct.data, 4);
+    struct.fcName = String.fromCodePoint(struct.data.slice(8, 9));
+    struct.fcTag = String.fromCodePoint(struct.data.slice(9, 10));
+    struct.fcLeader = String.fromCodePoint(struct.data.slice(10, 11));
+    struct.fcSlogan = String.fromCodePoint(struct.data.slice(11, 12));
+    struct.fcEstateProfile = String.fromCodePoint(struct.data.slice(12, 13));
 };

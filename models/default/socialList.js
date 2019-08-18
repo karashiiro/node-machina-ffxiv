@@ -3,6 +3,6 @@
 const MachinaModels = require("../_MachinaModels.js")
 
 module.exports = async (struct) => {
-    struct.type = struct.data[12];
-    struct.sequence = struct.data[13];
+    struct.type = struct.data[0];
+    struct.sequence = struct.data[1];
 };

@@ -8,5 +8,5 @@ module.exports = async (struct) => {
     struct.challengeByYou = struct.data[2];
     struct.otherItemLevel = struct.data[3];
     struct.otherActorId = MachinaModels.getUint32(struct.data, 4);
-    struct.otherName = String.fromCodePoint(struct.data.slice(8, 40));
+    struct.otherName = String.fromCodePoint(struct.data.slice(8, 9));
 };

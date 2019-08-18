@@ -7,365 +7,365 @@ module.exports = async (struct) => {
     struct.houseInfoEntry_1 = {
         housePrice: MachinaModels.getUint32(struct.data, 2),
         infoFlags: struct.data[6],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 7),houseAppeal_2: MachinaModels.getUint16(struct.data, 7),houseAppeal_3: MachinaModels.getUint16(struct.data, 7),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(13, 43)),
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 7),houseAppeal_2: MachinaModels.getUint16(struct.data, 9),houseAppeal_3: MachinaModels.getUint16(struct.data, 11),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(13, 14)),
     };
     struct.houseInfoEntry_2 = {
-        housePrice: MachinaModels.getUint32(struct.data, 43),
-        infoFlags: struct.data[47],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 48),houseAppeal_2: MachinaModels.getUint16(struct.data, 48),houseAppeal_3: MachinaModels.getUint16(struct.data, 48),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(54, 84)),
+        housePrice: MachinaModels.getUint32(struct.data, 14),
+        infoFlags: struct.data[18],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 19),houseAppeal_2: MachinaModels.getUint16(struct.data, 21),houseAppeal_3: MachinaModels.getUint16(struct.data, 23),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(25, 26)),
     };
     struct.houseInfoEntry_3 = {
-        housePrice: MachinaModels.getUint32(struct.data, 84),
-        infoFlags: struct.data[88],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 89),houseAppeal_2: MachinaModels.getUint16(struct.data, 89),houseAppeal_3: MachinaModels.getUint16(struct.data, 89),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(95, 125)),
+        housePrice: MachinaModels.getUint32(struct.data, 26),
+        infoFlags: struct.data[30],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 31),houseAppeal_2: MachinaModels.getUint16(struct.data, 33),houseAppeal_3: MachinaModels.getUint16(struct.data, 35),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(37, 38)),
     };
     struct.houseInfoEntry_4 = {
-        housePrice: MachinaModels.getUint32(struct.data, 125),
-        infoFlags: struct.data[129],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 130),houseAppeal_2: MachinaModels.getUint16(struct.data, 130),houseAppeal_3: MachinaModels.getUint16(struct.data, 130),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(136, 166)),
+        housePrice: MachinaModels.getUint32(struct.data, 38),
+        infoFlags: struct.data[42],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 43),houseAppeal_2: MachinaModels.getUint16(struct.data, 45),houseAppeal_3: MachinaModels.getUint16(struct.data, 47),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(49, 50)),
     };
     struct.houseInfoEntry_5 = {
-        housePrice: MachinaModels.getUint32(struct.data, 166),
-        infoFlags: struct.data[170],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 171),houseAppeal_2: MachinaModels.getUint16(struct.data, 171),houseAppeal_3: MachinaModels.getUint16(struct.data, 171),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(177, 207)),
+        housePrice: MachinaModels.getUint32(struct.data, 50),
+        infoFlags: struct.data[54],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 55),houseAppeal_2: MachinaModels.getUint16(struct.data, 57),houseAppeal_3: MachinaModels.getUint16(struct.data, 59),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(61, 62)),
     };
     struct.houseInfoEntry_6 = {
-        housePrice: MachinaModels.getUint32(struct.data, 207),
-        infoFlags: struct.data[211],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 212),houseAppeal_2: MachinaModels.getUint16(struct.data, 212),houseAppeal_3: MachinaModels.getUint16(struct.data, 212),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(218, 248)),
+        housePrice: MachinaModels.getUint32(struct.data, 62),
+        infoFlags: struct.data[66],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 67),houseAppeal_2: MachinaModels.getUint16(struct.data, 69),houseAppeal_3: MachinaModels.getUint16(struct.data, 71),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(73, 74)),
     };
     struct.houseInfoEntry_7 = {
-        housePrice: MachinaModels.getUint32(struct.data, 248),
-        infoFlags: struct.data[252],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 253),houseAppeal_2: MachinaModels.getUint16(struct.data, 253),houseAppeal_3: MachinaModels.getUint16(struct.data, 253),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(259, 289)),
+        housePrice: MachinaModels.getUint32(struct.data, 74),
+        infoFlags: struct.data[78],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 79),houseAppeal_2: MachinaModels.getUint16(struct.data, 81),houseAppeal_3: MachinaModels.getUint16(struct.data, 83),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(85, 86)),
     };
     struct.houseInfoEntry_8 = {
-        housePrice: MachinaModels.getUint32(struct.data, 289),
-        infoFlags: struct.data[293],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 294),houseAppeal_2: MachinaModels.getUint16(struct.data, 294),houseAppeal_3: MachinaModels.getUint16(struct.data, 294),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(300, 330)),
+        housePrice: MachinaModels.getUint32(struct.data, 86),
+        infoFlags: struct.data[90],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 91),houseAppeal_2: MachinaModels.getUint16(struct.data, 93),houseAppeal_3: MachinaModels.getUint16(struct.data, 95),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(97, 98)),
     };
     struct.houseInfoEntry_9 = {
-        housePrice: MachinaModels.getUint32(struct.data, 330),
-        infoFlags: struct.data[334],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 335),houseAppeal_2: MachinaModels.getUint16(struct.data, 335),houseAppeal_3: MachinaModels.getUint16(struct.data, 335),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(341, 371)),
+        housePrice: MachinaModels.getUint32(struct.data, 98),
+        infoFlags: struct.data[102],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 103),houseAppeal_2: MachinaModels.getUint16(struct.data, 105),houseAppeal_3: MachinaModels.getUint16(struct.data, 107),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(109, 110)),
     };
     struct.houseInfoEntry_10 = {
-        housePrice: MachinaModels.getUint32(struct.data, 371),
-        infoFlags: struct.data[375],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 376),houseAppeal_2: MachinaModels.getUint16(struct.data, 376),houseAppeal_3: MachinaModels.getUint16(struct.data, 376),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(382, 412)),
+        housePrice: MachinaModels.getUint32(struct.data, 110),
+        infoFlags: struct.data[114],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 115),houseAppeal_2: MachinaModels.getUint16(struct.data, 117),houseAppeal_3: MachinaModels.getUint16(struct.data, 119),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(121, 122)),
     };
     struct.houseInfoEntry_11 = {
-        housePrice: MachinaModels.getUint32(struct.data, 412),
-        infoFlags: struct.data[416],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 417),houseAppeal_2: MachinaModels.getUint16(struct.data, 417),houseAppeal_3: MachinaModels.getUint16(struct.data, 417),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(423, 453)),
+        housePrice: MachinaModels.getUint32(struct.data, 122),
+        infoFlags: struct.data[126],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 127),houseAppeal_2: MachinaModels.getUint16(struct.data, 129),houseAppeal_3: MachinaModels.getUint16(struct.data, 131),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(133, 134)),
     };
     struct.houseInfoEntry_12 = {
-        housePrice: MachinaModels.getUint32(struct.data, 453),
-        infoFlags: struct.data[457],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 458),houseAppeal_2: MachinaModels.getUint16(struct.data, 458),houseAppeal_3: MachinaModels.getUint16(struct.data, 458),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(464, 494)),
+        housePrice: MachinaModels.getUint32(struct.data, 134),
+        infoFlags: struct.data[138],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 139),houseAppeal_2: MachinaModels.getUint16(struct.data, 141),houseAppeal_3: MachinaModels.getUint16(struct.data, 143),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(145, 146)),
     };
     struct.houseInfoEntry_13 = {
-        housePrice: MachinaModels.getUint32(struct.data, 494),
-        infoFlags: struct.data[498],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 499),houseAppeal_2: MachinaModels.getUint16(struct.data, 499),houseAppeal_3: MachinaModels.getUint16(struct.data, 499),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(505, 535)),
+        housePrice: MachinaModels.getUint32(struct.data, 146),
+        infoFlags: struct.data[150],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 151),houseAppeal_2: MachinaModels.getUint16(struct.data, 153),houseAppeal_3: MachinaModels.getUint16(struct.data, 155),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(157, 158)),
     };
     struct.houseInfoEntry_14 = {
-        housePrice: MachinaModels.getUint32(struct.data, 535),
-        infoFlags: struct.data[539],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 540),houseAppeal_2: MachinaModels.getUint16(struct.data, 540),houseAppeal_3: MachinaModels.getUint16(struct.data, 540),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(546, 576)),
+        housePrice: MachinaModels.getUint32(struct.data, 158),
+        infoFlags: struct.data[162],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 163),houseAppeal_2: MachinaModels.getUint16(struct.data, 165),houseAppeal_3: MachinaModels.getUint16(struct.data, 167),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(169, 170)),
     };
     struct.houseInfoEntry_15 = {
-        housePrice: MachinaModels.getUint32(struct.data, 576),
-        infoFlags: struct.data[580],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 581),houseAppeal_2: MachinaModels.getUint16(struct.data, 581),houseAppeal_3: MachinaModels.getUint16(struct.data, 581),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(587, 617)),
+        housePrice: MachinaModels.getUint32(struct.data, 170),
+        infoFlags: struct.data[174],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 175),houseAppeal_2: MachinaModels.getUint16(struct.data, 177),houseAppeal_3: MachinaModels.getUint16(struct.data, 179),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(181, 182)),
     };
     struct.houseInfoEntry_16 = {
-        housePrice: MachinaModels.getUint32(struct.data, 617),
-        infoFlags: struct.data[621],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 622),houseAppeal_2: MachinaModels.getUint16(struct.data, 622),houseAppeal_3: MachinaModels.getUint16(struct.data, 622),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(628, 658)),
+        housePrice: MachinaModels.getUint32(struct.data, 182),
+        infoFlags: struct.data[186],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 187),houseAppeal_2: MachinaModels.getUint16(struct.data, 189),houseAppeal_3: MachinaModels.getUint16(struct.data, 191),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(193, 194)),
     };
     struct.houseInfoEntry_17 = {
-        housePrice: MachinaModels.getUint32(struct.data, 658),
-        infoFlags: struct.data[662],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 663),houseAppeal_2: MachinaModels.getUint16(struct.data, 663),houseAppeal_3: MachinaModels.getUint16(struct.data, 663),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(669, 699)),
+        housePrice: MachinaModels.getUint32(struct.data, 194),
+        infoFlags: struct.data[198],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 199),houseAppeal_2: MachinaModels.getUint16(struct.data, 201),houseAppeal_3: MachinaModels.getUint16(struct.data, 203),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(205, 206)),
     };
     struct.houseInfoEntry_18 = {
-        housePrice: MachinaModels.getUint32(struct.data, 699),
-        infoFlags: struct.data[703],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 704),houseAppeal_2: MachinaModels.getUint16(struct.data, 704),houseAppeal_3: MachinaModels.getUint16(struct.data, 704),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(710, 740)),
+        housePrice: MachinaModels.getUint32(struct.data, 206),
+        infoFlags: struct.data[210],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 211),houseAppeal_2: MachinaModels.getUint16(struct.data, 213),houseAppeal_3: MachinaModels.getUint16(struct.data, 215),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(217, 218)),
     };
     struct.houseInfoEntry_19 = {
-        housePrice: MachinaModels.getUint32(struct.data, 740),
-        infoFlags: struct.data[744],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 745),houseAppeal_2: MachinaModels.getUint16(struct.data, 745),houseAppeal_3: MachinaModels.getUint16(struct.data, 745),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(751, 781)),
+        housePrice: MachinaModels.getUint32(struct.data, 218),
+        infoFlags: struct.data[222],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 223),houseAppeal_2: MachinaModels.getUint16(struct.data, 225),houseAppeal_3: MachinaModels.getUint16(struct.data, 227),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(229, 230)),
     };
     struct.houseInfoEntry_20 = {
-        housePrice: MachinaModels.getUint32(struct.data, 781),
-        infoFlags: struct.data[785],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 786),houseAppeal_2: MachinaModels.getUint16(struct.data, 786),houseAppeal_3: MachinaModels.getUint16(struct.data, 786),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(792, 822)),
+        housePrice: MachinaModels.getUint32(struct.data, 230),
+        infoFlags: struct.data[234],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 235),houseAppeal_2: MachinaModels.getUint16(struct.data, 237),houseAppeal_3: MachinaModels.getUint16(struct.data, 239),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(241, 242)),
     };
     struct.houseInfoEntry_21 = {
-        housePrice: MachinaModels.getUint32(struct.data, 822),
-        infoFlags: struct.data[826],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 827),houseAppeal_2: MachinaModels.getUint16(struct.data, 827),houseAppeal_3: MachinaModels.getUint16(struct.data, 827),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(833, 863)),
+        housePrice: MachinaModels.getUint32(struct.data, 242),
+        infoFlags: struct.data[246],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 247),houseAppeal_2: MachinaModels.getUint16(struct.data, 249),houseAppeal_3: MachinaModels.getUint16(struct.data, 251),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(253, 254)),
     };
     struct.houseInfoEntry_22 = {
-        housePrice: MachinaModels.getUint32(struct.data, 863),
-        infoFlags: struct.data[867],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 868),houseAppeal_2: MachinaModels.getUint16(struct.data, 868),houseAppeal_3: MachinaModels.getUint16(struct.data, 868),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(874, 904)),
+        housePrice: MachinaModels.getUint32(struct.data, 254),
+        infoFlags: struct.data[258],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 259),houseAppeal_2: MachinaModels.getUint16(struct.data, 261),houseAppeal_3: MachinaModels.getUint16(struct.data, 263),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(265, 266)),
     };
     struct.houseInfoEntry_23 = {
-        housePrice: MachinaModels.getUint32(struct.data, 904),
-        infoFlags: struct.data[908],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 909),houseAppeal_2: MachinaModels.getUint16(struct.data, 909),houseAppeal_3: MachinaModels.getUint16(struct.data, 909),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(915, 945)),
+        housePrice: MachinaModels.getUint32(struct.data, 266),
+        infoFlags: struct.data[270],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 271),houseAppeal_2: MachinaModels.getUint16(struct.data, 273),houseAppeal_3: MachinaModels.getUint16(struct.data, 275),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(277, 278)),
     };
     struct.houseInfoEntry_24 = {
-        housePrice: MachinaModels.getUint32(struct.data, 945),
-        infoFlags: struct.data[949],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 950),houseAppeal_2: MachinaModels.getUint16(struct.data, 950),houseAppeal_3: MachinaModels.getUint16(struct.data, 950),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(956, 986)),
+        housePrice: MachinaModels.getUint32(struct.data, 278),
+        infoFlags: struct.data[282],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 283),houseAppeal_2: MachinaModels.getUint16(struct.data, 285),houseAppeal_3: MachinaModels.getUint16(struct.data, 287),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(289, 290)),
     };
     struct.houseInfoEntry_25 = {
-        housePrice: MachinaModels.getUint32(struct.data, 986),
-        infoFlags: struct.data[990],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 991),houseAppeal_2: MachinaModels.getUint16(struct.data, 991),houseAppeal_3: MachinaModels.getUint16(struct.data, 991),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(997, 1027)),
+        housePrice: MachinaModels.getUint32(struct.data, 290),
+        infoFlags: struct.data[294],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 295),houseAppeal_2: MachinaModels.getUint16(struct.data, 297),houseAppeal_3: MachinaModels.getUint16(struct.data, 299),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(301, 302)),
     };
     struct.houseInfoEntry_26 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1027),
-        infoFlags: struct.data[1031],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1032),houseAppeal_2: MachinaModels.getUint16(struct.data, 1032),houseAppeal_3: MachinaModels.getUint16(struct.data, 1032),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1038, 1068)),
+        housePrice: MachinaModels.getUint32(struct.data, 302),
+        infoFlags: struct.data[306],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 307),houseAppeal_2: MachinaModels.getUint16(struct.data, 309),houseAppeal_3: MachinaModels.getUint16(struct.data, 311),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(313, 314)),
     };
     struct.houseInfoEntry_27 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1068),
-        infoFlags: struct.data[1072],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1073),houseAppeal_2: MachinaModels.getUint16(struct.data, 1073),houseAppeal_3: MachinaModels.getUint16(struct.data, 1073),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1079, 1109)),
+        housePrice: MachinaModels.getUint32(struct.data, 314),
+        infoFlags: struct.data[318],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 319),houseAppeal_2: MachinaModels.getUint16(struct.data, 321),houseAppeal_3: MachinaModels.getUint16(struct.data, 323),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(325, 326)),
     };
     struct.houseInfoEntry_28 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1109),
-        infoFlags: struct.data[1113],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1114),houseAppeal_2: MachinaModels.getUint16(struct.data, 1114),houseAppeal_3: MachinaModels.getUint16(struct.data, 1114),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1120, 1150)),
+        housePrice: MachinaModels.getUint32(struct.data, 326),
+        infoFlags: struct.data[330],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 331),houseAppeal_2: MachinaModels.getUint16(struct.data, 333),houseAppeal_3: MachinaModels.getUint16(struct.data, 335),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(337, 338)),
     };
     struct.houseInfoEntry_29 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1150),
-        infoFlags: struct.data[1154],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1155),houseAppeal_2: MachinaModels.getUint16(struct.data, 1155),houseAppeal_3: MachinaModels.getUint16(struct.data, 1155),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1161, 1191)),
+        housePrice: MachinaModels.getUint32(struct.data, 338),
+        infoFlags: struct.data[342],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 343),houseAppeal_2: MachinaModels.getUint16(struct.data, 345),houseAppeal_3: MachinaModels.getUint16(struct.data, 347),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(349, 350)),
     };
     struct.houseInfoEntry_30 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1191),
-        infoFlags: struct.data[1195],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1196),houseAppeal_2: MachinaModels.getUint16(struct.data, 1196),houseAppeal_3: MachinaModels.getUint16(struct.data, 1196),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1202, 1232)),
+        housePrice: MachinaModels.getUint32(struct.data, 350),
+        infoFlags: struct.data[354],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 355),houseAppeal_2: MachinaModels.getUint16(struct.data, 357),houseAppeal_3: MachinaModels.getUint16(struct.data, 359),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(361, 362)),
     };
     struct.houseInfoEntry_31 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1232),
-        infoFlags: struct.data[1236],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1237),houseAppeal_2: MachinaModels.getUint16(struct.data, 1237),houseAppeal_3: MachinaModels.getUint16(struct.data, 1237),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1243, 1273)),
+        housePrice: MachinaModels.getUint32(struct.data, 362),
+        infoFlags: struct.data[366],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 367),houseAppeal_2: MachinaModels.getUint16(struct.data, 369),houseAppeal_3: MachinaModels.getUint16(struct.data, 371),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(373, 374)),
     };
     struct.houseInfoEntry_32 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1273),
-        infoFlags: struct.data[1277],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1278),houseAppeal_2: MachinaModels.getUint16(struct.data, 1278),houseAppeal_3: MachinaModels.getUint16(struct.data, 1278),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1284, 1314)),
+        housePrice: MachinaModels.getUint32(struct.data, 374),
+        infoFlags: struct.data[378],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 379),houseAppeal_2: MachinaModels.getUint16(struct.data, 381),houseAppeal_3: MachinaModels.getUint16(struct.data, 383),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(385, 386)),
     };
     struct.houseInfoEntry_33 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1314),
-        infoFlags: struct.data[1318],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1319),houseAppeal_2: MachinaModels.getUint16(struct.data, 1319),houseAppeal_3: MachinaModels.getUint16(struct.data, 1319),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1325, 1355)),
+        housePrice: MachinaModels.getUint32(struct.data, 386),
+        infoFlags: struct.data[390],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 391),houseAppeal_2: MachinaModels.getUint16(struct.data, 393),houseAppeal_3: MachinaModels.getUint16(struct.data, 395),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(397, 398)),
     };
     struct.houseInfoEntry_34 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1355),
-        infoFlags: struct.data[1359],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1360),houseAppeal_2: MachinaModels.getUint16(struct.data, 1360),houseAppeal_3: MachinaModels.getUint16(struct.data, 1360),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1366, 1396)),
+        housePrice: MachinaModels.getUint32(struct.data, 398),
+        infoFlags: struct.data[402],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 403),houseAppeal_2: MachinaModels.getUint16(struct.data, 405),houseAppeal_3: MachinaModels.getUint16(struct.data, 407),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(409, 410)),
     };
     struct.houseInfoEntry_35 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1396),
-        infoFlags: struct.data[1400],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1401),houseAppeal_2: MachinaModels.getUint16(struct.data, 1401),houseAppeal_3: MachinaModels.getUint16(struct.data, 1401),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1407, 1437)),
+        housePrice: MachinaModels.getUint32(struct.data, 410),
+        infoFlags: struct.data[414],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 415),houseAppeal_2: MachinaModels.getUint16(struct.data, 417),houseAppeal_3: MachinaModels.getUint16(struct.data, 419),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(421, 422)),
     };
     struct.houseInfoEntry_36 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1437),
-        infoFlags: struct.data[1441],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1442),houseAppeal_2: MachinaModels.getUint16(struct.data, 1442),houseAppeal_3: MachinaModels.getUint16(struct.data, 1442),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1448, 1478)),
+        housePrice: MachinaModels.getUint32(struct.data, 422),
+        infoFlags: struct.data[426],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 427),houseAppeal_2: MachinaModels.getUint16(struct.data, 429),houseAppeal_3: MachinaModels.getUint16(struct.data, 431),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(433, 434)),
     };
     struct.houseInfoEntry_37 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1478),
-        infoFlags: struct.data[1482],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1483),houseAppeal_2: MachinaModels.getUint16(struct.data, 1483),houseAppeal_3: MachinaModels.getUint16(struct.data, 1483),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1489, 1519)),
+        housePrice: MachinaModels.getUint32(struct.data, 434),
+        infoFlags: struct.data[438],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 439),houseAppeal_2: MachinaModels.getUint16(struct.data, 441),houseAppeal_3: MachinaModels.getUint16(struct.data, 443),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(445, 446)),
     };
     struct.houseInfoEntry_38 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1519),
-        infoFlags: struct.data[1523],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1524),houseAppeal_2: MachinaModels.getUint16(struct.data, 1524),houseAppeal_3: MachinaModels.getUint16(struct.data, 1524),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1530, 1560)),
+        housePrice: MachinaModels.getUint32(struct.data, 446),
+        infoFlags: struct.data[450],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 451),houseAppeal_2: MachinaModels.getUint16(struct.data, 453),houseAppeal_3: MachinaModels.getUint16(struct.data, 455),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(457, 458)),
     };
     struct.houseInfoEntry_39 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1560),
-        infoFlags: struct.data[1564],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1565),houseAppeal_2: MachinaModels.getUint16(struct.data, 1565),houseAppeal_3: MachinaModels.getUint16(struct.data, 1565),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1571, 1601)),
+        housePrice: MachinaModels.getUint32(struct.data, 458),
+        infoFlags: struct.data[462],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 463),houseAppeal_2: MachinaModels.getUint16(struct.data, 465),houseAppeal_3: MachinaModels.getUint16(struct.data, 467),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(469, 470)),
     };
     struct.houseInfoEntry_40 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1601),
-        infoFlags: struct.data[1605],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1606),houseAppeal_2: MachinaModels.getUint16(struct.data, 1606),houseAppeal_3: MachinaModels.getUint16(struct.data, 1606),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1612, 1642)),
+        housePrice: MachinaModels.getUint32(struct.data, 470),
+        infoFlags: struct.data[474],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 475),houseAppeal_2: MachinaModels.getUint16(struct.data, 477),houseAppeal_3: MachinaModels.getUint16(struct.data, 479),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(481, 482)),
     };
     struct.houseInfoEntry_41 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1642),
-        infoFlags: struct.data[1646],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1647),houseAppeal_2: MachinaModels.getUint16(struct.data, 1647),houseAppeal_3: MachinaModels.getUint16(struct.data, 1647),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1653, 1683)),
+        housePrice: MachinaModels.getUint32(struct.data, 482),
+        infoFlags: struct.data[486],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 487),houseAppeal_2: MachinaModels.getUint16(struct.data, 489),houseAppeal_3: MachinaModels.getUint16(struct.data, 491),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(493, 494)),
     };
     struct.houseInfoEntry_42 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1683),
-        infoFlags: struct.data[1687],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1688),houseAppeal_2: MachinaModels.getUint16(struct.data, 1688),houseAppeal_3: MachinaModels.getUint16(struct.data, 1688),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1694, 1724)),
+        housePrice: MachinaModels.getUint32(struct.data, 494),
+        infoFlags: struct.data[498],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 499),houseAppeal_2: MachinaModels.getUint16(struct.data, 501),houseAppeal_3: MachinaModels.getUint16(struct.data, 503),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(505, 506)),
     };
     struct.houseInfoEntry_43 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1724),
-        infoFlags: struct.data[1728],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1729),houseAppeal_2: MachinaModels.getUint16(struct.data, 1729),houseAppeal_3: MachinaModels.getUint16(struct.data, 1729),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1735, 1765)),
+        housePrice: MachinaModels.getUint32(struct.data, 506),
+        infoFlags: struct.data[510],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 511),houseAppeal_2: MachinaModels.getUint16(struct.data, 513),houseAppeal_3: MachinaModels.getUint16(struct.data, 515),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(517, 518)),
     };
     struct.houseInfoEntry_44 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1765),
-        infoFlags: struct.data[1769],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1770),houseAppeal_2: MachinaModels.getUint16(struct.data, 1770),houseAppeal_3: MachinaModels.getUint16(struct.data, 1770),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1776, 1806)),
+        housePrice: MachinaModels.getUint32(struct.data, 518),
+        infoFlags: struct.data[522],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 523),houseAppeal_2: MachinaModels.getUint16(struct.data, 525),houseAppeal_3: MachinaModels.getUint16(struct.data, 527),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(529, 530)),
     };
     struct.houseInfoEntry_45 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1806),
-        infoFlags: struct.data[1810],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1811),houseAppeal_2: MachinaModels.getUint16(struct.data, 1811),houseAppeal_3: MachinaModels.getUint16(struct.data, 1811),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1817, 1847)),
+        housePrice: MachinaModels.getUint32(struct.data, 530),
+        infoFlags: struct.data[534],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 535),houseAppeal_2: MachinaModels.getUint16(struct.data, 537),houseAppeal_3: MachinaModels.getUint16(struct.data, 539),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(541, 542)),
     };
     struct.houseInfoEntry_46 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1847),
-        infoFlags: struct.data[1851],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1852),houseAppeal_2: MachinaModels.getUint16(struct.data, 1852),houseAppeal_3: MachinaModels.getUint16(struct.data, 1852),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1858, 1888)),
+        housePrice: MachinaModels.getUint32(struct.data, 542),
+        infoFlags: struct.data[546],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 547),houseAppeal_2: MachinaModels.getUint16(struct.data, 549),houseAppeal_3: MachinaModels.getUint16(struct.data, 551),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(553, 554)),
     };
     struct.houseInfoEntry_47 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1888),
-        infoFlags: struct.data[1892],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1893),houseAppeal_2: MachinaModels.getUint16(struct.data, 1893),houseAppeal_3: MachinaModels.getUint16(struct.data, 1893),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1899, 1929)),
+        housePrice: MachinaModels.getUint32(struct.data, 554),
+        infoFlags: struct.data[558],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 559),houseAppeal_2: MachinaModels.getUint16(struct.data, 561),houseAppeal_3: MachinaModels.getUint16(struct.data, 563),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(565, 566)),
     };
     struct.houseInfoEntry_48 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1929),
-        infoFlags: struct.data[1933],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1934),houseAppeal_2: MachinaModels.getUint16(struct.data, 1934),houseAppeal_3: MachinaModels.getUint16(struct.data, 1934),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1940, 1970)),
+        housePrice: MachinaModels.getUint32(struct.data, 566),
+        infoFlags: struct.data[570],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 571),houseAppeal_2: MachinaModels.getUint16(struct.data, 573),houseAppeal_3: MachinaModels.getUint16(struct.data, 575),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(577, 578)),
     };
     struct.houseInfoEntry_49 = {
-        housePrice: MachinaModels.getUint32(struct.data, 1970),
-        infoFlags: struct.data[1974],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 1975),houseAppeal_2: MachinaModels.getUint16(struct.data, 1975),houseAppeal_3: MachinaModels.getUint16(struct.data, 1975),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(1981, 2011)),
+        housePrice: MachinaModels.getUint32(struct.data, 578),
+        infoFlags: struct.data[582],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 583),houseAppeal_2: MachinaModels.getUint16(struct.data, 585),houseAppeal_3: MachinaModels.getUint16(struct.data, 587),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(589, 590)),
     };
     struct.houseInfoEntry_50 = {
-        housePrice: MachinaModels.getUint32(struct.data, 2011),
-        infoFlags: struct.data[2015],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 2016),houseAppeal_2: MachinaModels.getUint16(struct.data, 2016),houseAppeal_3: MachinaModels.getUint16(struct.data, 2016),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(2022, 2052)),
+        housePrice: MachinaModels.getUint32(struct.data, 590),
+        infoFlags: struct.data[594],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 595),houseAppeal_2: MachinaModels.getUint16(struct.data, 597),houseAppeal_3: MachinaModels.getUint16(struct.data, 599),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(601, 602)),
     };
     struct.houseInfoEntry_51 = {
-        housePrice: MachinaModels.getUint32(struct.data, 2052),
-        infoFlags: struct.data[2056],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 2057),houseAppeal_2: MachinaModels.getUint16(struct.data, 2057),houseAppeal_3: MachinaModels.getUint16(struct.data, 2057),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(2063, 2093)),
+        housePrice: MachinaModels.getUint32(struct.data, 602),
+        infoFlags: struct.data[606],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 607),houseAppeal_2: MachinaModels.getUint16(struct.data, 609),houseAppeal_3: MachinaModels.getUint16(struct.data, 611),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(613, 614)),
     };
     struct.houseInfoEntry_52 = {
-        housePrice: MachinaModels.getUint32(struct.data, 2093),
-        infoFlags: struct.data[2097],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 2098),houseAppeal_2: MachinaModels.getUint16(struct.data, 2098),houseAppeal_3: MachinaModels.getUint16(struct.data, 2098),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(2104, 2134)),
+        housePrice: MachinaModels.getUint32(struct.data, 614),
+        infoFlags: struct.data[618],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 619),houseAppeal_2: MachinaModels.getUint16(struct.data, 621),houseAppeal_3: MachinaModels.getUint16(struct.data, 623),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(625, 626)),
     };
     struct.houseInfoEntry_53 = {
-        housePrice: MachinaModels.getUint32(struct.data, 2134),
-        infoFlags: struct.data[2138],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 2139),houseAppeal_2: MachinaModels.getUint16(struct.data, 2139),houseAppeal_3: MachinaModels.getUint16(struct.data, 2139),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(2145, 2175)),
+        housePrice: MachinaModels.getUint32(struct.data, 626),
+        infoFlags: struct.data[630],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 631),houseAppeal_2: MachinaModels.getUint16(struct.data, 633),houseAppeal_3: MachinaModels.getUint16(struct.data, 635),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(637, 638)),
     };
     struct.houseInfoEntry_54 = {
-        housePrice: MachinaModels.getUint32(struct.data, 2175),
-        infoFlags: struct.data[2179],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 2180),houseAppeal_2: MachinaModels.getUint16(struct.data, 2180),houseAppeal_3: MachinaModels.getUint16(struct.data, 2180),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(2186, 2216)),
+        housePrice: MachinaModels.getUint32(struct.data, 638),
+        infoFlags: struct.data[642],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 643),houseAppeal_2: MachinaModels.getUint16(struct.data, 645),houseAppeal_3: MachinaModels.getUint16(struct.data, 647),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(649, 650)),
     };
     struct.houseInfoEntry_55 = {
-        housePrice: MachinaModels.getUint32(struct.data, 2216),
-        infoFlags: struct.data[2220],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 2221),houseAppeal_2: MachinaModels.getUint16(struct.data, 2221),houseAppeal_3: MachinaModels.getUint16(struct.data, 2221),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(2227, 2257)),
+        housePrice: MachinaModels.getUint32(struct.data, 650),
+        infoFlags: struct.data[654],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 655),houseAppeal_2: MachinaModels.getUint16(struct.data, 657),houseAppeal_3: MachinaModels.getUint16(struct.data, 659),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(661, 662)),
     };
     struct.houseInfoEntry_56 = {
-        housePrice: MachinaModels.getUint32(struct.data, 2257),
-        infoFlags: struct.data[2261],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 2262),houseAppeal_2: MachinaModels.getUint16(struct.data, 2262),houseAppeal_3: MachinaModels.getUint16(struct.data, 2262),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(2268, 2298)),
+        housePrice: MachinaModels.getUint32(struct.data, 662),
+        infoFlags: struct.data[666],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 667),houseAppeal_2: MachinaModels.getUint16(struct.data, 669),houseAppeal_3: MachinaModels.getUint16(struct.data, 671),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(673, 674)),
     };
     struct.houseInfoEntry_57 = {
-        housePrice: MachinaModels.getUint32(struct.data, 2298),
-        infoFlags: struct.data[2302],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 2303),houseAppeal_2: MachinaModels.getUint16(struct.data, 2303),houseAppeal_3: MachinaModels.getUint16(struct.data, 2303),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(2309, 2339)),
+        housePrice: MachinaModels.getUint32(struct.data, 674),
+        infoFlags: struct.data[678],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 679),houseAppeal_2: MachinaModels.getUint16(struct.data, 681),houseAppeal_3: MachinaModels.getUint16(struct.data, 683),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(685, 686)),
     };
     struct.houseInfoEntry_58 = {
-        housePrice: MachinaModels.getUint32(struct.data, 2339),
-        infoFlags: struct.data[2343],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 2344),houseAppeal_2: MachinaModels.getUint16(struct.data, 2344),houseAppeal_3: MachinaModels.getUint16(struct.data, 2344),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(2350, 2380)),
+        housePrice: MachinaModels.getUint32(struct.data, 686),
+        infoFlags: struct.data[690],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 691),houseAppeal_2: MachinaModels.getUint16(struct.data, 693),houseAppeal_3: MachinaModels.getUint16(struct.data, 695),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(697, 698)),
     };
     struct.houseInfoEntry_59 = {
-        housePrice: MachinaModels.getUint32(struct.data, 2380),
-        infoFlags: struct.data[2384],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 2385),houseAppeal_2: MachinaModels.getUint16(struct.data, 2385),houseAppeal_3: MachinaModels.getUint16(struct.data, 2385),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(2391, 2421)),
+        housePrice: MachinaModels.getUint32(struct.data, 698),
+        infoFlags: struct.data[702],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 703),houseAppeal_2: MachinaModels.getUint16(struct.data, 705),houseAppeal_3: MachinaModels.getUint16(struct.data, 707),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(709, 710)),
     };
     struct.houseInfoEntry_60 = {
-        housePrice: MachinaModels.getUint32(struct.data, 2421),
-        infoFlags: struct.data[2425],
-        houseAppeal_1: MachinaModels.getUint16(struct.data, 2426),houseAppeal_2: MachinaModels.getUint16(struct.data, 2426),houseAppeal_3: MachinaModels.getUint16(struct.data, 2426),
-        estateOwnerName: String.fromCodePoint(struct.data.slice(2432, 2462)),
+        housePrice: MachinaModels.getUint32(struct.data, 710),
+        infoFlags: struct.data[714],
+        houseAppeal_1: MachinaModels.getUint16(struct.data, 715),houseAppeal_2: MachinaModels.getUint16(struct.data, 717),houseAppeal_3: MachinaModels.getUint16(struct.data, 719),
+        estateOwnerName: String.fromCodePoint(struct.data.slice(721, 722)),
     };
-    struct.housePrice = MachinaModels.getUint32(struct.data, 2464);
-    struct.infoFlags = struct.data[2468];
-    struct.houseAppeal_1 = MachinaModels.getUint16(struct.data, 2469);    struct.houseAppeal_2 = MachinaModels.getUint16(struct.data, 2469);    struct.houseAppeal_3 = MachinaModels.getUint16(struct.data, 2469);
-    struct.estateOwnerName = String.fromCodePoint(struct.data.slice(2475, 2505));
+    struct.housePrice = MachinaModels.getUint32(struct.data, 724);
+    struct.infoFlags = struct.data[728];
+    struct.houseAppeal_1 = MachinaModels.getUint16(struct.data, 729);    struct.houseAppeal_2 = MachinaModels.getUint16(struct.data, 731);    struct.houseAppeal_3 = MachinaModels.getUint16(struct.data, 733);
+    struct.estateOwnerName = String.fromCodePoint(struct.data.slice(735, 736));
 };

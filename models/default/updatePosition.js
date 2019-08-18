@@ -3,9 +3,9 @@
 const MachinaModels = require("../_MachinaModels.js")
 
 module.exports = async (struct) => {
-    struct.headPosition = struct.data[3];
-    struct.position = MachinaModels.getUint16(struct.data, 4);
-    struct.animationType = struct.data[6];
-    struct.animationState = struct.data[7];
-    struct.clientAnimationType = struct.data[8];
+    struct.headPosition = struct.data[0];
+    struct.position = MachinaModels.getUint16(struct.data, 1);
+    struct.animationType = struct.data[3];
+    struct.animationState = struct.data[4];
+    struct.clientAnimationType = struct.data[5];
 };

@@ -3,5 +3,5 @@
 const MachinaModels = require("../_MachinaModels.js")
 
 module.exports = async (struct) => {
-    struct.ident = MachinaModels.getUint16(struct.data, 8);
+    struct.ident = MachinaModels.getUint16(struct.data, 0);
 };
