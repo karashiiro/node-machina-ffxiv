@@ -1,0 +1,7 @@
+// This is an auto-generated file.
+
+const MachinaModels = require("../_MachinaModels.js")
+
+module.exports = async (struct) => {
+    struct.data_1 = struct.data[0];    struct.data_2 = struct.data[0];    struct.data_3 = struct.data[0];    struct.data_4 = struct.data[0];    struct.data_5 = struct.data[0];    struct.data_6 = struct.data[0];    struct.data_7 = struct.data[0];    struct.data_8 = struct.data[0];    struct.data_9 = struct.data[0];    struct.data_10 = struct.data[0];    struct.data_11 = struct.data[0];    struct.data_12 = struct.data[0];    struct.data_13 = struct.data[0];    struct.data_14 = struct.data[0];    struct.data_15 = struct.data[0];    struct.data_16 = struct.data[0];    struct.data_17 = struct.data[0];    struct.data_18 = struct.data[0];    struct.data_19 = struct.data[0];    struct.data_20 = struct.data[0];    struct.data_21 = struct.data[0];    struct.data_22 = struct.data[0];    struct.data_23 = struct.data[0];    struct.data_24 = struct.data[0];    struct.data_25 = struct.data[0];    struct.data_26 = struct.data[0];    struct.data_27 = struct.data[0];    struct.data_28 = struct.data[0];    struct.data_29 = struct.data[0];    struct.data_30 = struct.data[0];    struct.data_31 = struct.data[0];    struct.data_32 = struct.data[0];
+};

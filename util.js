@@ -18,7 +18,11 @@ const remoteFileMap = new Map();
 // Makes marginally more sense to do it this way than to potentially allow arbitrary
 // HTTP requests.
 const urlDictionary = {
+    "ClientZoneDef.h": "https://raw.githubusercontent.com/SapphireServer/Sapphire/develop/src/common/Network/PacketDef/Zone/ClientZoneDef.h",
     "Materia.csv": "https://raw.githubusercontent.com/xivapi/ffxiv-datamining/master/csv/Materia.csv",
+    "ServerChatDef.h": "https://raw.githubusercontent.com/SapphireServer/Sapphire/develop/src/common/Network/PacketDef/Chat/ServerChatDef.h",
+    "ServerLobbyDef.h": "https://raw.githubusercontent.com/SapphireServer/Sapphire/develop/src/common/Network/PacketDef/Lobby/ServerLobbyDef.h",
+    "ServerZoneDef.h": "https://raw.githubusercontent.com/SapphireServer/Sapphire/develop/src/common/Network/PacketDef/Zone/ServerZoneDef.h",
 };
 
 // Clears the folder and the cache. Can probably be used to force a data update.
@@ -56,6 +60,11 @@ module.exports.fetchFile = async (fileName) => {
 
         return remoteFileMap.get(fileName);
     }
+};
+
+// Download file data and return it without saving or caching the data.
+module.exports.fetchFileNoSave = async (fileName) => {
+    return await request(urlDictionary[fileName]);
 };
 
 // Parse a CSV, and then cache it in the Map.

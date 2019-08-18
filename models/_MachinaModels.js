@@ -1,5 +1,8 @@
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
+
 // Server-zone packets
 this.chat                          = require('./chat.js');
 this.directorPopUp                 = require('./directorPopUp.js');
@@ -18,6 +21,17 @@ this.updateHpMpTp                  = require('./updateHpMpTp.js');
 this.chatHandler                   = require('./chatHandler.js');
 this.emoteEventHandler             = require('./emoteEventHandler.js');
 this.inventoryModifyHandler        = require('./inventoryModifyHandler.js');
+
+// Auto-generated processing definitions; not necessarily low on size so we deprioritize them
+let dir = fs.readdirSync(path.join(__dirname, "./default"));
+for (let def of dir) {
+    let packetDef = def.substr(0, def.indexOf("."));
+    if (!this[packetDef]) {
+        this[packetDef] = require(path.join(__dirname, `./default/${def}`));
+    }
+}
+
+// Methods
 
 module.exports.parse = (struct) => {
     if (struct.segmentType !== 0x03) return; // No IPC data
@@ -42,7 +56,7 @@ module.exports.parseAndEmit = async (struct, context) => {
     if (struct.segmentType !== 0x03) return; // No IPC data
 
     // Testing
-    /*let testSequence = new Uint8Array([]);
+    /*let testSequence = new Uint8Array([0x57,0x5D,0xE2,0x2E,0x07,0x00,0x30,0x75]);
     if (hasSubArray(struct.data, testSequence)) {
         if (struct.type === "unknown") {
             console.log(`Found data in IPC ${struct.operation} type ${struct.type} (${this.getUint16(struct.data, 0x12)})`);
@@ -52,15 +66,26 @@ module.exports.parseAndEmit = async (struct, context) => {
 
         console.log(struct.data.toString());
         console.log(String.fromCodePoint(...struct.data));
-    }
+    }*/
 
     /*switch (this.getUint16(struct.data, 0x12)) {
-        case 0x0123:
-            struct.type = "freeCompanyUpdateShortMessageHandler";
+        case 0x013B:
+            console.log("0x013B");
+            console.log(struct.data.toString());
+            console.log(String.fromCodePoint(...struct.data));
             break;
-        case 0x0157:
-            struct.type = "freeCompanyUpdateShortMessage";
+        case 0x013A:
+            console.log("0x013A");
+            console.log(struct.data.toString());
+            console.log(String.fromCodePoint(...struct.data));
             break;
+    }*/
+
+    /*if (String.fromCodePoint(...struct.data).includes("")) {
+        console.log(struct.data.toString());
+        console.log(String.fromCodePoint(...struct.data));
+    } else {
+        return;
     }*/
 
     if (struct.type.startsWith("ping") && (struct.packetSize === 1064 /* pingHandler */ || struct.packetSize === 1112 /* ping */)) {
@@ -105,6 +130,16 @@ module.exports.getUint32 = (uint8Array, offset) => {
         buffer.setUint8(i, uint8Array[offset + i]);
     }
     return buffer.getUint32(0, true);
+};
+
+module.exports.getUint64 = (uint8Array, offset) => {
+    if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
+
+    let buffer = new DataView(new ArrayBuffer(8));
+    for (let i = 0; i < 8; i++) {
+        buffer.setUint8(i, uint8Array[offset + i]);
+    }
+    return buffer.getBigUint64(0, true);
 };
 
 function hasSubArray(master, sub) {
