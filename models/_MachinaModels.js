@@ -39,6 +39,7 @@ module.exports.parse = (struct) => {
     // same packet structure as a regular chat packet, so it gets miscategorized
     // as CharProgress if you feed it through the chat event handler.
     if (struct.type.startsWith("ping") && (struct.packetSize === 1064 /* pingHandler */ || struct.packetSize === 1112 /* ping */)) {
+        //console.log(struct.data.toString());
         struct.superType = "message";
         struct.type = "messageFC";
     }
