@@ -137,7 +137,9 @@ module.exports.getUint64 = (uint8Array, offset) => {
     for (let i = 0; i < 8; i++) {
         buffer.setUint8(i, uint8Array[offset + i]);
     }
-    return buffer.getBigUint64(0, true);
+
+    let num = `${buffer.getBigUint64(0, true)}`;
+    return num.substr(0, num.length - 1);
 };
 
 function hasSubArray(master, sub) {
