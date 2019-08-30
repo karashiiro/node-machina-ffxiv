@@ -54,7 +54,7 @@ module.exports.parseAndEmit = async (struct, context) => {
     if (struct.segmentType !== 0x03) return; // No IPC data
 
     // Testing
-    /*let testSequence = new Uint8Array([0x57,0x5D,0xE2,0x2E,0x07,0x00,0x30,0x75]);
+    /*let testSequence = new Uint8Array([]);
     if (hasSubArray(struct.data, testSequence)) {
         if (struct.type === "unknown") {
             console.log(`Found data in IPC ${struct.operation} type ${struct.type} (${this.getUint16(struct.data, 0x12)})`);
@@ -64,7 +64,7 @@ module.exports.parseAndEmit = async (struct, context) => {
 
         console.log(struct.data.toString());
         console.log(String.fromCodePoint(...struct.data));
-    }*/
+    }
 
     /*switch (this.getUint16(struct.data, 0x12)) {
         case 0x013B:
@@ -72,12 +72,7 @@ module.exports.parseAndEmit = async (struct, context) => {
             console.log(struct.data.toString());
             console.log(String.fromCodePoint(...struct.data));
             break;
-        case 0x013A:
-            console.log("0x013A");
-            console.log(struct.data.toString());
-            console.log(String.fromCodePoint(...struct.data));
-            break;
-    }*/
+    }
 
     /*if (String.fromCodePoint(...struct.data).includes("")) {
         console.log(struct.data.toString());
@@ -118,6 +113,16 @@ module.exports.getUint16 = (uint8Array, offset) => {
         buffer.setUint8(i, uint8Array[offset + i]);
     }
     return buffer.getUint16(0, true);
+};
+
+module.exports.getInt32 = (uint8Array, offset) => {
+    if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
+
+    let buffer = new DataView(new ArrayBuffer(4));
+    for (let i = 0; i < 4; i++) {
+        buffer.setUint8(i, uint8Array[offset + i]);
+    }
+    return buffer.getInt32(0, true);
 };
 
 module.exports.getUint32 = (uint8Array, offset) => {

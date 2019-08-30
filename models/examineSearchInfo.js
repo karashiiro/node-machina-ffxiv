@@ -1,6 +1,8 @@
+const MachinaModels = require('./_MachinaModels.js');
+
 module.exports = (struct) => {
-    let worldID = getWorld(struct.data[0x22]);
-    struct.world = worldID ? worldID : struct.data[0x22];
+    let worldID = getWorld(MachinaModels.getInt32(struct.data[0x22]));
+    struct.world = worldID ? worldID : MachinaModels.getInt32(struct.data[0x22]);
 
     struct.fc = String.fromCodePoint(...struct.data.slice(0x85, 0x97)).replace(/\0/g, ""); // Why is this an odd number?
     struct.searchComment = String.fromCodePoint(...struct.data.slice(0x24, 0x60)).replace(/\0/g, "");
@@ -14,7 +16,7 @@ module.exports = (struct) => {
     }
 };
 
-const getWorld = (id) => { // WIP
+const getWorld = (id) => { // TODO: use World exd
     if (id ===  34) return "Brynhildr";
     if (id ===  35) return "Famfrit";
     if (id ===  37) return "Mateus";
