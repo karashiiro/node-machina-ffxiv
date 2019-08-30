@@ -51,6 +51,6 @@ module.exports = async (struct) => {
         itemListing.city = MachinaModels.cityIDList[struct.data[0x8F + (LISTING_LENGTH * i)]];
         itemListing.dyeID = MachinaModels.getUint16(struct.data, 0x90 + (LISTING_LENGTH * i));
 
-        listings.push(itemListing);
+        struct.listings.push(itemListing);
     }
 };
