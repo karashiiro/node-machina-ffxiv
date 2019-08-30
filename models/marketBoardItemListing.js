@@ -41,7 +41,7 @@ module.exports = async (struct) => {
         for (let j = 0; j < 5; j++) {
             let materiaSlot = MachinaModels.getUint16(struct.data, 0x3C + (j * 2) + (LISTING_LENGTH * i));
             let materiaID = await MateriaHelper.materiaValueToItemID(materiaSlot);
-            if (materiaID !== 0) itemListing.materia.push(materiaID);
+            if (materiaID != 0) itemListing.materia.push(materiaID);
         }
         itemListing.retainerName = String.fromCodePoint(...struct.data.slice(0x4C + (LISTING_LENGTH * i), 0x6C + (LISTING_LENGTH * i))).replace(/\0/g, "");
         itemListing.playerName = String.fromCodePoint(...struct.data.slice(0x6C + (LISTING_LENGTH * i), 0x8C + (LISTING_LENGTH * i))).replace(/\0/g, "");
