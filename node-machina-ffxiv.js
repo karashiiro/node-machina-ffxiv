@@ -10,8 +10,9 @@ const localUtil = require('./util.js')
 const MachinaModels = require('./models/_MachinaModels.js');
 
 // Folders
-if (!fs.existsSync(path.join(__dirname, "./remote-data"))) {
-    fs.mkdirSync("./remote-data");
+const remoteDatapath = path.join(__dirname, "./remote-data");
+if (!fs.existsSync(remoteDatapath)) {
+    fs.mkdirSync(remoteDatapath);
 }
 
 // Private module members
