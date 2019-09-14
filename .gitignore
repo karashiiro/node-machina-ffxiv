@@ -76,12 +76,5 @@ typings/
 # Mono auto generated files
 mono_crash.*
 
-# Build results
-MachinaWrapper/Machina.dll
-MachinaWrapper/Machina.FFXIV.dll
-MachinaWrapper/MachinaWrapper.exe
-MachinaWrapper/MachinaWrapper.exe.config
-MachinaWrapper/MachinaWrapper.pdb
-
 # Remote files
 remote-data/
