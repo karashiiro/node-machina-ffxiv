@@ -93,6 +93,7 @@ module.exports.parseAndEmit = async (struct, context) => {
 
     context.emit(struct.type, struct); // Emit a parsed event
     if (struct.superType) context.emit(struct.superType, struct); // Emit another event so you can write catch-alls
+    context.emit("any", struct); // Emit an even bigger catchall
 };
 
 module.exports.uint8ArrayToHexArray = (array) => {
