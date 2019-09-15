@@ -15,9 +15,8 @@ module.exports = (struct) => {
     struct.spiritBond = MachinaModels.getUint16(struct.data, 0x22);
     struct.stain = MachinaModels.getUint16(struct.data, 0x22);
     struct.glamourCatalogId = MachinaModels.getUint32(struct.data, 0x24);
-    struct.materia1 = MachinaModels.getUint16(struct.data, 0x28);
-    struct.materia2 = MachinaModels.getUint16(struct.data, 0x2A);
-    struct.materia3 = MachinaModels.getUint16(struct.data, 0x2C);
-    struct.materia4 = MachinaModels.getUint16(struct.data, 0x30);
-    struct.materia5 = MachinaModels.getUint16(struct.data, 0x32);
+    struct.materia = [];
+    for (let i = 0; i < 5; i++) {
+        struct.materia.push(MachinaModels.getUint16(struct.data, 0x28 + (i * 2)));
+    }
 };
