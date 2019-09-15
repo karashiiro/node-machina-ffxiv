@@ -8,7 +8,7 @@ module.exports = (struct) => {
     struct.quantity = MachinaModels.getUint32(struct.data, 0x0C);
     struct.catalogId = MachinaModels.getUint32(struct.data, 0x10);
     struct.reservedFlag = MachinaModels.getUint32(struct.data, 0x14);
-    struct.signatureId = MachinaModels.getUint32(struct.data, 0x18);
+    struct.signatureId = MachinaModels.getUint64(struct.data, 0x18);
     struct.hqFlag = struct.data[0x20];
     struct.unknown2 = struct.data[0x21];
     struct.condition = MachinaModels.getUint16(struct.data, 0x22);
