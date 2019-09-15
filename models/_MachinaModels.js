@@ -8,6 +8,7 @@ this.chat                          = require('./chat.js');
 this.examineSearchInfo             = require('./examineSearchInfo.js');
 this.freeCompanyEvent              = require('./freeCompanyEvent.js');
 this.freeCompanyUpdateShortMessage = require('./freeCompanyUpdateShortMessage.js');
+this.itemInfo                      = require('./itemInfo.js');
 this.logMessage                    = require('./logMessage.js');
 this.marketBoardItemListing        = require('./marketBoardItemListing.js');
 this.messageFC                     = require('./messageFC.js');
