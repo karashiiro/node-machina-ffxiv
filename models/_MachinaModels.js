@@ -14,6 +14,7 @@ this.marketBoardItemListing        = require('./marketBoardItemListing.js');
 this.messageFC                     = require('./messageFC.js');
 this.playtime                      = require('./playtime.js');
 this.playerStats                   = require('./playerStats.js');
+this.updateInventorySlot           = require('./updateInventorySlot.js');
 
 // Client-zone packets
 this.chatHandler                   = require('./chatHandler.js');
