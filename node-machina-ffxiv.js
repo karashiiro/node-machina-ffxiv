@@ -6,6 +6,8 @@ const readline = require('readline');
 const path = require('path');
 const{spawn} = require('child_process');
 
+require('./polyfill');
+
 const localUtil = require('./util.js')
 const MachinaModels = require('./models/_MachinaModels.js');
 

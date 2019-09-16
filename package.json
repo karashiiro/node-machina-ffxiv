@@ -1,6 +1,6 @@
 {
   "name": "node-machina-ffxiv",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "A wrapper for revahn's Machina network capture library.",
   "main": "node-machina-ffxiv.js",
   "scripts": {
@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "csv-parse": "^4.4.5",
+    "jsbi": "^3.1.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
   }
