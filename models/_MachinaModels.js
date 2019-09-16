@@ -99,7 +99,7 @@ module.exports.parseAndEmit = async (struct, context) => {
 
 module.exports.uint8ArrayToHexArray = (array) => {
     let newArray = [];
-    for (let i; i < array.length; i++) {
+    for (let i = 0; i < array.length; i++) {
         let temp = array[i].toString(16);
         if (temp.length === 1) temp = `0${temp}`;
         newArray[i] = temp;
