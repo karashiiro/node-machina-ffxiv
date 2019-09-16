@@ -25,6 +25,7 @@ var _monitorType;
 var _pid;
 var _ip;
 var _useSocketFilter;
+var _noData;
 
 // Public class
 class MachinaFFXIV extends EventEmitter {
@@ -55,6 +56,12 @@ class MachinaFFXIV extends EventEmitter {
                 throw new TypeError("useSocketFilter must be a Boolean.");
             } else if (options.useSocketFilter) {
                 _useSocketFilter = options.useSocketFilter;
+            }
+
+            if (options.noData && typeof options.noData != 'boolean') {
+                throw new TypeError("noData must be a Boolean.");
+            } else if (options.noData) {
+                _noData = options.noData;
             }
         }
 
@@ -87,7 +94,7 @@ class MachinaFFXIV extends EventEmitter {
                 content.data = new Uint8Array(content.data); // Why store bytes as 32-bit integers?
 
                 this.emit('raw', content); // Emit a catch-all event
-                MachinaModels.parseAndEmit(content, this); // Parse packet data
+                MachinaModels.parseAndEmit(content, _noData, this); // Parse packet data
 
                 _stdoutQueue = ""; // Clear the queue
             }

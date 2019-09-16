@@ -12,11 +12,11 @@ module.exports = (struct) => {
     struct.hqFlag = struct.data[0x20];
     struct.unknown2 = struct.data[0x21];
     struct.condition = MachinaModels.getUint16(struct.data, 0x22);
-    struct.spiritBond = MachinaModels.getUint16(struct.data, 0x22);
-    struct.stain = MachinaModels.getUint16(struct.data, 0x22);
-    struct.glamourCatalogId = MachinaModels.getUint32(struct.data, 0x24);
+    struct.spiritBond = MachinaModels.getUint16(struct.data, 0x24);
+    struct.stain = MachinaModels.getUint16(struct.data, 0x26);
+    struct.glamourCatalogId = MachinaModels.getUint32(struct.data, 0x28);
     struct.materia = [];
     for (let i = 0; i < 5; i++) {
-        struct.materia.push(MachinaModels.getUint16(struct.data, 0x28 + (i * 2)));
+        struct.materia.push(MachinaModels.getUint16(struct.data, 0x2C + (i * 2)));
     }
 };
