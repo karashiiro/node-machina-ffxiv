@@ -1,9 +1,10 @@
 {
   "name": "node-machina-ffxiv",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "A wrapper for revahn's Machina network capture library.",
   "main": "node-machina-ffxiv.js",
   "scripts": {
+    "postinstall": "",
     "test": "echo \"Error: no test specified\" && exit 1",
     "unfirewall7": "netsh advfirewall firewall add rule name=\"MachinaWrapperJSON\" dir=in action=allow program=./MachinaWrapper/MachinaWrapper.exe enable=yes",
     "unfirewallXP": "netsh firewall set allowedprogram ./MachinaWrapper/MachinaWrapper.exe MachinaWrapperJSON ENABLE"
