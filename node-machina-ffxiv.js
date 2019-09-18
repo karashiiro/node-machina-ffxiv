@@ -70,7 +70,11 @@ class MachinaFFXIV extends EventEmitter {
         if (_pid) args.push(`--ProcessID ${_pid}`);
         if (_ip) args.push(`--LocalIP ${_ip}`);
         if (_useSocketFilter) args.push("--UseSocketFilter");
-        _monitor = spawn((options && options.machinaExePath) || path.join(__dirname, '/MachinaWrapper/MachinaWrapper.exe'), args);
+        const exePath = (options && options.machinaExePath) || path.join(__dirname, '/MachinaWrapper/MachinaWrapper.exe');
+        if (!fs.existsSync(exePath)) {
+            throw new Error(`MachinaWrapper not found in ${exePath}`);
+        }
+        _monitor = spawn(exePath, args);
 
         // Create events to route outputs.
         _stdoutQueue = ""; // A queue so that we don't get too much or too little of the buffer at once.
