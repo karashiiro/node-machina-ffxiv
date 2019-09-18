@@ -11,12 +11,6 @@ require('./polyfill');
 const localUtil = require('./util.js')
 const MachinaModels = require('./models/_MachinaModels.js');
 
-// Folders
-const remoteDatapath = path.join(__dirname, "./remote-data");
-if (!fs.existsSync(remoteDatapath)) {
-    fs.mkdirSync(remoteDatapath);
-}
-
 // Private module members
 var _monitor;
 var _stdoutQueue;
@@ -65,12 +59,18 @@ class MachinaFFXIV extends EventEmitter {
             }
         }
 
+        // Folders
+        const remoteDatapath = (options && options.remoteDataPath) || path.join(__dirname, './remote-data');
+        if (!fs.existsSync(remoteDatapath)) {
+            fs.mkdirSync(remoteDatapath);
+        }
+
         let args = [];
         if (_monitorType) args.push(`--MonitorType ${_monitorType}`);
         if (_pid) args.push(`--ProcessID ${_pid}`);
         if (_ip) args.push(`--LocalIP ${_ip}`);
         if (_useSocketFilter) args.push("--UseSocketFilter");
-        _monitor = spawn(path.join(__dirname, "/MachinaWrapper/MachinaWrapper.exe"), args);
+        _monitor = spawn((options && options.machinaExePath) || path.join(__dirname, '/MachinaWrapper/MachinaWrapper.exe'), args);
 
         // Create events to route outputs.
         _stdoutQueue = ""; // A queue so that we don't get too much or too little of the buffer at once.
