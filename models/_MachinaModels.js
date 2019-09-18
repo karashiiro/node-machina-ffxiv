@@ -10,7 +10,8 @@ this.freeCompanyEvent              = require('./freeCompanyEvent.js');
 this.freeCompanyUpdateShortMessage = require('./freeCompanyUpdateShortMessage.js');
 this.itemInfo                      = require('./itemInfo.js');
 this.logMessage                    = require('./logMessage.js');
-this.marketBoardItemListing        = require('./marketBoardItemListing.js');
+// Disabled until we find a better implementation for materia without needing csv or request.
+// this.marketBoardItemListing        = require('./marketBoardItemListing.js');
 this.messageFC                     = require('./messageFC.js');
 this.playtime                      = require('./playtime.js');
 this.playerStats                   = require('./playerStats.js');
@@ -20,17 +21,21 @@ this.updateInventorySlot           = require('./updateInventorySlot.js');
 this.chatHandler                   = require('./chatHandler.js');
 this.emoteEventHandler             = require('./emoteEventHandler.js');
 
-// Auto-generated processing definitions; not necessarily low on size
-// or as rich as we can make them so we deprioritize them.
-let dir = fs.readdirSync(path.join(__dirname, "./default"));
-for (let def of dir) {
-    let packetDef = def.substr(0, def.indexOf("."));
-    if (!this[packetDef]) {
-        this[packetDef] = require(path.join(__dirname, `./default/${def}`));
-    }
-}
-
 // Methods
+
+module.exports.init = (definitionsDir) => {
+    definitionsDir = definitionsDir || path.join(__dirname, "./default");
+    // Auto-generated processing definitions; not necessarily low on size
+    // or as rich as we can make them so we deprioritize them.
+    let dir = fs.readdirSync(definitionsDir);
+    for (let def of dir) {
+        let packetDef = def.substr(0, def.indexOf("."));
+        if (!this[packetDef]) {
+            this[packetDef] = require(path.join(definitionsDir, def));
+        }
+    }
+
+};
 
 module.exports.parse = (struct) => {
     if (struct.segmentType !== 0x03) return; // No IPC data
@@ -52,7 +57,7 @@ module.exports.parse = (struct) => {
     }
 };
 
-module.exports.parseAndEmit = async (struct, noData, context) => {
+module.exports.parseAndEmit = async (struct, context) => {
     if (struct.segmentType !== 0x03) return; // No IPC data
 
     // Testing
@@ -92,8 +97,6 @@ module.exports.parseAndEmit = async (struct, noData, context) => {
     if (this[struct.type]) {
         await this[struct.type](struct);
     }
-
-    if (noData) delete struct.data;
 
     context.emit(struct.type, struct); // Emit a parsed event
     if (struct.superType) context.emit(struct.superType, struct); // Emit another event so you can write catch-alls

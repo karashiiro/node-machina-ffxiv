@@ -8,7 +8,7 @@ const{spawn} = require('child_process');
 
 require('./polyfill');
 
-const localUtil = require('./util.js')
+const localUtil = require('./util.js');
 const MachinaModels = require('./models/_MachinaModels.js');
 
 // Private module members
@@ -75,6 +75,7 @@ class MachinaFFXIV extends EventEmitter {
             throw new Error(`MachinaWrapper not found in ${exePath}`);
         }
         _monitor = spawn(exePath, args);
+        MachinaModels.init(options && options.definitionsDir);
 
         // Create events to route outputs.
         _stdoutQueue = ""; // A queue so that we don't get too much or too little of the buffer at once.
