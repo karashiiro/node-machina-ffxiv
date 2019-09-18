@@ -57,7 +57,7 @@ module.exports.parse = (struct) => {
     }
 };
 
-module.exports.parseAndEmit = async (struct, context) => {
+module.exports.parseAndEmit = async (struct, noData, context) => {
     if (struct.segmentType !== 0x03) return; // No IPC data
 
     // Testing
@@ -97,6 +97,8 @@ module.exports.parseAndEmit = async (struct, context) => {
     if (this[struct.type]) {
         await this[struct.type](struct);
     }
+
+    if(noData) delete struct.data;
 
     context.emit(struct.type, struct); // Emit a parsed event
     if (struct.superType) context.emit(struct.superType, struct); // Emit another event so you can write catch-alls
