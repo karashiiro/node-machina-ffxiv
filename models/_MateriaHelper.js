@@ -1,14 +1,10 @@
 'use strict';
 
-const localUtil = require('../util.js');
-
 module.exports.materiaValueToItemID = async (materiaValue) => {
-    let data = await localUtil.parseCSV("Materia.csv");
+    let data = require('./materiaCSV.json');
     let materiaData = this.materiaValueToMateriaData(materiaValue);
 
-    let itemID = data[materiaData.materiaID + 3][materiaData.tier + 1];
-
-    return itemID;
+    return data[materiaData.materiaID + 3][materiaData.tier + 1];
 }
 
 module.exports.materiaValueToItemName = async (materiaValue) => {

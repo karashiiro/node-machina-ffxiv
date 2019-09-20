@@ -6,16 +6,9 @@ const readline = require('readline');
 const path = require('path');
 const{spawn} = require('child_process');
 
-require('./polyfill');
+require('./polyfill.js');
 
-const localUtil = require('./util.js')
 const MachinaModels = require('./models/_MachinaModels.js');
-
-// Folders
-const remoteDatapath = path.join(__dirname, "./remote-data");
-if (!fs.existsSync(remoteDatapath)) {
-    fs.mkdirSync(remoteDatapath);
-}
 
 // Private module members
 var _monitor;
@@ -65,12 +58,24 @@ class MachinaFFXIV extends EventEmitter {
             }
         }
 
+        // Folders
+        const remoteDatapath = (options && options.remoteDataPath) || path.join(__dirname, './remote-data');
+        if (!fs.existsSync(remoteDatapath)) {
+            fs.mkdirSync(remoteDatapath);
+        }
+
         let args = [];
         if (_monitorType) args.push(`--MonitorType ${_monitorType}`);
         if (_pid) args.push(`--ProcessID ${_pid}`);
         if (_ip) args.push(`--LocalIP ${_ip}`);
         if (_useSocketFilter) args.push("--UseSocketFilter");
-        _monitor = spawn(path.join(__dirname, "/MachinaWrapper/MachinaWrapper.exe"), args);
+        const exePath = (options && options.machinaExePath) || path.join(__dirname, '/MachinaWrapper/MachinaWrapper.exe');
+        if (!fs.existsSync(exePath)) {
+            throw new Error(`MachinaWrapper not found in ${exePath}`);
+        }
+        _monitor = spawn(exePath, args);
+
+        MachinaModels.loadDefinitions(options && options.definitionsDir);
 
         // Create events to route outputs.
         _stdoutQueue = ""; // A queue so that we don't get too much or too little of the buffer at once.
