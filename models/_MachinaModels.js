@@ -23,7 +23,7 @@ this.emoteEventHandler             = require('./emoteEventHandler.js');
 
 // Methods
 
-module.exports.init = (definitionsDir) => {
+module.exports.loadDefinitions = (definitionsDir) => {
     definitionsDir = definitionsDir || path.join(__dirname, "./default");
     // Auto-generated processing definitions; not necessarily low on size
     // or as rich as we can make them so we deprioritize them.

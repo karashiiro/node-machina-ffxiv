@@ -74,7 +74,8 @@ class MachinaFFXIV extends EventEmitter {
             throw new Error(`MachinaWrapper not found in ${exePath}`);
         }
         _monitor = spawn(exePath, args);
-        MachinaModels.init(options && options.definitionsDir);
+
+        MachinaModels.loadDefinitions(options && options.definitionsDir);
 
         // Create events to route outputs.
         _stdoutQueue = ""; // A queue so that we don't get too much or too little of the buffer at once.
