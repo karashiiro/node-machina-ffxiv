@@ -15,6 +15,7 @@ this.marketBoardItemListing        = require('./marketBoardItemListing.js');
 this.marketBoardItemListingHistory = require('./marketBoardItemListingHistory.js');
 this.messageFC                     = require('./messageFC.js');
 this.playtime                      = require('./playtime.js');
+this.playerSetup                   = require('./playerSetup.js');
 this.playerStats                   = require('./playerStats.js');
 this.updateInventorySlot           = require('./updateInventorySlot.js');
 
