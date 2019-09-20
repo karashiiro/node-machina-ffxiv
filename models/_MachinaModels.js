@@ -12,6 +12,7 @@ this.itemInfo                      = require('./itemInfo.js');
 this.logMessage                    = require('./logMessage.js');
 // Disabled until we find a better implementation for materia without needing csv or request.
 this.marketBoardItemListing        = require('./marketBoardItemListing.js');
+this.marketBoardItemListingHistory = require('./marketBoardItemListingHistory.js');
 this.messageFC                     = require('./messageFC.js');
 this.playtime                      = require('./playtime.js');
 this.playerStats                   = require('./playerStats.js');
