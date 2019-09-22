@@ -22,6 +22,7 @@ this.updateInventorySlot           = require('./updateInventorySlot.js');
 // Client-zone packets
 this.chatHandler                   = require('./chatHandler.js');
 this.emoteEventHandler             = require('./emoteEventHandler.js');
+this.inventoryModifyHandler        = require('./inventoryModifyHandler.js');
 
 // Methods
 
