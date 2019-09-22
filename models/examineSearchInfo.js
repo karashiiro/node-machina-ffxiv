@@ -1,18 +1,24 @@
 const MachinaModels = require('./_MachinaModels.js');
 
+const CLASSJOB_TOTAL = 38;
+
 module.exports = (struct) => {
-    let worldID = getWorld(MachinaModels.getInt32(struct.data[0x22]));
-    struct.world = worldID ? worldID : MachinaModels.getInt32(struct.data[0x22]);
+    let worldID = getWorld(struct.data[0x22]);
+    struct.world = worldID ? worldID : struct.data[0x22];
 
-    struct.fc = String.fromCodePoint(...struct.data.slice(0x85, 0x97)).replace(/\0/g, ""); // Why is this an odd number?
-    struct.searchComment = String.fromCodePoint(...struct.data.slice(0x24, 0x60)).replace(/\0/g, "");
+    struct.searchComment = String.fromCodePoint(...struct.data.slice(0x23, 0xE3)).replace(/\0/g, "");
+    struct.fc = String.fromCodePoint(...struct.data.slice(0xE4, 0xFB)).replace(/\0/g, "");
 
-    struct.classJob = new Map();
-    let classJobAbbreviation = ["GLD", "PGL", "MRD", "LNC", "ARC", "CNJ", "THM", "CRP", "BSM", "ARM",
-    "GSM", "LTW", "WVR", "ALC", "CUL", "MIN", "BTN", "FSH", "CUL", "MNK", "WAR", "DRG", "BRD", "PLD", "BLM",
-    "ACN", "SCH", "SMN", "ROG", "NIN", "MCH", "DRK", "AST", "SAM", "RDM", "BLU", "GNB", "DNC"];
-    for (let i = 0; i < classJobAbbreviation.length; i++) {
-        struct.classJob.set(classJobAbbreviation[i], struct.data[0x102 + i * 4]);
+    struct.classJob = [];
+    for (let i = 0; i < CLASSJOB_TOTAL; i++) {
+        // https://github.com/SapphireServer/Sapphire/blob/develop/src/common/Network/PacketDef/Zone/ServerZoneDef.h#L138
+        // Here data are inverted
+        // DNC is missing
+        // first classJob is wrong !
+        struct.classJob.push({
+            level: MachinaModels.getUint16(struct.data, 0xFE + (i * 4)),
+            job: getJob(MachinaModels.getUint16(struct.data, 0x100 + (i * 4)))
+        });
     }
 };
 
@@ -32,6 +38,7 @@ const getWorld = (id) => { // TODO: use World exd
     if (id ===  63) return "Gilgamesh";
     if (id ===  64) return "Leviathan";
     if (id ===  65) return "Midgardsormr";
+    if (id ===  66) return "Odin";
     if (id ===  68) return "Atomos";
     if (id ===  71) return "Moogle";
     if (id ===  72) return "Tonberry";
@@ -50,3 +57,46 @@ const getWorld = (id) => { // TODO: use World exd
     if (id ===  97) return "Ragnarok";
     if (id ===  99) return "Sargatanas";
 };
+const getJob = (id) => {
+    if (id ===  1) return ""; // ? Unknow
+    if (id ===  2) return "GLD";
+    if (id ===  3) return "PGL";
+    if (id ===  4) return "MRD";
+    if (id ===  5) return "LNC";
+    if (id ===  6) return "ARC";
+    if (id ===  7) return "CNJ";
+    if (id ===  8) return "THM";
+    if (id ===  9) return "CRP";
+    if (id ===  10) return "BSM";
+    if (id ===  11) return "ARM";
+    if (id ===  12) return "GSM";
+    if (id ===  13) return "LTW";
+    if (id ===  14) return "WVR";
+    if (id ===  15) return "ALC";
+    if (id ===  16) return "CUL";
+    if (id ===  17) return "MIN";
+    if (id ===  18) return "BTN";
+    if (id ===  19) return "FSH";
+    if (id ===  20) return "PLD";
+    if (id ===  21) return "MNK";
+    if (id ===  22) return "WAR";
+    if (id ===  23) return "DRG";
+    if (id ===  24) return "BRD";
+    if (id ===  25) return "WHM";
+    if (id ===  26) return "BLM";
+    if (id ===  27) return "ACN";
+    if (id ===  28) return "SCH"; // Need confirm
+    if (id ===  29) return "SMN"; // Need confirm
+    if (id ===  30) return "ROG";
+    if (id ===  31) return "NIN";
+    if (id ===  32) return "MCH";
+    if (id ===  33) return "DRK";
+    if (id ===  34) return "AST";
+    if (id ===  35) return "SAM";
+    if (id ===  36) return "RDM";
+    if (id ===  37) return "BLU";
+    if (id ===  38) return "GNB";
+
+    // DNC is missing ?
+};
+
