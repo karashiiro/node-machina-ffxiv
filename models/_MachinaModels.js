@@ -10,6 +10,7 @@ this.freeCompanyEvent              = require('./freeCompanyEvent.js');
 this.freeCompanyUpdateShortMessage = require('./freeCompanyUpdateShortMessage.js');
 this.itemInfo                      = require('./itemInfo.js');
 this.logMessage                    = require('./logMessage.js');
+this.npcSpawn                      = require('./npcSpawn.js');
 // Disabled until we find a better implementation for materia without needing csv or request.
 this.marketBoardItemListing        = require('./marketBoardItemListing.js');
 this.marketBoardItemListingHistory = require('./marketBoardItemListingHistory.js');

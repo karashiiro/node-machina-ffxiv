@@ -1,6 +1,4 @@
-// This is an auto-generated file.
-
-const MachinaModels = require("../_MachinaModels.js")
+const MachinaModels = require("./_MachinaModels.js")
 
 module.exports = async (struct) => {
     struct.gimmickId = MachinaModels.getUint32(struct.data, 0);
@@ -184,8 +182,8 @@ module.exports = async (struct) => {
     struct.sourceActorId = MachinaModels.getUint32(struct.data, 478);
     struct.pos = MachinaModels.getUint16(struct.data, 482);
     struct.models_1 = MachinaModels.getUint32(struct.data, 484);    struct.models_2 = MachinaModels.getUint32(struct.data, 488);    struct.models_3 = MachinaModels.getUint32(struct.data, 492);    struct.models_4 = MachinaModels.getUint32(struct.data, 496);    struct.models_5 = MachinaModels.getUint32(struct.data, 500);    struct.models_6 = MachinaModels.getUint32(struct.data, 504);    struct.models_7 = MachinaModels.getUint32(struct.data, 508);    struct.models_8 = MachinaModels.getUint32(struct.data, 512);    struct.models_9 = MachinaModels.getUint32(struct.data, 516);    struct.models_10 = MachinaModels.getUint32(struct.data, 520);
-    struct.name = String.fromCodePoint(struct.data.slice(524, 525));
-    struct.look_1 = struct.data[525];    struct.look_2 = struct.data[526];    struct.look_3 = struct.data[527];    struct.look_4 = struct.data[528];    struct.look_5 = struct.data[529];    struct.look_6 = struct.data[530];    struct.look_7 = struct.data[531];    struct.look_8 = struct.data[532];    struct.look_9 = struct.data[533];    struct.look_10 = struct.data[534];    struct.look_11 = struct.data[535];    struct.look_12 = struct.data[536];    struct.look_13 = struct.data[537];    struct.look_14 = struct.data[538];    struct.look_15 = struct.data[539];    struct.look_16 = struct.data[540];    struct.look_17 = struct.data[541];    struct.look_18 = struct.data[542];    struct.look_19 = struct.data[543];    struct.look_20 = struct.data[544];    struct.look_21 = struct.data[545];    struct.look_22 = struct.data[546];    struct.look_23 = struct.data[547];    struct.look_24 = struct.data[548];    struct.look_25 = struct.data[549];    struct.look_26 = struct.data[550];
-    struct.fcTag = String.fromCodePoint(struct.data.slice(551, 552));
-    struct.bNPCPartSlot = struct.data[552];
+    struct.name = String.fromCodePoint(...struct.data.slice(560, 592)).replace(/\0/g, "");
+    struct.look_1 = struct.data[592];    struct.look_2 = struct.data[593];    struct.look_3 = struct.data[594];    struct.look_4 = struct.data[595];    struct.look_5 = struct.data[596];    struct.look_6 = struct.data[597];    struct.look_7 = struct.data[598];    struct.look_8 = struct.data[599];    struct.look_9 = struct.data[600];    struct.look_10 = struct.data[601];    struct.look_11 = struct.data[602];    struct.look_12 = struct.data[603];    struct.look_13 = struct.data[604];    struct.look_14 = struct.data[605];    struct.look_15 = struct.data[606];    struct.look_16 = struct.data[607];    struct.look_17 = struct.data[608];    struct.look_18 = struct.data[609];    struct.look_19 = struct.data[610];    struct.look_20 = struct.data[611];    struct.look_21 = struct.data[612];    struct.look_22 = struct.data[613];    struct.look_23 = struct.data[614];    struct.look_24 = struct.data[615];    struct.look_25 = struct.data[616];    struct.look_26 = struct.data[617];
+    struct.fcTag = String.fromCodePoint(...struct.data.slice(618, 624)).replace(/\0/g, "");
+    struct.bNPCPartSlot = struct.data[624];
 };
