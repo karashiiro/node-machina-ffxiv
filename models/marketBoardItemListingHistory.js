@@ -9,6 +9,7 @@ module.exports = async (struct) => {
     struct.listings = [];
     for (let i = 0; i < 20; i++) {
         const salePrice = MachinaModels.getUint32(struct.data, 0x08 + (LISTING_LENGTH * i));
+        if (salePrice === 0) break;
 
         let itemListing = {};
         itemListing.salePrice = salePrice;
