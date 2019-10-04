@@ -61,8 +61,11 @@ module.exports.parse = (struct) => {
     }
 };
 
-module.exports.parseAndEmit = async (struct, noData, context) => {
-    if (struct.segmentType !== 0x03) return; // No IPC data
+module.exports.parseAndEmit = async (logger, struct, noData, context) => {
+    if (struct.segmentType !== 0x03) {
+        logger(`[${getTime()}] Packet recieved with no IPC data, ignoring...`)
+        return;
+    } // No IPC data
 
     // Testing
     /*let testSequence = new Uint8Array([]);
@@ -102,7 +105,9 @@ module.exports.parseAndEmit = async (struct, noData, context) => {
         await this[struct.type](struct);
     }
 
-    if(noData) delete struct.data;
+    if (noData) delete struct.data;
+
+    logger(`[${getTime()}] Processed packet ${struct.type}, firing event...`);
 
     context.emit(struct.type, struct); // Emit a parsed event
     if (struct.superType) context.emit(struct.superType, struct); // Emit another event so you can write catch-alls
@@ -159,6 +164,15 @@ module.exports.getUint64 = (uint8Array, offset) => {
 
     let num = `${buffer.getBigUint64(0, true)}`;
     return num.substr(0, num.length - 1);
+};
+
+const getTime = () => {
+    const time = new Date();
+    let m = time.getMinutes();
+    if (m < 10) {
+        m = `0${m}`;
+    }
+    return `${time.getHours()}:${m}`;
 };
 
 function hasSubArray(master, sub) {
