@@ -102,12 +102,14 @@ module.exports.parseAndEmit = async (logger, struct, noData, context) => {
 
     // Read IPC data
     if (this[struct.type]) {
-        await this[struct.type](struct);
+        await this[struct.type](struct).then(() => {
+            logger(`[${getTime()}] Processed packet ${struct.type}, firing event...`);
+        }).catch((err) => {
+            logger(`[${getTime()}] Failed to process packet ${struct.type}, got error ${err}`);
+        });
     }
 
     if (noData) delete struct.data;
-
-    logger(`[${getTime()}] Processed packet ${struct.type}, firing event...`);
 
     context.emit(struct.type, struct); // Emit a parsed event
     if (struct.superType) context.emit(struct.superType, struct); // Emit another event so you can write catch-alls
