@@ -106,10 +106,10 @@ class MachinaFFXIV extends EventEmitter {
             terminal: false
         }).on('line', (line) => {
             // If the C# program hangs for whatever reason.
-            if (_timeout) {
+            /*if (_timeout) {
                 clearTimeout(_timeout);
                 _timeout = setTimeout(1200000, this.reset);
-            }
+            }*/
 
             _stdoutQueue += line;
             if (_stdoutQueue.indexOf("}") !== -1) { // A full JSON.
