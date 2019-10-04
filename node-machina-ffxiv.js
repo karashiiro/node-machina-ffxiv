@@ -136,22 +136,26 @@ class MachinaFFXIV extends EventEmitter {
         if (!_exePath || !_args) throw "No instance to reset.";
         _monitor = spawn(_exePath, _args);
         this.start(callback);
+        _logger(`[${getTime()}] MachinaWrapper reset!`);
     }
 
     start(callback) {
         if (!_monitor) throw "MachinaWrapper is uninitialized.";
         _monitor.stdin.write("start\n", callback);
+        _logger(`[${getTime()}] MachinaWrapper started!`);
     }
 
     stop(callback) {
         if (!_monitor) throw "MachinaWrapper is uninitialized.";
         _monitor.stdin.write("stop\n", callback);
+        _logger(`[${getTime()}] MachinaWrapper stopped!`);
     }
 
     kill(callback) {
         if (!_monitor) throw "MachinaWrapper is uninitialized.";
         _monitor.stdin.end("kill\n", callback);
         _monitor = undefined;
+        _logger(`[${getTime()}] MachinaWrapper killed!`);
     }
 };
 
