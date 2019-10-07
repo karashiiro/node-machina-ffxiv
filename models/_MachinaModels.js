@@ -41,27 +41,7 @@ module.exports.loadDefinitions = (definitionsDir) => {
 
 };
 
-module.exports.parse = (struct) => {
-    if (struct.segmentType !== 0x03) return; // No IPC data
-
-    // FC message opcodes overlap with Ping/PingHandler, and Machina cuts off
-    // the header that tells us whether a packet is a zone packet or a chat
-    // packet, so we use a different marker. Further, FC chat doesn't have the
-    // same packet structure as a regular chat packet, so it gets miscategorized
-    // as CharProgress if you feed it through the chat event handler.
-    if (struct.type.startsWith("ping") && (struct.packetSize === 1064 /* pingHandler */ || struct.packetSize === 1112 /* ping */)) {
-        //console.log(struct.data.toString());
-        struct.superType = "message";
-        struct.type = "messageFC";
-    }
-
-    // Read IPC data
-    if (this[struct.type]) {
-        this[struct.type](struct);
-    }
-};
-
-module.exports.parseAndEmit = async (logger, struct, noData, context) => {
+module.exports.parse = async (logger, struct, noData) => {
     if (struct.segmentType !== 0x03) {
         logger(`[${getTime()}] Packet recieved with no IPC data, ignoring...`)
         return;
@@ -102,14 +82,26 @@ module.exports.parseAndEmit = async (logger, struct, noData, context) => {
 
     // Read IPC data
     if (this[struct.type]) {
-        await this[struct.type](struct).then(() => {
+        try {
+            await this[struct.type](struct);
             logger(`[${getTime()}] Processed packet ${struct.type}, firing event...`);
-        }).catch((err) => {
+        } catch {
             logger(`[${getTime()}] Failed to process packet ${struct.type}, got error ${err}`);
-        });
+        }
     }
 
     if (noData) delete struct.data;
+
+    return struct;
+};
+
+module.exports.parseAndEmit = async (logger, struct, noData, context) => {
+    if (struct.segmentType !== 0x03) {
+        logger(`[${getTime()}] Packet recieved with no IPC data, ignoring...`)
+        return;
+    } // No IPC data
+
+    await this.parse(logger, struct, noData, context);
 
     context.emit(struct.type, struct); // Emit a parsed event
     if (struct.superType) context.emit(struct.superType, struct); // Emit another event so you can write catch-alls

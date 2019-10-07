@@ -14,13 +14,14 @@ const MachinaModels = require('./models/_MachinaModels.js');
 var _monitor;
 var _stdoutQueue;
 var _timeout;
+var _filter;
 
 var _monitorType;
 var _pid;
 var _ip;
 var _useSocketFilter;
 var _noData;
-var _logger = console.log;
+var _logger = () => {};
 
 var _args;
 var _exePath;
@@ -89,6 +90,8 @@ class MachinaFFXIV extends EventEmitter {
 
         MachinaModels.loadDefinitions(options && options.definitionsDir);
 
+        _filter = [];
+
         // Create events to route outputs.
         _stdoutQueue = ""; // A queue so that we don't get too much or too little of the buffer at once.
 
@@ -108,18 +111,23 @@ class MachinaFFXIV extends EventEmitter {
             // If the C# program hangs for whatever reason.
             /*if (_timeout) {
                 clearTimeout(_timeout);
-                _timeout = setTimeout(1200000, this.reset);
+                _timeout = setTimeout(this.reset, 1200000);
             }*/
 
             _stdoutQueue += line;
             if (_stdoutQueue.indexOf("}") !== -1) { // A full JSON.
-                let content = JSON.parse(_stdoutQueue);
-                content.data = new Uint8Array(content.data); // Why store bytes as 32-bit integers?
+                let content = JSON.parse(_stdoutQueue.slice(0, _stdoutQueue.indexOf("}") + 1));
+                
+                if (_filter.length === 0 || _filter.includes(content.type)) {
+                    content.data = new Uint8Array(content.data); // Why store bytes as 32-bit integers?
 
-                this.emit('raw', content); // Emit a catch-all event
-                MachinaModels.parseAndEmit(_logger, content, _noData, this); // Parse packet data
+                    this.emit('raw', content); // Emit a catch-all event
+                    MachinaModels.parseAndEmit(_logger, content, _noData, this); // Parse packet data
+                }
 
-                _stdoutQueue = ""; // Clear the queue
+                _stdoutQueue = _stdoutQueue.indexOf("{") === -1 // Clear the queue
+                    ? ""
+                    : _stdoutQueue.slice(_stdoutQueue.indexOf("{"), _stdoutQueue.indexOf("{"));
             }
         });
 
@@ -130,6 +138,15 @@ class MachinaFFXIV extends EventEmitter {
         _monitor.once('close', (code) => {
             _logger(`[${getTime()}] MachinaWrapper closed with code: ${code}`);
         });
+    }
+
+    async parse(struct) {
+        return await MachinaModels.parse(_logger, struct, _noData, this);
+    }
+
+    filter(filter) {
+        if (!filter) return;
+        _filter = filter.slice(0);
     }
 
     reset(callback) {
