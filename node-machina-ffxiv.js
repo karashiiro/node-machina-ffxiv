@@ -10,15 +10,21 @@ require('./polyfill.js');
 
 const MachinaModels = require('./models/_MachinaModels.js');
 
-// Private module members
+// Private module members (TODO: Make Symbol() objects)
 var _monitor;
 var _stdoutQueue;
+var _timeout;
+var _filter;
 
 var _monitorType;
 var _pid;
 var _ip;
 var _useSocketFilter;
 var _noData;
+var _logger = () => {};
+
+var _args;
+var _exePath;
 
 // Public class
 class MachinaFFXIV extends EventEmitter {
@@ -56,6 +62,12 @@ class MachinaFFXIV extends EventEmitter {
             } else if (options.noData) {
                 _noData = options.noData;
             }
+
+            if (options.logger && typeof options.logger != 'function') {
+                throw new TypeError("logger must be a Function.");
+            } else if (options.logger) {
+                _logger = options.logger;
+            }
         }
 
         // Folders
@@ -64,24 +76,27 @@ class MachinaFFXIV extends EventEmitter {
             fs.mkdirSync(remoteDatapath);
         }
 
-        let args = [];
-        if (_monitorType) args.push(`--MonitorType ${_monitorType}`);
-        if (_pid) args.push(`--ProcessID ${_pid}`);
-        if (_ip) args.push(`--LocalIP ${_ip}`);
-        if (_useSocketFilter) args.push("--UseSocketFilter");
-        const exePath = (options && options.machinaExePath) || path.join(__dirname, '/MachinaWrapper/MachinaWrapper.exe');
-        if (!fs.existsSync(exePath)) {
-            throw new Error(`MachinaWrapper not found in ${exePath}`);
+        _args = [];
+        if (_monitorType) _args.push(`--MonitorType ${_monitorType}`);
+        if (_pid) _args.push(`--ProcessID ${_pid}`);
+        if (_ip) _args.push(`--LocalIP ${_ip}`);
+        if (_useSocketFilter) _args.push("--UseSocketFilter");
+        _exePath = (options && options.machinaExePath) || path.join(__dirname, '/MachinaWrapper/MachinaWrapper.exe');
+        if (!fs.existsSync(_exePath)) {
+            throw new Error(`MachinaWrapper not found in ${_exePath}`);
         }
-        _monitor = spawn(exePath, args);
+        _monitor = spawn(_exePath, _args);
+        _logger(`[${getTime()}] MachinaWrapper spawned with arguments "${_args.toString()}"`);
 
         MachinaModels.loadDefinitions(options && options.definitionsDir);
+
+        _filter = [];
 
         // Create events to route outputs.
         _stdoutQueue = ""; // A queue so that we don't get too much or too little of the buffer at once.
 
         _monitor.on('error', (err) => {
-            console.log(err);
+            _logger(err);
         });
 
         // { type: raw
@@ -93,42 +108,81 @@ class MachinaFFXIV extends EventEmitter {
             input: _monitor.stdout,
             terminal: false
         }).on('line', (line) => {
+            // If the C# program hangs for whatever reason.
+            /*if (_timeout) {
+                clearTimeout(_timeout);
+                _timeout = setTimeout(this.reset, 1200000);
+            }*/
+
             _stdoutQueue += line;
             if (_stdoutQueue.indexOf("}") !== -1) { // A full JSON.
-                let content = JSON.parse(_stdoutQueue);
-                content.data = new Uint8Array(content.data); // Why store bytes as 32-bit integers?
+                let content = JSON.parse(_stdoutQueue.slice(0, _stdoutQueue.indexOf("}") + 1));
+                
+                if (_filter.length === 0 || _filter.includes(content.type)) {
+                    content.data = new Uint8Array(content.data); // Why store bytes as 32-bit integers?
 
-                this.emit('raw', content); // Emit a catch-all event
-                MachinaModels.parseAndEmit(content, _noData, this); // Parse packet data
+                    this.emit('raw', content); // Emit a catch-all event
+                    MachinaModels.parseAndEmit(_logger, content, _noData, this); // Parse packet data
+                }
 
-                _stdoutQueue = ""; // Clear the queue
+                _stdoutQueue = _stdoutQueue.indexOf("{") === -1 // Clear the queue
+                    ? ""
+                    : _stdoutQueue.slice(_stdoutQueue.indexOf("{"), _stdoutQueue.indexOf("{"));
             }
         });
 
         _monitor.stderr.on('data', (err) => {
-            console.log(err);
+            _logger(err);
         });
 
         _monitor.once('close', (code) => {
-            console.log("MachinaWrapper closed with code: " + code);
+            _logger(`[${getTime()}] MachinaWrapper closed with code: ${code}`);
         });
+    }
+
+    async parse(struct) {
+        return await MachinaModels.parse(_logger, struct, _noData, this);
+    }
+
+    filter(filter) {
+        if (!filter) return;
+        _filter = filter.slice(0);
+    }
+
+    reset(callback) {
+        if (!_exePath || !_args) throw "No instance to reset.";
+        _monitor = spawn(_exePath, _args);
+        this.start(callback);
+        _logger(`[${getTime()}] MachinaWrapper reset!`);
     }
 
     start(callback) {
         if (!_monitor) throw "MachinaWrapper is uninitialized.";
         _monitor.stdin.write("start\n", callback);
+        _logger(`[${getTime()}] MachinaWrapper started!`);
     }
 
     stop(callback) {
         if (!_monitor) throw "MachinaWrapper is uninitialized.";
         _monitor.stdin.write("stop\n", callback);
+        _logger(`[${getTime()}] MachinaWrapper stopped!`);
     }
 
     kill(callback) {
         if (!_monitor) throw "MachinaWrapper is uninitialized.";
         _monitor.stdin.end("kill\n", callback);
         _monitor = undefined;
+        _logger(`[${getTime()}] MachinaWrapper killed!`);
     }
+};
+
+const getTime = () => {
+    const time = new Date();
+    let m = time.getMinutes();
+    if (m < 10) {
+        m = `0${m}`;
+    }
+    return `${time.getHours()}:${m}`;
 };
 
 module.exports = MachinaFFXIV;
