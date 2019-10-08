@@ -10,16 +10,20 @@ this.freeCompanyEvent              = require('./freeCompanyEvent.js');
 this.freeCompanyUpdateShortMessage = require('./freeCompanyUpdateShortMessage.js');
 this.itemInfo                      = require('./itemInfo.js');
 this.logMessage                    = require('./logMessage.js');
+this.npcSpawn                      = require('./npcSpawn.js');
 // Disabled until we find a better implementation for materia without needing csv or request.
 this.marketBoardItemListing        = require('./marketBoardItemListing.js');
+this.marketBoardItemListingHistory = require('./marketBoardItemListingHistory.js');
 this.messageFC                     = require('./messageFC.js');
 this.playtime                      = require('./playtime.js');
+this.playerSetup                   = require('./playerSetup.js');
 this.playerStats                   = require('./playerStats.js');
 this.updateInventorySlot           = require('./updateInventorySlot.js');
 
 // Client-zone packets
 this.chatHandler                   = require('./chatHandler.js');
 this.emoteEventHandler             = require('./emoteEventHandler.js');
+this.inventoryModifyHandler        = require('./inventoryModifyHandler.js');
 
 // Methods
 
@@ -37,28 +41,11 @@ module.exports.loadDefinitions = (definitionsDir) => {
 
 };
 
-module.exports.parse = (struct) => {
-    if (struct.segmentType !== 0x03) return; // No IPC data
-
-    // FC message opcodes overlap with Ping/PingHandler, and Machina cuts off
-    // the header that tells us whether a packet is a zone packet or a chat
-    // packet, so we use a different marker. Further, FC chat doesn't have the
-    // same packet structure as a regular chat packet, so it gets miscategorized
-    // as CharProgress if you feed it through the chat event handler.
-    if (struct.type.startsWith("ping") && (struct.packetSize === 1064 /* pingHandler */ || struct.packetSize === 1112 /* ping */)) {
-        //console.log(struct.data.toString());
-        struct.superType = "message";
-        struct.type = "messageFC";
-    }
-
-    // Read IPC data
-    if (this[struct.type]) {
-        this[struct.type](struct);
-    }
-};
-
-module.exports.parseAndEmit = async (struct, noData, context) => {
-    if (struct.segmentType !== 0x03) return; // No IPC data
+module.exports.parse = async (logger, struct, noData) => {
+    if (struct.segmentType !== 0x03) {
+        logger(`[${getTime()}] Packet recieved with no IPC data, ignoring...`)
+        return;
+    } // No IPC data
 
     // Testing
     /*let testSequence = new Uint8Array([]);
@@ -95,10 +82,26 @@ module.exports.parseAndEmit = async (struct, noData, context) => {
 
     // Read IPC data
     if (this[struct.type]) {
-        await this[struct.type](struct);
+        try {
+            await this[struct.type](struct);
+            logger(`[${getTime()}] Processed packet ${struct.type}, firing event...`);
+        } catch {
+            logger(`[${getTime()}] Failed to process packet ${struct.type}, got error ${err}`);
+        }
     }
 
-    if(noData) delete struct.data;
+    if (noData) delete struct.data;
+
+    return struct;
+};
+
+module.exports.parseAndEmit = async (logger, struct, noData, context) => {
+    if (struct.segmentType !== 0x03) {
+        logger(`[${getTime()}] Packet recieved with no IPC data, ignoring...`)
+        return;
+    } // No IPC data
+
+    await this.parse(logger, struct, noData, context);
 
     context.emit(struct.type, struct); // Emit a parsed event
     if (struct.superType) context.emit(struct.superType, struct); // Emit another event so you can write catch-alls
@@ -155,6 +158,15 @@ module.exports.getUint64 = (uint8Array, offset) => {
 
     let num = `${buffer.getBigUint64(0, true)}`;
     return num.substr(0, num.length - 1);
+};
+
+const getTime = () => {
+    const time = new Date();
+    let m = time.getMinutes();
+    if (m < 10) {
+        m = `0${m}`;
+    }
+    return `${time.getHours()}:${m}`;
 };
 
 function hasSubArray(master, sub) {

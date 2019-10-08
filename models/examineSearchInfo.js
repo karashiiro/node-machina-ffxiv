@@ -1,18 +1,21 @@
 const MachinaModels = require('./_MachinaModels.js');
 
+const CLASSJOB_TOTAL = 38;
+
 module.exports = (struct) => {
-    let worldID = getWorld(MachinaModels.getInt32(struct.data[0x22]));
-    struct.world = worldID ? worldID : MachinaModels.getInt32(struct.data[0x22]);
+    let worldID = getWorld(struct.data[0x22]);
+    struct.world = worldID ? worldID : struct.data[0x22];
 
-    struct.fc = String.fromCodePoint(...struct.data.slice(0x85, 0x97)).replace(/\0/g, ""); // Why is this an odd number?
-    struct.searchComment = String.fromCodePoint(...struct.data.slice(0x24, 0x60)).replace(/\0/g, "");
+    struct.searchComment = String.fromCodePoint(...struct.data.slice(0x23, 0xE3)).replace(/\0/g, "");
+    struct.fc = String.fromCodePoint(...struct.data.slice(0xE4, 0xFB)).replace(/\0/g, "");
 
-    struct.classJob = new Map();
-    let classJobAbbreviation = ["GLD", "PGL", "MRD", "LNC", "ARC", "CNJ", "THM", "CRP", "BSM", "ARM",
-    "GSM", "LTW", "WVR", "ALC", "CUL", "MIN", "BTN", "FSH", "CUL", "MNK", "WAR", "DRG", "BRD", "PLD", "BLM",
-    "ACN", "SCH", "SMN", "ROG", "NIN", "MCH", "DRK", "AST", "SAM", "RDM", "BLU", "GNB", "DNC"];
-    for (let i = 0; i < classJobAbbreviation.length; i++) {
-        struct.classJob.set(classJobAbbreviation[i], struct.data[0x102 + i * 4]);
+    struct.classJobs = [];
+    for (let i = 0; i < CLASSJOB_TOTAL; i++) {
+        const classJob = {
+            job: getJob(MachinaModels.getUint16(struct.data, 0x100 + (i * 4))),
+            level: MachinaModels.getUint16(struct.data, 0x102 + (i * 4))
+        };
+        struct.classJobs.push(classJob);
     }
 };
 
@@ -32,6 +35,7 @@ const getWorld = (id) => { // TODO: use World exd
     if (id ===  63) return "Gilgamesh";
     if (id ===  64) return "Leviathan";
     if (id ===  65) return "Midgardsormr";
+    if (id ===  66) return "Odin";
     if (id ===  68) return "Atomos";
     if (id ===  71) return "Moogle";
     if (id ===  72) return "Tonberry";
@@ -49,4 +53,44 @@ const getWorld = (id) => { // TODO: use World exd
     if (id ===  95) return "Hyperion";
     if (id ===  97) return "Ragnarok";
     if (id ===  99) return "Sargatanas";
+};
+const getJob = (id) => {
+    if (id ===  1) return "GLD";
+    if (id ===  2) return "PGL";
+    if (id ===  3) return "MRD";
+    if (id ===  4) return "LNC";
+    if (id ===  5) return "ARC";
+    if (id ===  6) return "CNJ";
+    if (id ===  7) return "THM";
+    if (id ===  8) return "CRP";
+    if (id ===  9) return "BSM";
+    if (id ===  10) return "ARM";
+    if (id ===  11) return "GSM";
+    if (id ===  12) return "LTW";
+    if (id ===  13) return "WVR";
+    if (id ===  14) return "ALC";
+    if (id ===  15) return "CUL";
+    if (id ===  16) return "MIN";
+    if (id ===  17) return "BTN";
+    if (id ===  18) return "FSH";
+    if (id ===  19) return "PLD";
+    if (id ===  20) return "MNK";
+    if (id ===  21) return "WAR";
+    if (id ===  22) return "DRG";
+    if (id ===  23) return "BRD";
+    if (id ===  24) return "WHM";
+    if (id ===  25) return "BLM";
+    if (id ===  26) return "ACN";
+    if (id ===  27) return "SCH"; // Need confirm
+    if (id ===  28) return "SMN"; // Need confirm
+    if (id ===  29) return "ROG";
+    if (id ===  30) return "NIN";
+    if (id ===  31) return "MCH";
+    if (id ===  32) return "DRK";
+    if (id ===  33) return "AST";
+    if (id ===  34) return "SAM";
+    if (id ===  35) return "RDM";
+    if (id ===  36) return "BLU";
+    if (id ===  37) return "GNB";
+    if (id ===  38) return "DNC";
 };
