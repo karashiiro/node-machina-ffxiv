@@ -80,6 +80,10 @@ module.exports.parse = async (logger, struct, noData) => {
         struct.type = "messageFC";
     }
 
+    if (struct.type.startsWith("actorControl")) {
+        struct.superType = "actorControl";
+    }
+
     // Read IPC data
     if (this[struct.type]) {
         try {
