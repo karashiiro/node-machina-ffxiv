@@ -4,9 +4,9 @@ const fs = require('fs');
 const path = require('path');
 
 // Server-zone packets
-this.actorControl142               = require('./actorControl142.js');
-this.actorControl143               = require('./actorControl143.js');
-this.actorControl144               = require('./actorControl144.js');
+this.actorControl                  = require('./actorControl.js');
+this.actorControlSelf              = require('./actorControlSelf.js');
+this.actorControlTarget            = require('./actorControlTarget.js');
 this.chat                          = require('./chat.js');
 this.examineSearchInfo             = require('./examineSearchInfo.js');
 this.freeCompanyEvent              = require('./freeCompanyEvent.js');
