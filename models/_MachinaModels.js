@@ -95,7 +95,7 @@ module.exports.parse = async (logger, struct, noData) => {
             logger(`[${getTime()}] Failed to process packet ${struct.type}, got error ${err}`);
         }
     }
-    console.log(struct.subType);
+    
     if (this[struct.subType]) {
         try {
             await this[struct.subType](struct);
