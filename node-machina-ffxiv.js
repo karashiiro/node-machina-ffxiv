@@ -117,8 +117,11 @@ class MachinaFFXIV extends EventEmitter {
             _stdoutQueue += line;
             if (_stdoutQueue.indexOf("}") !== -1) { // A full JSON.
                 let content = JSON.parse(_stdoutQueue.slice(0, _stdoutQueue.indexOf("}") + 1));
-                
-                if (_filter.length === 0 || _filter.includes(content.type)) {
+
+                if (_filter.length === 0 ||
+                        _filter.includes(content.type) ||
+                        _filter.includes(content.subType) |
+                         _filter.includes(content.superType)) {
                     content.data = new Uint8Array(content.data); // Why store bytes as 32-bit integers?
 
                     this.emit('raw', content); // Emit a catch-all event

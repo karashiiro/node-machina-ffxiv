@@ -4,6 +4,9 @@ const fs = require('fs');
 const path = require('path');
 
 // Server-zone packets
+this.actorControl142               = require('./actorControl142.js');
+this.actorControl143               = require('./actorControl143.js');
+this.actorControl144               = require('./actorControl144.js');
 this.chat                          = require('./chat.js');
 this.examineSearchInfo             = require('./examineSearchInfo.js');
 this.freeCompanyEvent              = require('./freeCompanyEvent.js');
@@ -19,6 +22,9 @@ this.playtime                      = require('./playtime.js');
 this.playerSetup                   = require('./playerSetup.js');
 this.playerStats                   = require('./playerStats.js');
 this.updateInventorySlot           = require('./updateInventorySlot.js');
+
+// Actor control packets
+this.desynthResult                 = require('./actorControl/desynthResult.js');
 
 // Client-zone packets
 this.chatHandler                   = require('./chatHandler.js');
@@ -80,10 +86,6 @@ module.exports.parse = async (logger, struct, noData) => {
         struct.type = "messageFC";
     }
 
-    if (struct.type.startsWith("actorControl")) {
-        struct.superType = "actorControl";
-    }
-
     // Read IPC data
     if (this[struct.type]) {
         try {
@@ -91,6 +93,15 @@ module.exports.parse = async (logger, struct, noData) => {
             logger(`[${getTime()}] Processed packet ${struct.type}, firing event...`);
         } catch {
             logger(`[${getTime()}] Failed to process packet ${struct.type}, got error ${err}`);
+        }
+    }
+    console.log(struct.subType);
+    if (this[struct.subType]) {
+        try {
+            await this[struct.subType](struct);
+            logger(`[${getTime()}] Processed packet ${struct.subType}, firing event...`);
+        } catch {
+            logger(`[${getTime()}] Failed to process packet ${struct.subType}, got error ${err}`);
         }
     }
 
@@ -108,6 +119,7 @@ module.exports.parseAndEmit = async (logger, struct, noData, context) => {
     await this.parse(logger, struct, noData, context);
 
     context.emit(struct.type, struct); // Emit a parsed event
+    if (struct.subType) context.emit(struct.subType, struct);
     if (struct.superType) context.emit(struct.superType, struct); // Emit another event so you can write catch-alls
     context.emit("any", struct); // Emit an even bigger catchall
 };
