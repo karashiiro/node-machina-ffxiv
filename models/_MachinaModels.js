@@ -4,6 +4,9 @@ const fs = require('fs');
 const path = require('path');
 
 // Server-zone packets
+this.actorControl                  = require('./actorControl.js');
+this.actorControlSelf              = require('./actorControlSelf.js');
+this.actorControlTarget            = require('./actorControlTarget.js');
 this.chat                          = require('./chat.js');
 this.examineSearchInfo             = require('./examineSearchInfo.js');
 this.freeCompanyEvent              = require('./freeCompanyEvent.js');
@@ -19,6 +22,9 @@ this.playtime                      = require('./playtime.js');
 this.playerSetup                   = require('./playerSetup.js');
 this.playerStats                   = require('./playerStats.js');
 this.updateInventorySlot           = require('./updateInventorySlot.js');
+
+// Actor control packets
+this.desynthResult                 = require('./actorControl/desynthResult.js');
 
 // Client-zone packets
 this.chatHandler                   = require('./chatHandler.js');
@@ -89,6 +95,15 @@ module.exports.parse = async (logger, struct, noData) => {
             logger(`[${getTime()}] Failed to process packet ${struct.type}, got error ${err}`);
         }
     }
+    
+    if (this[struct.subType]) {
+        try {
+            await this[struct.subType](struct);
+            logger(`[${getTime()}] Processed packet ${struct.subType}, firing event...`);
+        } catch {
+            logger(`[${getTime()}] Failed to process packet ${struct.subType}, got error ${err}`);
+        }
+    }
 
     if (noData) delete struct.data;
 
@@ -104,6 +119,7 @@ module.exports.parseAndEmit = async (logger, struct, noData, context) => {
     await this.parse(logger, struct, noData, context);
 
     context.emit(struct.type, struct); // Emit a parsed event
+    if (struct.subType) context.emit(struct.subType, struct);
     if (struct.superType) context.emit(struct.superType, struct); // Emit another event so you can write catch-alls
     context.emit("any", struct); // Emit an even bigger catchall
 };

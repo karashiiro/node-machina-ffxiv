@@ -20,6 +20,7 @@ var _monitorType;
 var _pid;
 var _ip;
 var _useSocketFilter;
+var _parseAlgorithm;
 var _noData;
 var _logger = () => {};
 
@@ -57,6 +58,18 @@ class MachinaFFXIV extends EventEmitter {
                 _useSocketFilter = options.useSocketFilter;
             }
 
+            if (options.parseAlgorithm && typeof options.parseAlgorithm != 'string') {
+                throw new TypeError("parseAlgorithm must be a string.");
+            } else if (options.parseAlgorithm) {
+                _parseAlgorithm = options.parseAlgorithm.replace(/[^a-zA-Z]/g, "");
+                switch (_parseAlgorithm) {
+                    case "RAMHeavy": break;
+                    case "CPUHeavy": break;
+                    case "PacketSpecific": break;
+                    default: throw new Error("Invalid parsing algorithm provided!");
+                }
+            }
+
             if (options.noData && typeof options.noData != 'boolean') {
                 throw new TypeError("noData must be a Boolean.");
             } else if (options.noData) {
@@ -81,6 +94,7 @@ class MachinaFFXIV extends EventEmitter {
         if (_pid) _args.push(`--ProcessID ${_pid}`);
         if (_ip) _args.push(`--LocalIP ${_ip}`);
         if (_useSocketFilter) _args.push("--UseSocketFilter");
+        if (_parseAlgorithm) _args.push(`--ParseAlgorithm ${_parseAlgorithm}`);
         _exePath = (options && options.machinaExePath) || path.join(__dirname, '/MachinaWrapper/MachinaWrapper.exe');
         if (!fs.existsSync(_exePath)) {
             throw new Error(`MachinaWrapper not found in ${_exePath}`);
@@ -117,8 +131,11 @@ class MachinaFFXIV extends EventEmitter {
             _stdoutQueue += line;
             if (_stdoutQueue.indexOf("}") !== -1) { // A full JSON.
                 let content = JSON.parse(_stdoutQueue.slice(0, _stdoutQueue.indexOf("}") + 1));
-                
-                if (_filter.length === 0 || _filter.includes(content.type)) {
+
+                if (_filter.length === 0 ||
+                        _filter.includes(content.type) ||
+                        _filter.includes(content.subType) |
+                         _filter.includes(content.superType)) {
                     content.data = new Uint8Array(content.data); // Why store bytes as 32-bit integers?
 
                     this.emit('raw', content); // Emit a catch-all event
