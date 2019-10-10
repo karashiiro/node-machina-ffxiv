@@ -21,6 +21,7 @@ this.messageFC                     = require('./messageFC.js');
 this.playtime                      = require('./playtime.js');
 this.playerSetup                   = require('./playerSetup.js');
 this.playerStats                   = require('./playerStats.js');
+this.updateHpMpTp                  = require('./updateHpMpTp');
 this.updateInventorySlot           = require('./updateInventorySlot.js');
 
 // Actor control packets
@@ -95,7 +96,7 @@ module.exports.parse = async (logger, struct, noData) => {
             logger(`[${getTime()}] Failed to process packet ${struct.type}, got error ${err}`);
         }
     }
-    
+
     if (this[struct.subType]) {
         try {
             await this[struct.subType](struct);
