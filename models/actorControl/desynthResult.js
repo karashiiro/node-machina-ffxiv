@@ -6,6 +6,7 @@ module.exports = async (struct) => {
     delete struct.param5;
     
     struct.resultType = MachinaModels.getUint32(struct.data, 0x04);
-    struct.itemID = MachinaModels.getUint32(struct.data, 0x0C);
+    struct.itemID = MachinaModels.getUint16(struct.data, 0x0C);
+    struct.itemHQ = MachinaModels.getUint16(struct.data, 0x0E);
     struct.exp = MachinaModels.getUint32(struct.data, 0x14);
 };

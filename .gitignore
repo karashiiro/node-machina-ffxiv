@@ -78,3 +78,6 @@ mono_crash.*
 
 # Remote files
 remote-data/
+
+# IDE configs
+.idea
