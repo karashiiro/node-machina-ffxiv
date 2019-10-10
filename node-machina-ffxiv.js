@@ -138,8 +138,8 @@ class MachinaFFXIV extends EventEmitter {
                          _filter.includes(content.superType)) {
                     content.data = new Uint8Array(content.data); // Why store bytes as 32-bit integers?
 
-                    this.emit('raw', content); // Emit a catch-all event
                     MachinaModels.parseAndEmit(_logger, content, _noData, this); // Parse packet data
+                    this.emit('raw', content); // Emit a catch-all event
                 }
 
                 _stdoutQueue = _stdoutQueue.indexOf("{") === -1 // Clear the queue

@@ -1,4 +1,4 @@
-const MachinaModels = require("../_MachinaModels.js")
+const MachinaModels = require("./_MachinaModels.js")
 
 module.exports = async (struct) => {
     struct.hp = MachinaModels.getUint32(struct.data, 0x00);

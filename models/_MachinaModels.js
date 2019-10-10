@@ -92,7 +92,7 @@ module.exports.parse = async (logger, struct, noData) => {
         try {
             await this[struct.type](struct);
             logger(`[${getTime()}] Processed packet ${struct.type}, firing event...`);
-        } catch {
+        } catch (err) {
             logger(`[${getTime()}] Failed to process packet ${struct.type}, got error ${err}`);
         }
     }
@@ -101,7 +101,7 @@ module.exports.parse = async (logger, struct, noData) => {
         try {
             await this[struct.subType](struct);
             logger(`[${getTime()}] Processed packet ${struct.subType}, firing event...`);
-        } catch {
+        } catch (err) {
             logger(`[${getTime()}] Failed to process packet ${struct.subType}, got error ${err}`);
         }
     }
