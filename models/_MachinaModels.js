@@ -24,7 +24,8 @@ this.playerStats                   = require('./playerStats.js');
 this.updateInventorySlot           = require('./updateInventorySlot.js');
 
 // Actor control packets
-this.desynthResult                 = require('./actorControl/desynthResult.js');
+this.desynthResult                 = require('./actorControl/desynthOrReduceResult.js');
+this.aetherReductionDlg            = require('./actorControl/aetherReductionDlg.js');
 
 // Client-zone packets
 this.chatHandler                   = require('./chatHandler.js');
@@ -95,7 +96,7 @@ module.exports.parse = async (logger, struct, noData) => {
             logger(`[${getTime()}] Failed to process packet ${struct.type}, got error ${err}`);
         }
     }
-    
+
     if (this[struct.subType]) {
         try {
             await this[struct.subType](struct);
