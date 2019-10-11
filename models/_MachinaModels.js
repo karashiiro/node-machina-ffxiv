@@ -25,8 +25,8 @@ this.updateHpMpTp                  = require('./updateHpMpTp');
 this.updateInventorySlot           = require('./updateInventorySlot.js');
 
 // Actor control packets
-this.desynthResult                 = require('./actorControl/desynthOrReduceResult.js');
 this.aetherReductionDlg            = require('./actorControl/aetherReductionDlg.js');
+this.desynthResult                 = require('./actorControl/desynthOrReduceResult.js');
 
 // Client-zone packets
 this.chatHandler                   = require('./chatHandler.js');
