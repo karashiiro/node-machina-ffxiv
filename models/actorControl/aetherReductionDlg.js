@@ -16,7 +16,7 @@ module.exports = async (struct) => {
             quantity: MachinaModels.getUint32(struct.data, 0x0C)
         })
     }
-    const param4 = MachinaModels.getUint32(struct.data, 0x08);
+    const param4 = MachinaModels.getUint32(struct.data, 0x10);
     if (param4 > 0) {
         struct.resultItems.push({
             itemId: param4,
