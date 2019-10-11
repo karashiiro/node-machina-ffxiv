@@ -11,10 +11,12 @@ const localUtil = require("../util.js");
         if (lines[i].startsWith("#")) { // Delete compiler directives
             delete lines[i];
             continue;
+        } else if (lines[i].startsWith("//")) { // Ignore things that are already commented
+            continue;
         }
 
         let comment = lines[i].substr(lines[i].indexOf("//"));
-        if (comment.startsWith("//") && !comment.startsWith("// added 5.0") && !comment.startsWith("// updated 5.0")) {
+        if (comment.startsWith("//") && !comment.includes("5.1")) {
             lines[i] = "//" + lines[i];
         }
     }
