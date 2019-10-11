@@ -7,7 +7,7 @@ module.exports = async (struct) => {
     const param3 = MachinaModels.getUint32(struct.data, 0x0C);
 
     struct.resultType = MachinaModels.getUint32(struct.data, 0x04);
-    struct.itemID = param3 % 100000;
-    struct.itemHQ = param3 > 100000;
+    struct.itemID = param3 % 1000000;
+    struct.itemHQ = param3 > 1000000;
     struct.exp = MachinaModels.getUint32(struct.data, 0x14);
 };

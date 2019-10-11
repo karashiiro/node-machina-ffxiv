@@ -12,14 +12,16 @@ module.exports = async (struct) => {
     const param2 = MachinaModels.getUint32(struct.data, 0x08);
     if (param2 > 0) {
         struct.resultItems.push({
-            itemId: param2,
+            itemId: param2 % 1000000,
+            hq: param2 > 1000000,
             quantity: MachinaModels.getUint32(struct.data, 0x0C)
         })
     }
-    const param4 = MachinaModels.getUint32(struct.data, 0x08);
+    const param4 = MachinaModels.getUint32(struct.data, 0x10);
     if (param4 > 0) {
         struct.resultItems.push({
-            itemId: param4,
+            itemId: param4 % 1000000,
+            hq: param4 > 1000000,
             quantity: MachinaModels.getUint32(struct.data, 0x14)
         })
     }
