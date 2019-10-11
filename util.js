@@ -18,6 +18,7 @@ const remoteFileMap = new Map();
 // Makes marginally more sense to do it this way than to potentially allow arbitrary
 // HTTP requests.
 const urlDictionary = {
+    "CommonActorControl.h": "https://raw.githubusercontent.com/SapphireServer/Sapphire/develop/src/common/Network/CommonActorControl.h",
     "ClientZoneDef.h": "https://raw.githubusercontent.com/SapphireServer/Sapphire/develop/src/common/Network/PacketDef/Zone/ClientZoneDef.h",
     "Ipcs.h": "https://raw.githubusercontent.com/karashiiro/Sapphire/develop/src/common/Network/PacketDef/Ipcs.h",
     "Materia.csv": "https://raw.githubusercontent.com/xivapi/ffxiv-datamining/master/csv/Materia.csv",

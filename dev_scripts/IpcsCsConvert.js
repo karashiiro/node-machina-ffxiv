@@ -25,6 +25,7 @@ const localUtil = require("../util.js");
 
     ipcs_h = ipcs_h.replace(/(?:uint16_t)/g, "ushort"); // Type rename
     ipcs_h = ipcs_h.replace(/(?:\:\:)/g, "."); // Child object syntax
+    ipcs_h = ipcs_h.trim(); // Remove empty lines where compiler directives used to be
 
     fs.writeFile("./Ipcs.cs", ipcs_h, (err) => {
         if (err) throw err;
