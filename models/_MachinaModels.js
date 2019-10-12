@@ -26,8 +26,8 @@ this.updateInventorySlot           = require('./updateInventorySlot.js');
 
 // Actor control packets
 this.aetherReductionDlg            = require('./actorControl/aetherReductionDlg.js');
-this.desynthOrReductionResult      = require('./actorControl/desynthOrReductionResult.js');
 this.craftingUnk                   = require('./actorControl/craftingUnk.js');
+this.desynthOrReductionResult      = require('./actorControl/desynthOrReductionResult.js');
 
 // Client-zone packets
 this.chatHandler                   = require('./chatHandler.js');
