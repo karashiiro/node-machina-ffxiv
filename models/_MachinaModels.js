@@ -24,17 +24,34 @@ this.updateHpMpTp                  = require('./updateHpMpTp');
 this.updateInventorySlot           = require('./updateInventorySlot.js');
 
 // Actor control packets
+this.actionStart                   = require('./actorControl/actionStart.js');
 this.aetherReductionDlg            = require('./actorControl/aetherReductionDlg.js');
+this.autoAttack                    = require('./actorControl/autoAttack.js');
 this.craftingUnk                   = require('./actorControl/craftingUnk.js');
+this.dailyQuestSeed                = require('./actorControl/dailyQuestSeed.js');
 this.desynthOrReductionResult      = require('./actorControl/desynthOrReductionResult.js');
+this.eObjSetState                  = require('./actorControl/eObjSetState.js');
+this.housingItemMoveConfirm        = require('./actorControl/housingItemMoveConfirm.js');
+this.housingStoreroomStatus        = require('./actorControl/housingStoreroomStatus.js');
+this.removeExteriorHousingItem     = require('./actorControl/removeExteriorHousingItem.js');
+this.setMountSpeed                 = require('./actorControl/setMountSpeed.js');
+this.toggleWeapon                  = require('./actorControl/toggleWeapon.js');
+this.updateRestedExp               = require('./actorControl/updateRestedExp.js');
 
 // Client-zone packets
 this.chatHandler                   = require('./chatHandler.js');
+this.clientTrigger                 = require('./clientTrigger.js');
 this.emoteEventHandler             = require('./emoteEventHandler.js');
 this.inventoryModifyHandler        = require('./inventoryModifyHandler.js');
 
-// Methods
+// Client trigger packets
+this.cameraMode                    = require('./clientTrigger/cameraMode.js');
+this.poseCancel                    = require('./clientTrigger/poseGeneral.js');
+this.poseChange                    = require('./clientTrigger/poseGeneral.js');
+this.poseReapply                   = require('./clientTrigger/poseGeneral.js');
+this.toggleSheathe                 = require('./clientTrigger/toggleSheathe.js');
 
+// Methods
 module.exports.loadDefinitions = (definitionsDir) => {
     definitionsDir = definitionsDir || path.join(__dirname, "./default");
     // Auto-generated processing definitions; not necessarily low on size
