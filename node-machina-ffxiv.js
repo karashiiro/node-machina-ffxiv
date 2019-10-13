@@ -137,7 +137,7 @@ const MachinaFFXIV = (() => {
                     if (this[filter].length === 0 ||
                             this[filter].includes(content.type) ||
                             this[filter].includes(content.subType) |
-                             this[filter].includes(content.superType)) {
+                            this[filter].includes(content.superType)) {
                         content.data = new Uint8Array(content.data); // Why store bytes as 32-bit integers?
 
                         MachinaModels.parseAndEmit(this[logger], content, this[noData], this); // Parse packet data
@@ -163,9 +163,9 @@ const MachinaFFXIV = (() => {
             return await MachinaModels.parse(this[logger], struct, this[noData], this);
         }
 
-        filter(filter) {
-            if (!filter) return;
-            this[filter] = filter.slice(0);
+        filter(userFilter) {
+            if (!userFilter) return;
+            this[filter] = userFilter.slice(0);
         }
 
         reset(callback) {
