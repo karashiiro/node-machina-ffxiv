@@ -3,6 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 
+// require("../dev_scripts/GenericJSONLoader.js")("ClassJob");
+
 // Server-zone packets
 this.actorControl                  = require('./actorControl.js');
 this.actorControlSelf              = require('./actorControlSelf.js');
@@ -27,6 +29,7 @@ this.updateInventorySlot           = require('./updateInventorySlot.js');
 this.actionStart                   = require('./actorControl/actionStart.js');
 this.aetherReductionDlg            = require('./actorControl/aetherReductionDlg.js');
 this.autoAttack                    = require('./actorControl/autoAttack.js');
+this.classJobChange                = require('./actorControl/classJobChange.js');
 this.craftingUnk                   = require('./actorControl/craftingUnk.js');
 this.dailyQuestSeed                = require('./actorControl/dailyQuestSeed.js');
 this.desynthOrReductionResult      = require('./actorControl/desynthOrReductionResult.js');
