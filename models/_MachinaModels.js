@@ -23,6 +23,7 @@ this.playerSetup                   = require('./playerSetup.js');
 this.playerStats                   = require('./playerStats.js');
 this.updateHpMpTp                  = require('./updateHpMpTp');
 this.updateInventorySlot           = require('./updateInventorySlot.js');
+this.currencyCrystalInfo           = require('./currencyCrystalInfo.js');
 
 // Actor control packets
 this.aetherReductionDlg            = require('./actorControl/aetherReductionDlg.js');
