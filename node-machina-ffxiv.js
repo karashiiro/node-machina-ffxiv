@@ -133,10 +133,10 @@ const MachinaFFXIV = (() => {
                 terminal: false
             }).on('line', (line) => {
                 // If the C# program hangs for whatever reason.
-                /*if (this[timeout]) {
+                if (this[timeout]) {
                     clearTimeout(this[timeout]);
                     this[timeout] = setTimeout(this.reset, 1200000);
-                }*/
+                }
 
                 this[stdoutQueue] += line;
                 if (this[stdoutQueue].indexOf("}") !== -1) { // A full JSON.
