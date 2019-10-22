@@ -24,6 +24,7 @@ const MachinaFFXIV = (() => {
     const parseAlgorithm = Symbol();
     const noData = Symbol();
     const logger = Symbol();
+    const region = Symbol();
 
     const args = Symbol();
     const exePath = Symbol();
@@ -83,6 +84,12 @@ const MachinaFFXIV = (() => {
                 } else if (options.logger) {
                     this[logger] = options.logger;
                 }
+
+                if (options.region && typeof options.region != 'string') {
+                    throw new TypeError("region must be a string.");
+                } else if (options.region) {
+                    this[region] = options.region;
+                }
             }
 
             // Folders
@@ -97,6 +104,7 @@ const MachinaFFXIV = (() => {
             if (this[ip]) this[args].push(`--LocalIP ${this[ip]}`);
             if (this[useSocketFilter]) this[args].push("--UseSocketFilter");
             if (this[parseAlgorithm]) this[args].push(`--ParseAlgorithm ${this[parseAlgorithm]}`);
+            if (this[region]) this[args].push(`--Region ${this[region]}`);
             this[exePath] = (options && options.machinaExePath) || path.join(__dirname, '/MachinaWrapper/MachinaWrapper.exe');
             if (!fs.existsSync(this[exePath])) {
                 throw new Error(`MachinaWrapper not found in ${this[exePath]}`);

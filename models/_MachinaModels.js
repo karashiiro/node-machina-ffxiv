@@ -3,6 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const common = require('../helpers/Common.js');
+
 // require("../dev_scripts/GenericJSONLoader.js")("ClassJob");
 
 // Server-zone packets
@@ -37,6 +39,7 @@ this.eObjSetState                  = require('./actorControl/eObjSetState.js');
 this.housingItemMoveConfirm        = require('./actorControl/housingItemMoveConfirm.js');
 this.housingStoreroomStatus        = require('./actorControl/housingStoreroomStatus.js');
 this.removeExteriorHousingItem     = require('./actorControl/removeExteriorHousingItem.js');
+this.setFestival                   = require('./actorControl/setFestival.js');
 this.setMountSpeed                 = require('./actorControl/setMountSpeed.js');
 this.toggleWeapon                  = require('./actorControl/toggleWeapon.js');
 this.updateRestedExp               = require('./actorControl/updateRestedExp.js');
@@ -211,116 +214,5 @@ function hasSubArray(master, sub) {
     return sub.every((i => v => i = master.indexOf(v, i) + 1)(0));
 }
 
-module.exports.cityIDList = {
-    0x01: "Limsa Lominsa",
-    0x02: "Gridania",
-    0x03: "Ul'dah",
-    0x04: "Ishgard",
-    0x07: "Kugane",
-    0x0A: "Crystarium"
-};
-
-// https://github.com/SapphireServer/Sapphire/blob/develop/src/common/Common.h#L731-L834
-module.exports.chatType = [
-    "LogKindError",
-    "ServerDebug",
-    "ServerUrgent",
-    "ServerNotice",
-    "Unused4",
-    "Unused5",
-    "Unused6",
-    "Unused7",
-    "Unused8",
-    "Unused9",
-    "Say",
-    "Shout",
-    "Tell",
-    "TellReceive",
-    "Party",
-    "Alliance",
-    "LS1",
-    "LS2",
-    "LS3",
-    "LS4",
-    "LS5",
-    "LS6",
-    "LS7",
-    "LS8",
-    "FreeCompany",
-    "Unused25",
-    "Unused26",
-    "NoviceNetwork",
-    "CustomEmote",
-    "StandardEmote",
-    "Yell",
-    "Unknown31",
-    "PartyUnk2",
-    "Unused33",
-    "Unused34",
-    "Unused35",
-    "Unused36",
-    "Unused37",
-    "Unused38",
-    "Unused39",
-    "Unused40",
-    "BattleDamage",
-    "BattleFailed",
-    "BattleActions",
-    "BattleItems",
-    "BattleHealing",
-    "BattleBeneficial",
-    "BattleDetrimental",
-    "BattleUnk48",
-    "BattleUnk49",
-    "Unused50",
-    "Unused51",
-    "Unused52",
-    "Unused53",
-    "Unused54",
-    "Unused55",
-    "Echo",
-    "SystemMessage",
-    "SystemErrorMessage",
-    "BattleSystem",
-    "GatheringSystem",
-    "NPCMessage",
-    "LootMessage",
-    "Unused63",
-    "CharProgress",
-    "Loot",
-    "Crafting",
-    "Gathering",
-    "NPCAnnouncement",
-    "FCAnnouncement",
-    "FCLogin",
-    "RetainerSale",
-    "PartySearch",
-    "PCSign",
-    "DiceRoll",
-    "NoviceNetworkNotice",
-    "Unknown76",
-    "Unused77",
-    "Unused78",
-    "Unused79",
-    "GMTell",
-    "GMSay",
-    "GMShout",
-    "GMYell",
-    "GMParty",
-    "GMFreeCompany",
-    "GMLS1",
-    "GMLS2",
-    "GMLS3",
-    "GMLS4",
-    "GMLS5",
-    "GMLS6",
-    "GMLS7",
-    "GMLS8",
-    "GMNoviceNetwork",
-    "Unused95",
-    "Unused96",
-    "Unused97",
-    "Unused98",
-    "Unused99",
-    "Unused100"
-];
+module.exports.chatType = common.chatType;
+module.exports.cityIDList = common.cityIDList;
