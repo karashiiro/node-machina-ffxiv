@@ -11,10 +11,13 @@ const common = require('../helpers/Common.js');
 this.actorControl                  = require('./actorControl.js');
 this.actorControlSelf              = require('./actorControlSelf.js');
 this.actorControlTarget            = require('./actorControlTarget.js');
+this.actorMove                     = require('./actorMove.js');
 this.chat                          = require('./chat.js');
+this.currencyCrystalInfo           = require('./currencyCrystalInfo.js');
 this.examineSearchInfo             = require('./examineSearchInfo.js');
 this.freeCompanyEvent              = require('./freeCompanyEvent.js');
 this.freeCompanyUpdateShortMessage = require('./freeCompanyUpdateShortMessage.js');
+this.initZone                      = require('./initZone.js');
 this.itemInfo                      = require('./itemInfo.js');
 this.logMessage                    = require('./logMessage.js');
 this.npcSpawn                      = require('./npcSpawn.js');
@@ -24,9 +27,10 @@ this.messageFC                     = require('./messageFC.js');
 this.playtime                      = require('./playtime.js');
 this.playerSetup                   = require('./playerSetup.js');
 this.playerStats                   = require('./playerStats.js');
+this.serverNotice                  = require('./serverNotice.js');
 this.updateHpMpTp                  = require('./updateHpMpTp');
 this.updateInventorySlot           = require('./updateInventorySlot.js');
-this.currencyCrystalInfo           = require('./currencyCrystalInfo.js');
+this.weatherChange                 = require('./weatherChange.js');
 
 // Actor control packets
 this.actionStart                   = require('./actorControl/actionStart.js');
@@ -200,6 +204,35 @@ module.exports.getUint64 = (uint8Array, offset) => {
 
     let num = `${buffer.getBigUint64(0, true)}`;
     return num.substr(0, num.length - 1);
+};
+
+module.exports.getFloat = (uint8Array, offset) => {
+    if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
+
+    let buffer = new DataView(new ArrayBuffer(4));
+    for (let i = 0; i < 4; i++) {
+        buffer.setUint8(i, uint8Array[offset + i]);
+    }
+    return buffer.getFloat32(0, true);
+};
+
+module.exports.getDouble = (uint8Array, offset) => {
+    if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
+
+    let buffer = new DataView(new ArrayBuffer(8));
+    for (let i = 0; i < 8; i++) {
+        buffer.setUint8(i, uint8Array[offset + i]);
+    }
+    return buffer.getFloat64(0, true);
+};
+
+module.exports.Position3 = (uint8Array, offset) => {
+    if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
+    return {
+        x: this.getUint16(uint8Array, offset),
+        y: this.getUint16(uint8Array, offset + 2),
+        z: this.getUint16(uint8Array, offset + 4)
+    };
 };
 
 const getTime = () => {
