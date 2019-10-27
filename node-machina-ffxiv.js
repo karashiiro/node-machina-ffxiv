@@ -99,12 +99,12 @@ const MachinaFFXIV = (() => {
             }
 
             this[args] = [];
-            if (this[monitorType]) this[args].push(`--MonitorType ${this[monitorType]}`);
-            if (this[pid]) this[args].push(`--ProcessID ${this[pid]}`);
-            if (this[ip]) this[args].push(`--LocalIP ${this[ip]}`);
+            if (this[monitorType]) this[args].push(...["--MonitorType", this[monitorType]]);
+            if (this[pid]) this[args].push(...["--ProcessID", this[pid]]);
+            if (this[ip]) this[args].push(...["--LocalIP", this[ip]]);
             if (this[useSocketFilter]) this[args].push("--UseSocketFilter");
-            if (this[parseAlgorithm]) this[args].push(`--ParseAlgorithm ${this[parseAlgorithm]}`);
-            if (this[region]) this[args].push(`--Region ${this[region]}`);
+            if (this[parseAlgorithm]) this[args].push(...["--ParseAlgorithm", this[parseAlgorithm]]);
+            if (this[region]) this[args].push(...["--Region", this[region]]);
             this[exePath] = (options && options.machinaExePath) || path.join(__dirname, '/MachinaWrapper/MachinaWrapper.exe');
             if (!fs.existsSync(this[exePath])) {
                 throw new Error(`MachinaWrapper not found in ${this[exePath]}`);
