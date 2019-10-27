@@ -29,6 +29,7 @@ module.exports = async (struct) => {
         itemListing.retainerOwnerID = MachinaModels.getUint64(struct.data, 0x10 + (LISTING_LENGTH * i));
         itemListing.artisanID = MachinaModels.getUint64(struct.data, 0x18 + (LISTING_LENGTH * i));
         itemListing.pricePerUnit = pricePerUnit;
+        itemListing.totalTax = MachinaModels.getUint32(struct.data, 0x24 + (LISTING_LENGTH * i));
         itemListing.quantity = MachinaModels.getUint32(struct.data, 0x28 + (LISTING_LENGTH * i));
         // Just for convenience; this value isn't in the packet.
         itemListing.total = itemListing.pricePerUnit * itemListing.quantity;

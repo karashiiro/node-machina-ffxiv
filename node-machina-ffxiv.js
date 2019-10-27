@@ -1,10 +1,10 @@
 'use strict';
 
+const { spawn }    = require('child_process');
 const EventEmitter = require('events');
-const fs = require('fs');
-const readline = require('readline');
-const path = require('path');
-const{spawn} = require('child_process');
+const fs           = require('fs');
+const path         = require('path');
+const readline     = require('readline');
 
 require('./polyfill.js');
 
@@ -109,6 +109,7 @@ const MachinaFFXIV = (() => {
             if (!fs.existsSync(this[exePath])) {
                 throw new Error(`MachinaWrapper not found in ${this[exePath]}`);
             }
+
             this[monitor] = spawn(this[exePath], this[args]);
             this[logger](`[${getTime()}] MachinaWrapper spawned with arguments "${this[args].toString()}"`);
 
