@@ -3,7 +3,8 @@ const MachinaModels = require("./_MachinaModels.js");
 const LISTING_LENGTH = 52;
 
 module.exports = async (struct) => {
-    struct.itemCatalogId = MachinaModels.getUint32(struct.data, 0x00);
+    struct.itemID = MachinaModels.getUint32(struct.data, 0x00);
+    struct.itemCatalogId = struct.itemID; // For backwards-compatability
     struct.itemCatalogId2 = MachinaModels.getUint32(struct.data, 0x04);
 
     struct.listings = [];
