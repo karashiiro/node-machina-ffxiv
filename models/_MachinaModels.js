@@ -23,6 +23,7 @@ this.logMessage                    = require('./logMessage.js');
 this.npcSpawn                      = require('./npcSpawn.js');
 this.marketBoardItemListing        = require('./marketBoardItemListing.js');
 this.marketBoardItemListingHistory = require('./marketBoardItemListingHistory.js');
+this.marketTaxRates                = require('./marketTaxRates.js');
 this.messageFC                     = require('./messageFC.js');
 this.playtime                      = require('./playtime.js');
 this.playerSetup                   = require('./playerSetup.js');
