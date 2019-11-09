@@ -8,5 +8,5 @@ module.exports = (struct) => {
     if (type) struct.type = `message${type}`;
 
     struct.character = "You";
-    struct.message = String.fromCodePoint(...struct.data.slice(0x1A)).replace(/\0/g, "");
+    struct.message = MachinaModels.getString(struct.data, 0x1A);
 };

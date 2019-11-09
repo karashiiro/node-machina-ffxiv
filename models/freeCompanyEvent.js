@@ -2,8 +2,8 @@ const MachinaModels = require('./_MachinaModels.js');
 
 module.exports = (struct) => {
     struct.supertype = "freeCompanyEvent";
-    struct.fc = String.fromCodePoint(...struct.data.slice(0x1A, 0x48)).replace(/\0/g, "");
-    struct.character = String.fromCodePoint(...struct.data.slice(0x68)).replace(/\0/g, "");
+    struct.fc = MachinaModels.getString(struct.data, 0x1A, 0x2E);
+    struct.character = MachinaModels.getString(struct.data, 0x68, struct.data.length - 0x68);
 
     let status = MachinaModels.getUint16(struct.data, 0x10);
     if (status === 0x0F) {

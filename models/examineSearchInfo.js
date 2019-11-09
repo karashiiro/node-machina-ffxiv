@@ -6,8 +6,8 @@ module.exports = (struct) => {
     let worldID = ProcessingHelper.getWorldByID(struct.data[0x22]);
     struct.world = worldID ? worldID : struct.data[0x22];
 
-    struct.searchComment = String.fromCodePoint(...struct.data.slice(0x23, 0xE3)).replace(/\0/g, "");
-    struct.fc = String.fromCodePoint(...struct.data.slice(0xE4, 0xFB)).replace(/\0/g, "");
+    struct.searchComment = MachinaModels.getString(struct.data, 0x23, 0x30);
+    struct.fc = MachinaModels.getString(struct.data, 0xE4, 0x17);
 
     struct.classJobs = [];
     for (let i = 0; i < ClassJobHelper.classJobTotal; i++) {

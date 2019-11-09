@@ -44,8 +44,8 @@ module.exports = async (struct) => {
             let materiaID = await MateriaHelper.materiaValueToItemID(materiaSlot);
             if (materiaID != 0) itemListing.materia.push(materiaID);
         }
-        itemListing.retainerName = String.fromCodePoint(...struct.data.slice(0x4C + (LISTING_LENGTH * i), 0x6C + (LISTING_LENGTH * i))).replace(/\0/g, "");
-        itemListing.playerName = String.fromCodePoint(...struct.data.slice(0x6C + (LISTING_LENGTH * i), 0x8C + (LISTING_LENGTH * i))).replace(/\0/g, "");
+        itemListing.retainerName = MachinaModels.getString(struct.data, 0x4C + (LISTING_LENGTH * i), 0x2C + (LISTING_LENGTH * i));
+        itemListing.playerName = MachinaModels.getString(struct.data, 0x6C + (LISTING_LENGTH * i), 0x2C + (LISTING_LENGTH * i));
         itemListing.hq = struct.data[0x8C + (LISTING_LENGTH * i)];
         itemListing.materiaCount = struct.data[0x8D + (LISTING_LENGTH * i)];
         itemListing.onMannequin = struct.data[0x8E + (LISTING_LENGTH * i)];
