@@ -18,7 +18,7 @@ module.exports = async (struct) => {
         itemListing.quantity = MachinaModels.getUint32(struct.data, 0x10 + (LISTING_LENGTH * i));
         itemListing.hq = struct.data[0x14 + (LISTING_LENGTH * i)] === 1 ? true : false;
         itemListing.onMannequin = struct.data[0x16 + (LISTING_LENGTH * i)] === 1 ? true : false;
-        itemListing.buyerName = MachinaModels.getString(struct.data, 0x17 + (LISTING_LENGTH * i), 0x17 + (LISTING_LENGTH * i));
+        itemListing.buyerName = MachinaModels.getString(struct.data, 0x17 + (LISTING_LENGTH * i), 0x17);
         itemListing.itemCatalogId = MachinaModels.getUint32(struct.data, 0x39 + (LISTING_LENGTH * i));
 
         struct.listings.push(itemListing);
