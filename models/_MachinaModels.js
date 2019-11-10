@@ -244,7 +244,6 @@ module.exports.getString = (uint8Array, offset, length) => {
         return '';
     }
 
-    console.log(length, uint8Array.slice(offset, offset + length))
     return Buffer.from(uint8Array.slice(offset, offset + length)).toString();
 }
 
