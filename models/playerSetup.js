@@ -15,5 +15,5 @@ module.exports = (struct) => {
     struct.unknown3 = MachinaModels.getUint16(struct.data, 0x30);
     struct.pvpFrontlineOverallCampaigns = MachinaModels.getUint32(struct.data, 0x32);
     struct.unknown34 = MachinaModels.getUint32(struct.data, 0x34);
-    struct.name = String.fromCodePoint(...struct.data.slice(0x23A, 0x25A)).replace(/\0/g, "");
+    struct.name = MachinaModels.getString(struct.data, 0x23A, 0x20);
 };

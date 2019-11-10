@@ -229,6 +229,24 @@ module.exports.getDouble = (uint8Array, offset) => {
     return buffer.getFloat64(0, true);
 };
 
+module.exports.getString = (uint8Array, offset, length) => {
+    if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
+    if (typeof length === 'undefined') {
+        length = uint8Array.length - offset;
+    }
+
+    // Remove the suffix zeros
+    while (length > 0 && uint8Array[offset + length - 1] === 0) {
+        --length;
+    }
+
+    if (length === 0) {
+        return '';
+    }
+
+    return Buffer.from(uint8Array.slice(offset, offset + length)).toString();
+}
+
 module.exports.Position3 = (uint8Array, offset) => {
     if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
     return {

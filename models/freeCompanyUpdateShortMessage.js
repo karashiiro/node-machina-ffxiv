@@ -1,3 +1,5 @@
+const MachinaModels = require("./_MachinaModels.js");
+
 module.exports = (struct) => {
-    struct.message = String.fromCodePoint(...struct.data.slice(0x10)).replace(/\0/g, "");
+    struct.message = MachinaModels.getString(struct.data, 0x10);
 };
