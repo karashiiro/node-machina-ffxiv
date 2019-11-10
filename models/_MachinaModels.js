@@ -24,6 +24,7 @@ this.npcSpawn                      = require('./npcSpawn.js');
 this.marketBoardItemListing        = require('./marketBoardItemListing.js');
 this.marketBoardItemListingCount   = require('./marketBoardItemListingCount.js');
 this.marketBoardItemListingHistory = require('./marketBoardItemListingHistory.js');
+this.marketBoardSearchResult       = require('./marketBoardSearchResult.js');
 this.marketTaxRates                = require('./marketTaxRates.js');
 this.messageFC                     = require('./messageFC.js');
 this.playtime                      = require('./playtime.js');
