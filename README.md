@@ -7,7 +7,7 @@ If you so choose, you can use it exclusively as a wrapper for Machina with minim
 
 Event type names and all packet structures are taken from the [Sapphire](https://github.com/SapphireServer/Sapphire) project.
 
-NOTE: Most features besides the `raw` data event will break after every major patch release (4.5, 5.0, 5.1 etc., NOT 5.01, 5.05 etc.) until the [IPC opcodes](https://github.com/SapphireServer/Sapphire/blob/develop/src/common/Network/PacketDef/Ipcs.h) are updated in the Sapphire repo.
+NOTE: Most features besides the `raw` data event will break after every patch release until the [IPC opcodes](https://github.com/SapphireServer/Sapphire/blob/develop/src/common/Network/PacketDef/Ipcs.h) are updated in the Sapphire repo.
 
 ## Installation
 ```
