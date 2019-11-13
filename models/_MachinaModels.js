@@ -59,6 +59,7 @@ this.chatHandler                   = require('./chatHandler.js');
 this.clientTrigger                 = require('./clientTrigger.js');
 this.emoteEventHandler             = require('./emoteEventHandler.js');
 this.inventoryModifyHandler        = require('./inventoryModifyHandler.js');
+this.persistentEffect              = require('./persistentEffect.js');
 
 // Client trigger packets
 this.cameraMode                    = require('./clientTrigger/cameraMode.js');
