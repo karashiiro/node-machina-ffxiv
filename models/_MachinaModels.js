@@ -31,6 +31,7 @@ this.playtime                      = require('./playtime.js');
 this.playerSetup                   = require('./playerSetup.js');
 this.playerStats                   = require('./playerStats.js');
 this.serverNotice                  = require('./serverNotice.js');
+this.statusEffectList              = require('./statusEffectList.js');
 this.updateHpMpTp                  = require('./updateHpMpTp');
 this.updateInventorySlot           = require('./updateInventorySlot.js');
 this.weatherChange                 = require('./weatherChange.js');
