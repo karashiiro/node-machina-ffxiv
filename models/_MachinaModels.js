@@ -52,6 +52,7 @@ this.setFestival                   = require('./actorControl/setFestival.js');
 this.setMountSpeed                 = require('./actorControl/setMountSpeed.js');
 this.toggleWeapon                  = require('./actorControl/toggleWeapon.js');
 this.updateRestedExp               = require('./actorControl/updateRestedExp.js');
+this.setBait                       = require('./actorControl/setBait.js');
 
 // Client-zone packets
 this.chatHandler                   = require('./chatHandler.js');
