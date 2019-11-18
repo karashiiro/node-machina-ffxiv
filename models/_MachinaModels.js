@@ -61,6 +61,7 @@ this.clientTrigger                 = require('./clientTrigger.js');
 this.emoteEventHandler             = require('./emoteEventHandler.js');
 this.inventoryModifyHandler        = require('./inventoryModifyHandler.js');
 this.persistentEffect              = require('./persistentEffect.js');
+this.updatePositionHandler         = require('./updatePositionHandler.js');
 
 // Client trigger packets
 this.cameraMode                    = require('./clientTrigger/cameraMode.js');
@@ -258,9 +259,9 @@ module.exports.getString = (uint8Array, offset, length) => {
 module.exports.Position3 = (uint8Array, offset) => {
     if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
     return {
-        x: this.getUint16(uint8Array, offset),
-        y: this.getUint16(uint8Array, offset + 2),
-        z: this.getUint16(uint8Array, offset + 4)
+        x: this.getFloat(uint8Array, offset),
+        y: this.getFloat(uint8Array, offset + 4),
+        z: this.getFloat(uint8Array, offset + 8)
     };
 };
 
