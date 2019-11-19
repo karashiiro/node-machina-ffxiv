@@ -36,6 +36,7 @@ this.updateHpMpTp                  = require('./updateHpMpTp');
 this.updateInventorySlot           = require('./updateInventorySlot.js');
 this.weatherChange                 = require('./weatherChange.js');
 this.effectResult                  = require('./effectResult.js');
+this.eventPlay                     = require('./eventPlay.js');
 
 // Actor control packets
 this.actionStart                   = require('./actorControl/actionStart.js');
