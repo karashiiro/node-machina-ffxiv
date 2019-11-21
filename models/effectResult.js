@@ -11,6 +11,6 @@ module.exports = async (struct) => {
     // struct.maxMp = MachinaModels.getUint16(struct.data, 16);
     // struct.maxSomething = MachinaModels.getUint16(struct.data, 18);
     struct.effectIndex = MachinaModels.getUint16(struct.data, 0x40);
-    struct.effectID = MachinaModels.getUint16(struct.data, 0x42);
+    struct.effectID = MachinaModels.getUint16(struct.data, 0x1E);
     struct.actorID1 = MachinaModels.getUint32(struct.data, 0x52);
 };
