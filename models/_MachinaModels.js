@@ -266,6 +266,15 @@ module.exports.Position3 = (uint8Array, offset) => {
     };
 };
 
+module.exports.Position3Uint16 = (uint8Array, offset) => {
+    if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
+    return {
+        x: this.getUint16(uint8Array, offset),
+        y: this.getUint16(uint8Array, offset + 2),
+        z: this.getUint16(uint8Array, offset + 4)
+    };
+};
+
 const getTime = () => {
     const time = new Date();
     let m = time.getMinutes();
