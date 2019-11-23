@@ -8,26 +8,43 @@ const common = require('../helpers/Common.js');
 // require("../dev_scripts/GenericJSONLoader.js")("ClassJob");
 
 // Server-zone packets
+this.actorCast                     = require('./actorCase.js');
 this.actorControl                  = require('./actorControl.js');
 this.actorControlSelf              = require('./actorControlSelf.js');
 this.actorControlTarget            = require('./actorControlTarget.js');
+this.aoeEffect8                    = require('./aoeEffect8.js');
+this.aoeEffect16                   = require('./aoeEffect16.js');
+this.aoeEffect24                   = require('./aoeEffect24.js');
+this.aoeEffect32                   = require('./aoeEffect32.js');
+this.actorFreeSpawn                = require('./actorFreeSpawn.js');
+this.actorGauge                    = require('./actorGauge.js');
 this.actorMove                     = require('./actorMove.js');
+this.actorSetPos                   = require('./actorSetPos.js');
+this.actorOwner                    = require('./actorOwner.js');
+this.blackList                     = require('./blackList.js');
+this.cFAvailableContents           = require('./cFAvailableContents.js');
+this.cFDutyInfo                    = require('./cFDutyInfo.js')
+this.cFPlayerInNeed                = require('./cFPlayerInNeed.js')
+this.cFRegisterDuty                = require('./cFRegisterDuty.js')
 this.chat                          = require('./chat.js');
 this.currencyCrystalInfo           = require('./currencyCrystalInfo.js');
+this.eorzeaTimeOffset              = require('./eorzeaTimeOffset.js');
+this.equipDisplayFlags             = require('./equipDisplayFlags.js');
 this.examineSearchInfo             = require('./examineSearchInfo.js');
 this.freeCompanyEvent              = require('./freeCompanyEvent.js');
 this.freeCompanyUpdateShortMessage = require('./freeCompanyUpdateShortMessage.js');
 this.initZone                      = require('./initZone.js');
 this.itemInfo                      = require('./itemInfo.js');
 this.logMessage                    = require('./logMessage.js');
-this.npcSpawn                      = require('./npcSpawn.js');
 this.marketBoardItemListing        = require('./marketBoardItemListing.js');
 this.marketBoardItemListingCount   = require('./marketBoardItemListingCount.js');
 this.marketBoardItemListingHistory = require('./marketBoardItemListingHistory.js');
 this.marketBoardSearchResult       = require('./marketBoardSearchResult.js');
 this.marketTaxRates                = require('./marketTaxRates.js');
+this.mount                         = require('./mount.js');
 this.messageFC                     = require('./messageFC.js');
-this.playtime                      = require('./playtime.js');
+this.npcSpawn                      = require('./npcSpawn.js');
+this.playtime                      = require('./playTime.js');
 this.playerSetup                   = require('./playerSetup.js');
 this.playerStats                   = require('./playerStats.js');
 this.serverNotice                  = require('./serverNotice.js');
@@ -47,6 +64,7 @@ this.craftingUnk                   = require('./actorControl/craftingUnk.js');
 this.dailyQuestSeed                = require('./actorControl/dailyQuestSeed.js');
 this.desynthOrReductionResult      = require('./actorControl/desynthOrReductionResult.js');
 this.eObjSetState                  = require('./actorControl/eObjSetState.js');
+this.fishingBaitMsg                = require('./actorControl/fishingBaitMsg.js');
 this.housingItemMoveConfirm        = require('./actorControl/housingItemMoveConfirm.js');
 this.housingStoreroomStatus        = require('./actorControl/housingStoreroomStatus.js');
 this.removeExteriorHousingItem     = require('./actorControl/removeExteriorHousingItem.js');
@@ -54,7 +72,6 @@ this.setFestival                   = require('./actorControl/setFestival.js');
 this.setMountSpeed                 = require('./actorControl/setMountSpeed.js');
 this.toggleWeapon                  = require('./actorControl/toggleWeapon.js');
 this.updateRestedExp               = require('./actorControl/updateRestedExp.js');
-this.fishingBaitMsg                = require('./actorControl/fishingBaitMsg.js');
 
 // Client-zone packets
 this.chatHandler                   = require('./chatHandler.js');
@@ -177,6 +194,20 @@ module.exports.uint8ArrayToHexArray = (array) => {
     return newArray;
 };
 
+module.exports.getInt8 = (value) => {
+    return value - 128;
+};
+
+module.exports.getInt16 = (uint8Array, offset) => {
+    if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
+
+    let buffer = new DataView(new ArrayBuffer(2));
+    for (let i = 0; i < 2; i++) {
+        buffer.setUint8(i, uint8Array[offset + i]);
+    }
+    return buffer.getInt16(0, true);
+};
+
 module.exports.getUint16 = (uint8Array, offset) => {
     if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
 
@@ -272,6 +303,42 @@ module.exports.Position3Uint16 = (uint8Array, offset) => {
         x: this.getUint16(uint8Array, offset),
         y: this.getUint16(uint8Array, offset + 2),
         z: this.getUint16(uint8Array, offset + 4)
+    };
+};
+
+module.exports.getEffectHeader = (uint8Array, offset) => { // 36 (0x24) bytes
+    if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
+    return {
+        animationTargetID:   this.getUint64(uint8Array, offset),
+
+        actionID:            this.getUint32(uint8Array, offset + 8),
+        globalEffectCounter: this.getUint32(uint8Array, offset + 12),
+
+        animationLockTime:   this.getFloat32(uint8Array, offset + 16),
+        someTargetID:        this.getUint32(uint8Array, offset + 20),
+
+        hiddenAnimation:     this.getUint16(uint8Array, offset + 24),
+        rotation:            this.getUint16(uint8Array, offset + 26),
+        actionAnimationID:   this.getUint16(uint8Array, offset + 28),
+        variation:           uint8Array[offset + 30],
+        effectDisplayType:   common.actionEffectDisplayType[uint8Array[offset + 31]],
+
+        unknown20:           uint8Array[offset + 32],
+        effectCount:         uint8Array[offset + 33],
+        padding21:           this.getUint16(uint8Array, offset + 34),
+    };
+};
+
+module.exports.getEffectEntry = (uint8Array, offset) -> { // 8 bytes long
+    if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
+    return {
+        effectType = common.actionEffectDisplayType[uint8Array[offset + 0x00]],
+        hitSeverity = common.actionHitSeverityType[uint8Array[offset + 0x01]],
+        param = uint8Array[offset + 0x02],
+        bonusPercent = this.getInt8(uint8Array[offset + 0x03]),
+        valueMultiplier = uint8Array[offset + 0x04],
+        flags = uint8Array[offset + 0x05],
+        value = this.getInt16(uint8Array, offset + 0x06),
     };
 };
 

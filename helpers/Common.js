@@ -101,7 +101,7 @@ module.exports = {
         "Unused97",
         "Unused98",
         "Unused99",
-        "Unused100"
+        "Unused100",
     ],
 
     cityIDList: {
@@ -110,7 +110,7 @@ module.exports = {
         0x03: "Ul'dah",
         0x04: "Ishgard",
         0x07: "Kugane",
-        0x0A: "Crystarium"
+        0x0A: "Crystarium",
     },
 
     roles: {
@@ -118,6 +118,26 @@ module.exports = {
         1: "tank",
         2: "dps",
         3: "rangedDps",
-        4: "healer"
-    }
+        4: "healer",
+    },
+
+    skillType: {
+        0x1: "Normal",
+        0x2: "ItemAction",
+        0xD: "MountSkill",
+    },
+
+    actionEffectDisplayType: {
+        0: "HideActionName",
+        1: "ShowActionName",
+        2: "ShowItemName",
+    },
+
+    actionHitSeverityType: {
+        0: "NormalDamageCritHeal",
+        1: "CritDamageNormalHeal",
+        2: "DirectHitDamage",
+        3: "CriticalDirectHitDamage",
+
+    },
 };
