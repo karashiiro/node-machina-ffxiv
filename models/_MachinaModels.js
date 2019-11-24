@@ -8,7 +8,7 @@ const common = require('../helpers/Common.js');
 // require("../dev_scripts/GenericJSONLoader.js")("ClassJob");
 
 // Server-zone packets
-this.actorCast                     = require('./actorCase.js');
+this.actorCast                     = require('./actorCast.js');
 this.actorControl                  = require('./actorControl.js');
 this.actorControlSelf              = require('./actorControlSelf.js');
 this.actorControlTarget            = require('./actorControlTarget.js');
@@ -329,16 +329,16 @@ module.exports.getEffectHeader = (uint8Array, offset) => { // 36 (0x24) bytes
     };
 };
 
-module.exports.getEffectEntry = (uint8Array, offset) -> { // 8 bytes long
+module.exports.getEffectEntry = (uint8Array, offset) => { // 8 bytes long
     if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
     return {
-        effectType = common.actionEffectDisplayType[uint8Array[offset + 0x00]],
-        hitSeverity = common.actionHitSeverityType[uint8Array[offset + 0x01]],
-        param = uint8Array[offset + 0x02],
-        bonusPercent = this.getInt8(uint8Array[offset + 0x03]),
-        valueMultiplier = uint8Array[offset + 0x04],
-        flags = uint8Array[offset + 0x05],
-        value = this.getInt16(uint8Array, offset + 0x06),
+        effectType: common.actionEffectDisplayType[uint8Array[offset + 0x00]],
+        hitSeverity: common.actionHitSeverityType[uint8Array[offset + 0x01]],
+        param: uint8Array[offset + 0x02],
+        bonusPercent: this.getInt8(uint8Array[offset + 0x03]),
+        valueMultiplier: uint8Array[offset + 0x04],
+        flags: uint8Array[offset + 0x05],
+        value: this.getInt16(uint8Array, offset + 0x06),
     };
 };
 
