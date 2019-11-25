@@ -314,7 +314,7 @@ module.exports.getEffectHeader = (uint8Array, offset) => { // 36 (0x24) bytes
         actionID:            this.getUint32(uint8Array, offset + 8),
         globalEffectCounter: this.getUint32(uint8Array, offset + 12),
 
-        animationLockTime:   this.getFloat32(uint8Array, offset + 16),
+        animationLockTime:   this.getFloat(uint8Array, offset + 16),
         someTargetID:        this.getUint32(uint8Array, offset + 20),
 
         hiddenAnimation:     this.getUint16(uint8Array, offset + 24),
