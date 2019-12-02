@@ -54,6 +54,7 @@ this.updateInventorySlot           = require('./updateInventorySlot.js');
 this.weatherChange                 = require('./weatherChange.js');
 this.effectResult                  = require('./effectResult.js');
 this.eventPlay                     = require('./eventPlay.js');
+this.useMooch                      = require('./useMooch.js');
 
 // Actor control packets
 this.actionStart                   = require('./actorControl/actionStart.js');
