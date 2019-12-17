@@ -1,4 +1,4 @@
-name: "Semver Bump"
+name: NPM CD
 
 on:
   push:
@@ -21,6 +21,7 @@ jobs:
         uses: "actions/setup-node@v1"
         with:
           node-version: 8.10.0
+          registry-url: 'https://registry.npmjs.org'
       - name: "Automated Version Bump"
         uses: "phips28/gh-action-bump-version@master"
         with:
@@ -29,3 +30,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: "cat package.json"
         run: cat ./package.json
+      - name: "Publish to NPM"
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
