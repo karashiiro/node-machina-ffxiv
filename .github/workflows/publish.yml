@@ -1,6 +1,9 @@
 name: NPM CD
 
-on: [release]
+on:
+    push:
+        tags:
+            - 'v*'
 
 jobs:
   build:
