@@ -46,6 +46,7 @@ this.messageFC                     = require('./messageFC.js');
 this.npcSpawn                      = require('./npcSpawn.js');
 this.playtime                      = require('./playTime.js');
 this.playerSetup                   = require('./playerSetup.js');
+this.playerSpawn                   = require('./playerSpawn.js');
 this.playerStats                   = require('./playerStats.js');
 this.serverNotice                  = require('./serverNotice.js');
 this.statusEffectList              = require('./statusEffectList.js');
