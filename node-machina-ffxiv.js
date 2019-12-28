@@ -179,6 +179,7 @@ const MachinaFFXIV = (() => {
 
         reset(callback) {
             if (!this[exePath] || !this[args]) throw "No instance to reset.";
+            this.kill();
             this[monitor] = spawn(this[exePath], this[args]);
             this.start(callback);
             this[logger](`[${getTime()}] MachinaWrapper reset!`);
