@@ -136,7 +136,7 @@ const MachinaFFXIV = (() => {
                 // If the C# program hangs for whatever reason.
                 if (this[timeout]) {
                     clearTimeout(this[timeout]);
-                    this[timeout] = setTimeout(this.reset, 1200000);
+                    this[timeout] = setTimeout(this.reset, 7000);
                 }
 
                 this[stdoutQueue] += line;
