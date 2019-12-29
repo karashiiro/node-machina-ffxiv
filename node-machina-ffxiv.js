@@ -3,6 +3,7 @@
 const { spawn }    = require('child_process');
 const EventEmitter = require('events');
 const fs           = require('fs');
+const http         = require('http');
 const path         = require('path');
 const readline     = require('readline');
 
@@ -13,6 +14,7 @@ const MachinaModels = require('./models/_MachinaModels.js');
 // Public class
 const MachinaFFXIV = (() => {
     const monitor = Symbol();
+    const server = Symbol();
     const stdoutQueue = Symbol();
     const timeout = Symbol();
     const filter = Symbol();
@@ -124,39 +126,39 @@ const MachinaFFXIV = (() => {
                 this[logger](err);
             });
 
-            // { type: raw
-            //   connection: ip1=>ip2
-            //   operation: send/receive
-            //   epoch
+            // { type: raw,
+            //   opcode: number,
+            //   region: Global/KR/CN,
+            //   connection: ip1=>ip2,
+            //   operation: send/receive,
+            //   epoch,
+            //   packetSize,
+            //   segmentType,
             //   data }
-            readline.createInterface({
-                input: this[monitor].stdout,
-                terminal: false
-            }).on('line', (line) => {
-                // If the C# program hangs for whatever reason.
-                if (this[timeout]) {
-                    clearTimeout(this[timeout]);
-                    this[timeout] = setTimeout(this.reset, 7000);
-                }
-
-                this[stdoutQueue] += line;
-                if (this[stdoutQueue].indexOf("}") !== -1) { // A full JSON.
-                    let content = JSON.parse(this[stdoutQueue].slice(0, this[stdoutQueue].indexOf("}") + 1));
+            this[server] = http.createServer((req, res) => {
+                const data = [];
+                req.on('data', (chunk) => {
+                    data.push(chunk);
+                });
+                req.on('end', () => {
+                    let content = JSON.parse(data);
 
                     if (this[filter].length === 0 ||
                             this[filter].includes(content.type) ||
                             this[filter].includes(content.subType) |
                             this[filter].includes(content.superType)) {
-                        content.data = new Uint8Array(content.data); // Why store bytes as 32-bit integers?
+                        content.data = new Uint8Array(content.data); // Should be less size in memory than a 64-bit number array
 
                         MachinaModels.parseAndEmit(this[logger], content, this[noData], this); // Parse packet data
                         this.emit('raw', content); // Emit a catch-all event
                     }
 
-                    this[stdoutQueue] = this[stdoutQueue].indexOf("{") === -1 // Clear the queue
-                        ? ""
-                        : this[stdoutQueue].slice(this[stdoutQueue].indexOf("{"), this[stdoutQueue].indexOf("{"));
-                }
+                    res.end();
+                });
+            });
+            this[server].listen(13346, (err) => {
+                if (err) return this[logger](err);
+                this[logger](`[${getTime()}] Server started on port 13346.`);
             });
 
             this[monitor].stderr.on('data', (err) => {
