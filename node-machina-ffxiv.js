@@ -15,7 +15,6 @@ const MachinaModels = require('./models/_MachinaModels.js');
 const MachinaFFXIV = (() => {
     const monitor = Symbol();
     const server = Symbol();
-    const stdoutQueue = Symbol();
     const timeout = Symbol();
     const filter = Symbol();
 
@@ -120,8 +119,6 @@ const MachinaFFXIV = (() => {
             this[filter] = [];
 
             // Create events to route outputs.
-            this[stdoutQueue] = ""; // A queue so that we don't get too much or too little of the buffer at once.
-
             this[monitor].on('error', (err) => {
                 this[logger](err);
             });
