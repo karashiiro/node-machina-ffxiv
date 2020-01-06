@@ -55,6 +55,8 @@ this.updateInventorySlot           = require('./updateInventorySlot.js');
 this.weatherChange                 = require('./weatherChange.js');
 this.effectResult                  = require('./effectResult.js');
 this.eventPlay                     = require('./eventPlay.js');
+this.eventPlay4                      = require('./eventPlay4.js');
+this.eventPlay8                      = require('./eventPlay8.js');
 this.useMooch                      = require('./useMooch.js');
 
 // Actor control packets
@@ -89,10 +91,6 @@ this.poseCancel                    = require('./clientTrigger/poseGeneral.js');
 this.poseChange                    = require('./clientTrigger/poseGeneral.js');
 this.poseReapply                   = require('./clientTrigger/poseGeneral.js');
 this.toggleSheathe                 = require('./clientTrigger/toggleSheathe.js');
-
-// Event unknown packets
-this.eventUnk0                      = require('./eventUnk0.js');
-this.eventUnk1                      = require('./eventUnk1.js');
 
 // Methods
 module.exports.loadDefinitions = (definitionsDir) => {
