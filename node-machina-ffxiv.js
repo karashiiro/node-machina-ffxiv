@@ -70,7 +70,7 @@ const MachinaFFXIV = (() => {
                         case "RAMHeavy": break;
                         case "CPUHeavy": break;
                         case "PacketSpecific": break;
-                        default: throw new Error("Invalid parsing algorithm provided!");
+                        default: throw new Error("Invalid parsing algorithm provided! Options are: 'RAMHeavy', 'CPUHeavy', 'PacketSpecific'.");
                     }
                 }
 
@@ -138,8 +138,12 @@ const MachinaFFXIV = (() => {
                     data.push(chunk);
                 });
                 req.on('end', () => {
-                    let content = JSON.parse(data);
-
+                    let content;
+                    try {
+                        content = JSON.parse(data);
+                    } catch (err) {
+                        this[logger](`Message threw an error: ${err}\n${err.stack}\nMessage content:\n${data.toString()}`);
+                    }
                     if (this[filter].length === 0 ||
                             this[filter].includes(content.type) ||
                             this[filter].includes(content.subType) |
