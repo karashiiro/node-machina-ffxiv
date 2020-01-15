@@ -110,7 +110,7 @@ module.exports.loadDefinitions = (definitionsDir) => {
 
 module.exports.parse = async (logger, struct, noData) => {
     if (struct.segmentType !== 0x03) {
-        logger(`[${getTime()}] Packet recieved with no IPC data, ignoring...`)
+        logger(`Packet recieved with no IPC data, ignoring...`)
         return;
     } // No IPC data
 
@@ -151,18 +151,18 @@ module.exports.parse = async (logger, struct, noData) => {
     if (this[struct.type]) {
         try {
             await this[struct.type](struct);
-            logger(`[${getTime()}] Processed packet ${struct.type}, firing event...`);
+            logger(`Processed packet ${struct.type}, firing event...`);
         } catch (err) {
-            logger(`[${getTime()}] Failed to process packet ${struct.type}, got error ${err}`);
+            logger(`Failed to process packet ${struct.type}, got error ${err}`);
         }
     }
 
     if (this[struct.subType]) {
         try {
             await this[struct.subType](struct);
-            logger(`[${getTime()}] Processed packet ${struct.subType}, firing event...`);
+            logger(`Processed packet ${struct.subType}, firing event...`);
         } catch (err) {
-            logger(`[${getTime()}] Failed to process packet ${struct.subType}, got error ${err}`);
+            logger(`Failed to process packet ${struct.subType}, got error ${err}`);
         }
     }
 
@@ -173,7 +173,7 @@ module.exports.parse = async (logger, struct, noData) => {
 
 module.exports.parseAndEmit = async (logger, struct, noData, context) => {
     if (struct.segmentType !== 0x03) {
-        logger(`[${getTime()}] Packet recieved with no IPC data, ignoring...`)
+        logger(`Packet recieved with no IPC data, ignoring...`)
         return;
     } // No IPC data
 
@@ -341,15 +341,6 @@ module.exports.getEffectEntry = (uint8Array, offset) => { // 8 bytes long
         flags: uint8Array[offset + 0x05],
         value: this.getInt16(uint8Array, offset + 0x06),
     };
-};
-
-const getTime = () => {
-    const time = new Date();
-    let m = time.getMinutes();
-    if (m < 10) {
-        m = `0${m}`;
-    }
-    return `${time.getHours()}:${m}`;
 };
 
 function hasSubArray(master, sub) {

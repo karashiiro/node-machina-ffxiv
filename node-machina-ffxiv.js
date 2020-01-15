@@ -112,7 +112,7 @@ const MachinaFFXIV = (() => {
             }
 
             this[monitor] = spawn(this[exePath], this[args]);
-            this[logger](`[${getTime()}] MachinaWrapper spawned with arguments "${this[args].toString()}"`);
+            this[logger](`MachinaWrapper spawned with arguments "${this[args].toString()}"`);
 
             MachinaModels.loadDefinitions(options && options.definitionsDir);
 
@@ -155,7 +155,7 @@ const MachinaFFXIV = (() => {
             });
             this[server].listen(13346, (err) => {
                 if (err) return this[logger](err);
-                this[logger](`[${getTime()}] Server started on port 13346.`);
+                this[logger](`Server started on port 13346.`);
             });
 
             this[monitor].stderr.on('data', (err) => {
@@ -164,7 +164,7 @@ const MachinaFFXIV = (() => {
 
             this[monitor].once('close', (code) => {
                 this[server].close();
-                this[logger](`[${getTime()}] MachinaWrapper closed with code: ${code}`);
+                this[logger](`MachinaWrapper closed with code: ${code}`);
             });
         }
 
@@ -182,39 +182,30 @@ const MachinaFFXIV = (() => {
             this.kill();
             this[monitor] = spawn(this[exePath], this[args]);
             this.start(callback);
-            this[logger](`[${getTime()}] MachinaWrapper reset!`);
+            this[logger](`MachinaWrapper reset!`);
         }
 
         start(callback) {
             if (!this[monitor]) throw "MachinaWrapper is uninitialized.";
             this[monitor].stdin.write("start\n", callback);
-            this[logger](`[${getTime()}] MachinaWrapper started!`);
+            this[logger](`MachinaWrapper started!`);
         }
 
         stop(callback) {
             if (!this[monitor]) throw "MachinaWrapper is uninitialized.";
             this[monitor].stdin.write("stop\n", callback);
-            this[logger](`[${getTime()}] MachinaWrapper stopped!`);
+            this[logger](`MachinaWrapper stopped!`);
         }
 
         kill(callback) {
             if (!this[monitor]) throw "MachinaWrapper is uninitialized.";
             this[monitor].stdin.end("kill\n", callback);
             this[monitor] = undefined;
-            this[logger](`[${getTime()}] MachinaWrapper killed!`);
+            this[logger](`MachinaWrapper killed!`);
         }
     };
 
     return MachinaFFXIV;
 })();
-
-const getTime = () => {
-    const time = new Date();
-    let m = time.getMinutes();
-    if (m < 10) {
-        m = `0${m}`;
-    }
-    return `${time.getHours()}:${m}`;
-};
 
 module.exports = MachinaFFXIV;
