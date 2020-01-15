@@ -163,6 +163,7 @@ const MachinaFFXIV = (() => {
             });
 
             this[monitor].once('close', (code) => {
+                this[server].close();
                 this[logger](`[${getTime()}] MachinaWrapper closed with code: ${code}`);
             });
         }
