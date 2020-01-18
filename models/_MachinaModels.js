@@ -8,7 +8,7 @@ const common = require('../helpers/Common.js');
 // require("../dev_scripts/GenericJSONLoader.js")("ClassJob");
 
 // Server-zone packets
-this.actorCast                     = require('./actorCase.js');
+this.actorCast                     = require('./actorCast.js');
 this.actorControl                  = require('./actorControl.js');
 this.actorControlSelf              = require('./actorControlSelf.js');
 this.actorControlTarget            = require('./actorControlTarget.js');
@@ -46,6 +46,7 @@ this.messageFC                     = require('./messageFC.js');
 this.npcSpawn                      = require('./npcSpawn.js');
 this.playtime                      = require('./playTime.js');
 this.playerSetup                   = require('./playerSetup.js');
+this.playerSpawn                   = require('./playerSpawn.js');
 this.playerStats                   = require('./playerStats.js');
 this.serverNotice                  = require('./serverNotice.js');
 this.statusEffectList              = require('./statusEffectList.js');
@@ -54,6 +55,10 @@ this.updateInventorySlot           = require('./updateInventorySlot.js');
 this.weatherChange                 = require('./weatherChange.js');
 this.effectResult                  = require('./effectResult.js');
 this.eventPlay                     = require('./eventPlay.js');
+this.eventPlay4                    = require('./eventPlay4.js');
+this.eventPlay8                    = require('./eventPlay8.js');
+this.someDirectorUnk4              = require('./someDirectorUnk4.js');
+this.useMooch                      = require('./useMooch.js');
 
 // Actor control packets
 this.actionStart                   = require('./actorControl/actionStart.js');
@@ -88,10 +93,6 @@ this.poseChange                    = require('./clientTrigger/poseGeneral.js');
 this.poseReapply                   = require('./clientTrigger/poseGeneral.js');
 this.toggleSheathe                 = require('./clientTrigger/toggleSheathe.js');
 
-// Event unknown packets
-this.eventUnk0                      = require('./eventUnk0.js');
-this.eventUnk1                      = require('./eventUnk1.js');
-
 // Methods
 module.exports.loadDefinitions = (definitionsDir) => {
     definitionsDir = definitionsDir || path.join(__dirname, "./default");
@@ -109,7 +110,7 @@ module.exports.loadDefinitions = (definitionsDir) => {
 
 module.exports.parse = async (logger, struct, noData) => {
     if (struct.segmentType !== 0x03) {
-        logger(`[${getTime()}] Packet recieved with no IPC data, ignoring...`)
+        logger(`Packet recieved with no IPC data, ignoring...`)
         return;
     } // No IPC data
 
@@ -150,18 +151,18 @@ module.exports.parse = async (logger, struct, noData) => {
     if (this[struct.type]) {
         try {
             await this[struct.type](struct);
-            logger(`[${getTime()}] Processed packet ${struct.type}, firing event...`);
+            logger(`Processed packet ${struct.type}, firing event...`);
         } catch (err) {
-            logger(`[${getTime()}] Failed to process packet ${struct.type}, got error ${err}`);
+            logger(`Failed to process packet ${struct.type}, got error ${err}`);
         }
     }
 
     if (this[struct.subType]) {
         try {
             await this[struct.subType](struct);
-            logger(`[${getTime()}] Processed packet ${struct.subType}, firing event...`);
+            logger(`Processed packet ${struct.subType}, firing event...`);
         } catch (err) {
-            logger(`[${getTime()}] Failed to process packet ${struct.subType}, got error ${err}`);
+            logger(`Failed to process packet ${struct.subType}, got error ${err}`);
         }
     }
 
@@ -172,7 +173,7 @@ module.exports.parse = async (logger, struct, noData) => {
 
 module.exports.parseAndEmit = async (logger, struct, noData, context) => {
     if (struct.segmentType !== 0x03) {
-        logger(`[${getTime()}] Packet recieved with no IPC data, ignoring...`)
+        logger(`Packet recieved with no IPC data, ignoring...`)
         return;
     } // No IPC data
 
@@ -314,7 +315,7 @@ module.exports.getEffectHeader = (uint8Array, offset) => { // 36 (0x24) bytes
         actionID:            this.getUint32(uint8Array, offset + 8),
         globalEffectCounter: this.getUint32(uint8Array, offset + 12),
 
-        animationLockTime:   this.getFloat32(uint8Array, offset + 16),
+        animationLockTime:   this.getFloat(uint8Array, offset + 16),
         someTargetID:        this.getUint32(uint8Array, offset + 20),
 
         hiddenAnimation:     this.getUint16(uint8Array, offset + 24),
@@ -329,26 +330,17 @@ module.exports.getEffectHeader = (uint8Array, offset) => { // 36 (0x24) bytes
     };
 };
 
-module.exports.getEffectEntry = (uint8Array, offset) -> { // 8 bytes long
+module.exports.getEffectEntry = (uint8Array, offset) => { // 8 bytes long
     if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
     return {
-        effectType = common.actionEffectDisplayType[uint8Array[offset + 0x00]],
-        hitSeverity = common.actionHitSeverityType[uint8Array[offset + 0x01]],
-        param = uint8Array[offset + 0x02],
-        bonusPercent = this.getInt8(uint8Array[offset + 0x03]),
-        valueMultiplier = uint8Array[offset + 0x04],
-        flags = uint8Array[offset + 0x05],
-        value = this.getInt16(uint8Array, offset + 0x06),
+        effectType: common.actionEffectDisplayType[uint8Array[offset + 0x00]],
+        hitSeverity: common.actionHitSeverityType[uint8Array[offset + 0x01]],
+        param: uint8Array[offset + 0x02],
+        bonusPercent: this.getInt8(uint8Array[offset + 0x03]),
+        valueMultiplier: uint8Array[offset + 0x04],
+        flags: uint8Array[offset + 0x05],
+        value: this.getInt16(uint8Array, offset + 0x06),
     };
-};
-
-const getTime = () => {
-    const time = new Date();
-    let m = time.getMinutes();
-    if (m < 10) {
-        m = `0${m}`;
-    }
-    return `${time.getHours()}:${m}`;
 };
 
 function hasSubArray(master, sub) {

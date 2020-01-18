@@ -1,6 +1,4 @@
-// This is an auto-generated file.
-
-const MachinaModels = require("../_MachinaModels.js")
+const MachinaModels = require("./_MachinaModels.js")
 
 module.exports = async (struct) => {
     struct.title = MachinaModels.getUint16(struct.data, 0);
@@ -59,8 +57,8 @@ module.exports = async (struct) => {
     struct.mountFeet = struct.data[137];
     struct.mountColor = struct.data[138];
     struct.scale = struct.data[139];
-    struct.u29b = MachinaModels.getUint32(struct.data, 140);
-    struct.u30b = MachinaModels.getUint32(struct.data, 144);
+    struct.elementalLevel = MachinaModels.getUint32(struct.data, 140); // Eureka
+    struct.element = MachinaModels.getUint32(struct.data, 144); // Eureka
     struct.effect_1 = {
         effect_id: MachinaModels.getUint16(struct.data, 148),
         sourceActorId: MachinaModels.getUint32(struct.data, 150),

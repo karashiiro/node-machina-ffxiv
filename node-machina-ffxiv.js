@@ -3,6 +3,7 @@
 const { spawn }    = require('child_process');
 const EventEmitter = require('events');
 const fs           = require('fs');
+const http         = require('http');
 const path         = require('path');
 const readline     = require('readline');
 
@@ -13,7 +14,7 @@ const MachinaModels = require('./models/_MachinaModels.js');
 // Public class
 const MachinaFFXIV = (() => {
     const monitor = Symbol();
-    const stdoutQueue = Symbol();
+    const server = Symbol();
     const timeout = Symbol();
     const filter = Symbol();
 
@@ -72,7 +73,7 @@ const MachinaFFXIV = (() => {
                         case "RAMHeavy": break;
                         case "CPUHeavy": break;
                         case "PacketSpecific": break;
-                        default: throw new Error("Invalid parsing algorithm provided!");
+                        default: throw new Error("Invalid parsing algorithm provided! Options are: 'RAMHeavy', 'CPUHeavy', 'PacketSpecific'.");
                     }
                 }
 
@@ -132,52 +133,54 @@ const MachinaFFXIV = (() => {
             } else {
                 this[monitor] = spawn(`WINEPREFIX="${this[winePrefix]}" wine ${this[exePath]}`, this[args]);
             }
-            this[logger](`[${getTime()}] MachinaWrapper spawned with arguments "${this[args].toString()}"`);
+            this[logger](`MachinaWrapper spawned with arguments "${this[args].toString()}"`);
 
             MachinaModels.loadDefinitions(options && options.definitionsDir);
 
             this[filter] = [];
 
             // Create events to route outputs.
-            this[stdoutQueue] = ""; // A queue so that we don't get too much or too little of the buffer at once.
-
             this[monitor].on('error', (err) => {
                 this[logger](err);
             });
 
-            // { type: raw
-            //   connection: ip1=>ip2
-            //   operation: send/receive
-            //   epoch
+            // { type: raw,
+            //   opcode: number,
+            //   region: Global/KR/CN,
+            //   connection: ip1=>ip2,
+            //   operation: send/receive,
+            //   epoch,
+            //   packetSize,
+            //   segmentType,
             //   data }
-            readline.createInterface({
-                input: this[monitor].stdout,
-                terminal: false
-            }).on('line', (line) => {
-                // If the C# program hangs for whatever reason.
-                if (this[timeout]) {
-                    clearTimeout(this[timeout]);
-                    this[timeout] = setTimeout(this.reset, 1200000);
-                }
-
-                this[stdoutQueue] += line;
-                if (this[stdoutQueue].indexOf("}") !== -1) { // A full JSON.
-                    let content = JSON.parse(this[stdoutQueue].slice(0, this[stdoutQueue].indexOf("}") + 1));
-
+            this[server] = http.createServer((req, res) => {
+                const data = [];
+                req.on('data', (chunk) => {
+                    data.push(chunk);
+                });
+                req.on('end', () => {
+                    let content;
+                    try {
+                        content = JSON.parse(data);
+                    } catch (err) {
+                        this[logger](`Message threw an error: ${err}\n${err.stack}\nMessage content:\n${data.toString()}`);
+                    }
                     if (this[filter].length === 0 ||
                             this[filter].includes(content.type) ||
                             this[filter].includes(content.subType) |
                             this[filter].includes(content.superType)) {
-                        content.data = new Uint8Array(content.data); // Why store bytes as 32-bit integers?
+                        content.data = new Uint8Array(content.data); // Should be less size in memory than a 64-bit number array
 
                         MachinaModels.parseAndEmit(this[logger], content, this[noData], this); // Parse packet data
                         this.emit('raw', content); // Emit a catch-all event
                     }
 
-                    this[stdoutQueue] = this[stdoutQueue].indexOf("{") === -1 // Clear the queue
-                        ? ""
-                        : this[stdoutQueue].slice(this[stdoutQueue].indexOf("{"), this[stdoutQueue].indexOf("{"));
-                }
+                    res.end();
+                });
+            });
+            this[server].listen(13346, (err) => {
+                if (err) return this[logger](err);
+                this[logger](`Server started on port 13346.`);
             });
 
             this[monitor].stderr.on('data', (err) => {
@@ -185,7 +188,8 @@ const MachinaFFXIV = (() => {
             });
 
             this[monitor].once('close', (code) => {
-                this[logger](`[${getTime()}] MachinaWrapper closed with code: ${code}`);
+                this[server].close();
+                this[logger](`MachinaWrapper closed with code: ${code}`);
             });
         }
 
@@ -200,41 +204,33 @@ const MachinaFFXIV = (() => {
 
         reset(callback) {
             if (!this[exePath] || !this[args]) throw "No instance to reset.";
+            this.kill();
             this[monitor] = spawn(this[exePath], this[args]);
             this.start(callback);
-            this[logger](`[${getTime()}] MachinaWrapper reset!`);
+            this[logger](`MachinaWrapper reset!`);
         }
 
         start(callback) {
             if (!this[monitor]) throw "MachinaWrapper is uninitialized.";
             this[monitor].stdin.write("start\n", callback);
-            this[logger](`[${getTime()}] MachinaWrapper started!`);
+            this[logger](`MachinaWrapper started!`);
         }
 
         stop(callback) {
             if (!this[monitor]) throw "MachinaWrapper is uninitialized.";
             this[monitor].stdin.write("stop\n", callback);
-            this[logger](`[${getTime()}] MachinaWrapper stopped!`);
+            this[logger](`MachinaWrapper stopped!`);
         }
 
         kill(callback) {
             if (!this[monitor]) throw "MachinaWrapper is uninitialized.";
             this[monitor].stdin.end("kill\n", callback);
             this[monitor] = undefined;
-            this[logger](`[${getTime()}] MachinaWrapper killed!`);
+            this[logger](`MachinaWrapper killed!`);
         }
     };
 
     return MachinaFFXIV;
 })();
-
-const getTime = () => {
-    const time = new Date();
-    let m = time.getMinutes();
-    if (m < 10) {
-        m = `0${m}`;
-    }
-    return `${time.getHours()}:${m}`;
-};
 
 module.exports = MachinaFFXIV;
