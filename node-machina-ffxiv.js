@@ -137,10 +137,10 @@ const MachinaFFXIV = (() => {
                 throw new Error(`MachinaWrapper not found in ${this[exePath]}`);
             }
 
-            if (!hasWine) {
-                this[monitor] = spawn(this[exePath], this[args]);
-            } else {
+            if (this[hasWine]) {
                 this[monitor] = spawn(`WINEPREFIX="${this[winePrefix]}" wine ${this[exePath]}`, this[args]);
+            } else {
+                this[monitor] = spawn(this[exePath], this[args]);
             }
             this[logger](`MachinaWrapper spawned with arguments "${this[args].toString()}"`);
 
