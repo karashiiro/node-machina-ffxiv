@@ -17,6 +17,7 @@ const MachinaFFXIV = (() => {
     const server = Symbol();
     const timeout = Symbol();
     const filter = Symbol();
+    const port = Symbol();
 
     const monitorType = Symbol();
     const pid = Symbol();
@@ -38,31 +39,31 @@ const MachinaFFXIV = (() => {
 
             // Basic type checks.
             if (options) {
-                if (options.monitorType && typeof options.monitorType != 'string') {
+                if (options.monitorType && typeof options.monitorType !== 'string') {
                     throw new TypeError("monitorType must be a string.");
                 } else if (options.monitorType) {
                     this[monitorType] = options.monitorType.replace(/[^a-zA-Z]/g, "");
                 }
 
-                if (options.pid && typeof options.pid != 'number') {
+                if (options.pid && typeof options.pid !== 'number') {
                     throw new TypeError("PID must be a number.");
                 } else if (options.pid) {
                     this[pid] = Math.floor(options.pid);
                 }
 
-                if (options.ip && typeof options.ip != 'string') {
+                if (options.ip && typeof options.ip !== 'string') {
                     throw new TypeError("IP must be a string.");
                 } else if (options.ip) {
                     this[ip] = options.ip.replace(/[^0-9.]/g, "");
                 }
 
-                if (options.useSocketFilter && typeof options.useSocketFilter != 'boolean') {
+                if (options.useSocketFilter && typeof options.useSocketFilter !== 'boolean') {
                     throw new TypeError("useSocketFilter must be a Boolean.");
                 } else if (options.useSocketFilter) {
                     this[useSocketFilter] = options.useSocketFilter;
                 }
 
-                if (options.parseAlgorithm && typeof options.parseAlgorithm != 'string') {
+                if (options.parseAlgorithm && typeof options.parseAlgorithm !== 'string') {
                     throw new TypeError("parseAlgorithm must be a string.");
                 } else if (options.parseAlgorithm) {
                     this[parseAlgorithm] = options.parseAlgorithm.replace(/[^a-zA-Z]/g, "");
@@ -74,22 +75,30 @@ const MachinaFFXIV = (() => {
                     }
                 }
 
-                if (options.noData && typeof options.noData != 'boolean') {
+                if (options.noData && typeof options.noData !== 'boolean') {
                     throw new TypeError("noData must be a Boolean.");
                 } else if (options.noData) {
                     this[noData] = options.noData;
                 }
 
-                if (options.logger && typeof options.logger != 'function') {
+                if (options.logger && typeof options.logger !== 'function') {
                     throw new TypeError("logger must be a Function.");
                 } else if (options.logger) {
                     this[logger] = options.logger;
                 }
 
-                if (options.region && typeof options.region != 'string') {
+                if (options.region && typeof options.region !== 'string') {
                     throw new TypeError("region must be a string.");
                 } else if (options.region) {
                     this[region] = options.region;
+                }
+
+                if (options.port && typeof options.port !== 'number') {
+                    throw new TypeError("port must be a number.");
+                } else if (options.port) {
+                    this[port] = options.port;
+                } else {
+                    this[port] = 13346;
                 }
             }
 
@@ -157,9 +166,9 @@ const MachinaFFXIV = (() => {
                     res.end();
                 });
             });
-            this[server].listen(13346, (err) => {
+            this[server].listen(this[port], (err) => {
                 if (err) return this[logger](err);
-                this[logger](`Server started on port 13346.`);
+                this[logger](`Server started on port ${this[port]}.`);
             });
 
             this[monitor].stderr.on('data', (err) => {
