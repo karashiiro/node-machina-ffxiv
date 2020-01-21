@@ -28,6 +28,9 @@ const MachinaFFXIV = (() => {
     const logger = Symbol();
     const region = Symbol();
 
+    const hasWine = Symbol();
+    const winePrefix = Symbol();
+
     const args = Symbol();
     const exePath = Symbol();
 
@@ -100,6 +103,20 @@ const MachinaFFXIV = (() => {
                 } else {
                     this[port] = 13346;
                 }
+
+                if (options.hasWine && typeof options.hasWine !== 'boolean') {
+                    throw new TypeError("hasWine must be a boolean.");
+                } else if (options.hasWine) {
+                    this[hasWine] = options.hasWine;
+                }
+
+                if (options.winePrefix && typeof options.winePrefix !== 'string') {
+                    throw new TypeError("winePrefix must be a string.");
+                } else if (options.winePrefix) {
+                    this[winePrefix] = options.winePrefix;
+                } else {
+                    this[winePrefix] = "$HOME/.Wine";
+                }
             }
 
             // Folders
@@ -120,7 +137,11 @@ const MachinaFFXIV = (() => {
                 throw new Error(`MachinaWrapper not found in ${this[exePath]}`);
             }
 
-            this[monitor] = spawn(this[exePath], this[args]);
+            if (!hasWine) {
+                this[monitor] = spawn(this[exePath], this[args]);
+            } else {
+                this[monitor] = spawn(`WINEPREFIX="${this[winePrefix]}" wine ${this[exePath]}`, this[args]);
+            }
             this[logger](`MachinaWrapper spawned with arguments "${this[args].toString()}"`);
 
             MachinaModels.loadDefinitions(options && options.definitionsDir);
