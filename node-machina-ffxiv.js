@@ -100,8 +100,6 @@ const MachinaFFXIV = (() => {
                     throw new TypeError("port must be a number.");
                 } else if (options.port) {
                     this[port] = options.port;
-                } else {
-                    this[port] = 13346;
                 }
 
                 if (options.hasWine && typeof options.hasWine !== 'boolean') {
@@ -114,9 +112,14 @@ const MachinaFFXIV = (() => {
                     throw new TypeError("winePrefix must be a string.");
                 } else if (options.winePrefix) {
                     this[winePrefix] = options.winePrefix;
-                } else {
-                    this[winePrefix] = "$HOME/.Wine";
                 }
+            }
+
+            if (!this[port]) {
+                this[port] = 13346;
+            }
+            if (!this[winePrefix]) {
+                this[winePrefix] = "$HOME/.Wine";
             }
 
             // Folders
