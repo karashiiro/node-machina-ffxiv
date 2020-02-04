@@ -1,21 +1,26 @@
 'use strict';
 
 module.exports.materiaValueToItemID = async (materiaValue) => {
-    let data = require('./materiaCSV.json');
-    let materiaData = this.materiaValueToMateriaData(materiaValue);
+    const data = require('./materiaCSV.json');
+    const materiaData = this.materiaValueToMateriaData(materiaValue);
 
     return data[materiaData.materiaID + 3][materiaData.tier + 1];
 }
 
+module.exports.materiaIDTierToItemID = async (materiaID, tier) => {
+    const data = require('./materiaCSV.json');
+    return data[materiaID + 3][tier + 1];
+}
+
 module.exports.materiaValueToItemName = async (materiaValue) => {
-    let itemID = await this.materiaValueToItemID(materiaValue);
+    const itemID = await this.materiaValueToItemID(materiaValue);
     return this.materiaIDList[itemID];
 }
 
 // https://discordapp.com/channels/192333432481775627/266296762690568192/611403811881222145
 // tyvm Adam
 module.exports.materiaValueToMateriaData = (materiaValue) => {
-    let materiaData = {
+    const materiaData = {
         materiaValue: materiaValue
     };
 
