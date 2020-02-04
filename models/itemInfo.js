@@ -1,7 +1,7 @@
 const MachinaModels = require('./_MachinaModels.js');
 const MateriaHelper = require('./_MateriaHelper.js');
 
-module.exports = (struct) => {
+module.exports = async (struct) => {
     struct.containerSequence = MachinaModels.getUint32(struct.data, 0x00);
     struct.unknown = MachinaModels.getUint32(struct.data, 0x04);
     struct.containerId = MachinaModels.getUint16(struct.data, 0x08);
@@ -18,7 +18,7 @@ module.exports = (struct) => {
     struct.glamourCatalogId = MachinaModels.getUint32(struct.data, 0x28);
     struct.materia = [];
     for (let i = 0; i < 5; i++) {
-        struct.materia.push(MateriaHelper.materiaIDTierToItemID(
+        struct.materia.push(await MateriaHelper.materiaIDTierToItemID(
             MachinaModels.getUint16(struct.data, 0x2C + (i * 2)),
             struct.data[0x36 + i],
         ));
