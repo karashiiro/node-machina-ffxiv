@@ -191,10 +191,6 @@ const MachinaFFXIV = (() => {
                     res.end();
                 });
             });
-            this[server].listen(this[port], (err) => {
-                if (err) return this[logger](err);
-                this[logger](`Server started on port ${this[port]}.`);
-            });
 
             this[monitor].stderr.on('data', (err) => {
                 this[logger](err);
@@ -225,6 +221,10 @@ const MachinaFFXIV = (() => {
 
         start(callback) {
             if (!this[monitor]) throw "MachinaWrapper is uninitialized.";
+            this[server].listen(this[port], (err) => {
+                if (err) return this[logger](err);
+                this[logger](`Server started on port ${this[port]}.`);
+            });
             this[monitor].stdin.write("start\n", callback);
             this[logger](`MachinaWrapper started!`);
         }
@@ -232,6 +232,9 @@ const MachinaFFXIV = (() => {
         stop(callback) {
             if (!this[monitor]) throw "MachinaWrapper is uninitialized.";
             this[monitor].stdin.write("stop\n", callback);
+            this[server].close(() => {
+                this[logger](`Server on port ${this[port]} closed.`);
+            });
             this[logger](`MachinaWrapper stopped!`);
         }
 
