@@ -177,6 +177,7 @@ const MachinaFFXIV = (() => {
                         content = JSON.parse(data);
                     } catch (err) {
                         this[logger](`Message threw an error: ${err}\n${err.stack}\nMessage content:\n${data.toString()}`);
+                        return;
                     }
                     if (this[filter].length === 0 ||
                             this[filter].includes(content.type) ||
