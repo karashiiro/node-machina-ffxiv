@@ -48,6 +48,7 @@ this.playtime                      = require('./playTime.js');
 this.playerSetup                   = require('./playerSetup.js');
 this.playerSpawn                   = require('./playerSpawn.js');
 this.playerStats                   = require('./playerStats.js');
+this.retainerInformation           = require('./retainerInformation.js');
 this.serverNotice                  = require('./serverNotice.js');
 this.statusEffectList              = require('./statusEffectList.js');
 this.updateHpMpTp                  = require('./updateHpMpTp');
