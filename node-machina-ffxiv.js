@@ -207,6 +207,10 @@ const MachinaFFXIV = (() => {
             return await MachinaModels.parse(this[logger], struct, this[noData], this);
         }
 
+        oncePacket(packetName) {
+            return new Promise((resolve) => this.once(packetName, resolve));
+        }
+
         filter(userFilter) {
             if (!userFilter) return;
             this[filter] = userFilter.slice(0);
