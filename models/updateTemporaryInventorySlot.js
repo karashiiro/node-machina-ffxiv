@@ -9,7 +9,7 @@ module.exports = (struct) => {
             - 0xEB: deleting an item
             - 0xED: sent when zoning, I don't know more.
      */
-    struct.type = MachinaModels.getUint16(struct.data, 0x04);
+    struct.flag = MachinaModels.getUint16(struct.data, 0x04);
     struct.containerId = MachinaModels.getUint16(struct.data, 0x0C);
     struct.slot = MachinaModels.getUint16(struct.data, 0x10);
     struct.unknown = MachinaModels.getUint16(struct.data, 0x12);
