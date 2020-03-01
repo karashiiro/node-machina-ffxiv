@@ -59,7 +59,7 @@ this.eventPlay                     = require('./eventPlay.js');
 this.eventPlay4                    = require('./eventPlay4.js');
 this.eventPlay8                    = require('./eventPlay8.js');
 this.someDirectorUnk4              = require('./someDirectorUnk4.js');
-this.updateTemporaryInventorySlot  = require('./updateTemporaryInventorySlot.js');
+this.inventoryTransaction          = require('./inventoryTransaction.js');
 
 // Actor control packets
 this.actionStart                   = require('./actorControl/actionStart.js');
