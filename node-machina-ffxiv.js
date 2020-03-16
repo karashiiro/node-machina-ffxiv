@@ -183,7 +183,16 @@ const MachinaFFXIV = (() => {
                             this[filter].includes(content.type) ||
                             this[filter].includes(content.subType) |
                             this[filter].includes(content.superType)) {
-                        content.data = new Uint8Array(content.data); // Should be less size in memory than a 64-bit number array
+                        Object.defineProperties(content, {
+                            opcode: {value: content.opcode},
+                            region: {value: content.region},
+                            connection: {value: content.connection},
+                            operation: {value: content.operation},
+                            epoch: {value: content.epoch},
+                            packetSize: {value: content.packetSize},
+                            segmentType: {value: content.segmentType},
+                            data: {value: new Uint8Array(content.data)}, // Should be less size in memory than a 64-bit number array
+                        });
 
                         MachinaModels.parseAndEmit(this[logger], content, this[noData], this); // Parse packet data
                         this.emit('raw', content); // Emit a catch-all event

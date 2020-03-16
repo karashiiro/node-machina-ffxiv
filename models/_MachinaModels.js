@@ -26,6 +26,7 @@ this.cFAvailableContents           = require('./cFAvailableContents.js');
 this.cFDutyInfo                    = require('./cFDutyInfo.js')
 this.cFPlayerInNeed                = require('./cFPlayerInNeed.js')
 this.cFRegisterDuty                = require('./cFRegisterDuty.js')
+this.charaVisualEffect             = require('./charaVisualEffect.js');
 this.chat                          = require('./chat.js');
 this.currencyCrystalInfo           = require('./currencyCrystalInfo.js');
 this.eorzeaTimeOffset              = require('./eorzeaTimeOffset.js');
