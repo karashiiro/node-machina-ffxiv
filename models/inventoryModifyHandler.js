@@ -11,7 +11,7 @@ module.exports = async (struct) => {
 };
 
 // https://github.com/SapphireServer/Sapphire/blob/develop/src/common/Common.h#L50-L57
-const operationsOffset = 0x7A;
+const operationsOffset = 0x6E;
 const inventoryOperation = {
     [operationsOffset]: "discard",
     [operationsOffset + 1]: "move",
