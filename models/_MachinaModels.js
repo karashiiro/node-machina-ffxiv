@@ -45,6 +45,7 @@ this.marketTaxRates                = require('./marketTaxRates.js');
 this.mount                         = require('./mount.js');
 this.messageFC                     = require('./messageFC.js');
 this.npcSpawn                      = require('./npcSpawn.js');
+this.objectSpawn                   = require('./objectSpawn.js');
 this.playtime                      = require('./playTime.js');
 this.playerSetup                   = require('./playerSetup.js');
 this.playerSpawn                   = require('./playerSpawn.js');
