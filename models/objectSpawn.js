@@ -13,9 +13,8 @@ module.exports = async (struct) => {
     struct.unknown10 = MachinaModels.getUint32(struct.data, 0x10);
     struct.someActorId14 = MachinaModels.getUint32(struct.data, 0x14);
     struct.gimmickId = MachinaModels.getUint32(struct.data, 0x18);
-    struct.scale = MachinaModels.getFloat(struct.data, 0x2C);
-    struct.unknown20a = MachinaModels.getUint16(struct.data, 0x30);
-    struct.rotation = MachinaModels.getUint16(struct.data, 0x32);
-    struct.housingLink = MachinaModels.getUint32(struct.data, 0x3C);
-    struct.position = MachinaModels.Position3(struct.data, 0x40);
+    struct.scale = MachinaModels.getFloat(struct.data, 0x1C);
+    struct.rotation = MachinaModels.getUint16(struct.data, 0x22);
+    struct.housingLink = MachinaModels.getUint32(struct.data, 0x2C);
+    struct.position = MachinaModels.Position3(struct.data, 0x30);
 };
