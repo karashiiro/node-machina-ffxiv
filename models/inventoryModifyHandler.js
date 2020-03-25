@@ -2,7 +2,7 @@ const MachinaModels = require("./_MachinaModels.js");
 
 module.exports = async (struct) => {
     struct.sequence = MachinaModels.getUint32(struct.data, 0x00);
-    struct.action = inventoryOperation[struct.data[0x04]];
+    struct.action = inventoryOperation(struct.region, struct.data[0x04]);
     struct.fromContainer = MachinaModels.getUint16(struct.data, 0x0C);
     struct.fromSlot = struct.data[0x10];
     struct.toContainer = MachinaModels.getUint16(struct.data, 0x20);
@@ -11,11 +11,26 @@ module.exports = async (struct) => {
 };
 
 // https://github.com/SapphireServer/Sapphire/blob/develop/src/common/Common.h#L50-L57
-const operationsOffset = 0x6E;
-const inventoryOperation = {
-    [operationsOffset]: "discard",
-    [operationsOffset + 1]: "move",
-    [operationsOffset + 2]: "swap",
-    [operationsOffset + 5]: "merge",
-    [operationsOffset + 10]: "split"
+const operationsOffset = (region) => {
+    switch (region) {
+        case "Global":
+            return 0x6E;
+        case "CN":
+            return 0x6E;
+        case "KR":
+            return 0x6E;
+    }
+};
+
+const inventoryOperation = (region, action) => {
+    if (action === operationsOffset(region))
+        return "discard";
+    if (action === operationsOffset(region) + 1)
+        return "move";
+    if (action === operationsOffset(region) + 2)
+        return "swap";
+    if (action === operationsOffset(region) + 5)
+        return "merge";
+    if (action === operationsOffset(region) + 10)
+        return "split";
 };
