@@ -23,14 +23,15 @@ const operationsOffset = (region) => {
 };
 
 const inventoryOperation = (region, action) => {
-    if (action === operationsOffset(region))
+    const offset = operationsOffset(region);
+    if (action === offset)
         return "discard";
-    if (action === operationsOffset(region) + 1)
+    if (action === offset + 1)
         return "move";
-    if (action === operationsOffset(region) + 2)
+    if (action === offset + 2)
         return "swap";
-    if (action === operationsOffset(region) + 5)
+    if (action === offset + 5)
         return "merge";
-    if (action === operationsOffset(region) + 10)
+    if (action === offset + 10)
         return "split";
 };
