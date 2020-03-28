@@ -5,20 +5,24 @@ module.exports = async (struct) => {
     struct.u1b = MachinaModels.getUint16(struct.data, 2);
     struct.currentWorldId = MachinaModels.getUint16(struct.data, 4);
     struct.homeWorldId = MachinaModels.getUint16(struct.data, 6);
+
     struct.gmRank = struct.data[8];
     struct.u3c = struct.data[9];
     struct.u4 = struct.data[10];
     struct.onlineStatus = struct.data[11];
+
     struct.pose = struct.data[12];
     struct.u5a = struct.data[13];
     struct.u5b = struct.data[14];
     struct.u5c = struct.data[15];
+
     struct.targetId = MachinaModels.getUint64(struct.data, 16);
     struct.u6 = MachinaModels.getUint32(struct.data, 24);
     struct.u7 = MachinaModels.getUint32(struct.data, 28);
     struct.mainWeaponModel = MachinaModels.getUint64(struct.data, 32);
     struct.secWeaponModel = MachinaModels.getUint64(struct.data, 40);
     struct.craftToolModel = MachinaModels.getUint64(struct.data, 48);
+
     struct.u14 = MachinaModels.getUint32(struct.data, 56);
     struct.u15 = MachinaModels.getUint32(struct.data, 60);
     struct.bNPCBase = MachinaModels.getUint32(struct.data, 64);
@@ -33,157 +37,50 @@ module.exports = async (struct) => {
     struct.displayFlags = MachinaModels.getUint32(struct.data, 100);
     struct.fateID = MachinaModels.getUint16(struct.data, 104);
     struct.mPCurr = MachinaModels.getUint16(struct.data, 106);
-    struct.tPCurr = MachinaModels.getUint16(struct.data, 108);
-    struct.mPMax = MachinaModels.getUint16(struct.data, 110);
-    struct.tPMax = MachinaModels.getUint16(struct.data, 112);
-    struct.modelChara = MachinaModels.getUint16(struct.data, 114);
-    struct.rotation = MachinaModels.getUint16(struct.data, 116);
-    struct.activeMinion = MachinaModels.getUint16(struct.data, 118);
-    struct.spawnIndex = struct.data[120];
-    struct.state = struct.data[121];
-    struct.persistentEmote = struct.data[122];
-    struct.modelType = struct.data[123];
-    struct.subtype = struct.data[124];
-    struct.voice = struct.data[125];
-    struct.u25c = MachinaModels.getUint16(struct.data, 126);
-    struct.enemyType = struct.data[128];
-    struct.level = struct.data[129];
-    struct.classJob = struct.data[130];
-    struct.u26d = struct.data[131];
-    struct.u27a = MachinaModels.getUint16(struct.data, 132);
-    struct.currentMount = struct.data[134];
-    struct.mountHead = struct.data[135];
-    struct.mountBody = struct.data[136];
-    struct.mountFeet = struct.data[137];
-    struct.mountColor = struct.data[138];
-    struct.scale = struct.data[139];
-    struct.elementalLevel = MachinaModels.getUint32(struct.data, 140); // Eureka
-    struct.element = MachinaModels.getUint32(struct.data, 144); // Eureka
-    struct.effect_1 = {
-        effect_id: MachinaModels.getUint16(struct.data, 148),
-        sourceActorId: MachinaModels.getUint32(struct.data, 150),
-    };
-    struct.effect_2 = {
-        effect_id: MachinaModels.getUint16(struct.data, 154),
-        sourceActorId: MachinaModels.getUint32(struct.data, 156),
-    };
-    struct.effect_3 = {
-        effect_id: MachinaModels.getUint16(struct.data, 160),
-        sourceActorId: MachinaModels.getUint32(struct.data, 162),
-    };
-    struct.effect_4 = {
-        effect_id: MachinaModels.getUint16(struct.data, 166),
-        sourceActorId: MachinaModels.getUint32(struct.data, 168),
-    };
-    struct.effect_5 = {
-        effect_id: MachinaModels.getUint16(struct.data, 172),
-        sourceActorId: MachinaModels.getUint32(struct.data, 174),
-    };
-    struct.effect_6 = {
-        effect_id: MachinaModels.getUint16(struct.data, 178),
-        sourceActorId: MachinaModels.getUint32(struct.data, 180),
-    };
-    struct.effect_7 = {
-        effect_id: MachinaModels.getUint16(struct.data, 184),
-        sourceActorId: MachinaModels.getUint32(struct.data, 186),
-    };
-    struct.effect_8 = {
-        effect_id: MachinaModels.getUint16(struct.data, 190),
-        sourceActorId: MachinaModels.getUint32(struct.data, 192),
-    };
-    struct.effect_9 = {
-        effect_id: MachinaModels.getUint16(struct.data, 196),
-        sourceActorId: MachinaModels.getUint32(struct.data, 198),
-    };
-    struct.effect_10 = {
-        effect_id: MachinaModels.getUint16(struct.data, 202),
-        sourceActorId: MachinaModels.getUint32(struct.data, 204),
-    };
-    struct.effect_11 = {
-        effect_id: MachinaModels.getUint16(struct.data, 208),
-        sourceActorId: MachinaModels.getUint32(struct.data, 210),
-    };
-    struct.effect_12 = {
-        effect_id: MachinaModels.getUint16(struct.data, 214),
-        sourceActorId: MachinaModels.getUint32(struct.data, 216),
-    };
-    struct.effect_13 = {
-        effect_id: MachinaModels.getUint16(struct.data, 220),
-        sourceActorId: MachinaModels.getUint32(struct.data, 222),
-    };
-    struct.effect_14 = {
-        effect_id: MachinaModels.getUint16(struct.data, 226),
-        sourceActorId: MachinaModels.getUint32(struct.data, 228),
-    };
-    struct.effect_15 = {
-        effect_id: MachinaModels.getUint16(struct.data, 232),
-        sourceActorId: MachinaModels.getUint32(struct.data, 234),
-    };
-    struct.effect_16 = {
-        effect_id: MachinaModels.getUint16(struct.data, 238),
-        sourceActorId: MachinaModels.getUint32(struct.data, 240),
-    };
-    struct.effect_17 = {
-        effect_id: MachinaModels.getUint16(struct.data, 244),
-        sourceActorId: MachinaModels.getUint32(struct.data, 246),
-    };
-    struct.effect_18 = {
-        effect_id: MachinaModels.getUint16(struct.data, 250),
-        sourceActorId: MachinaModels.getUint32(struct.data, 252),
-    };
-    struct.effect_19 = {
-        effect_id: MachinaModels.getUint16(struct.data, 256),
-        sourceActorId: MachinaModels.getUint32(struct.data, 258),
-    };
-    struct.effect_20 = {
-        effect_id: MachinaModels.getUint16(struct.data, 262),
-        sourceActorId: MachinaModels.getUint32(struct.data, 264),
-    };
-    struct.effect_21 = {
-        effect_id: MachinaModels.getUint16(struct.data, 268),
-        sourceActorId: MachinaModels.getUint32(struct.data, 270),
-    };
-    struct.effect_22 = {
-        effect_id: MachinaModels.getUint16(struct.data, 274),
-        sourceActorId: MachinaModels.getUint32(struct.data, 276),
-    };
-    struct.effect_23 = {
-        effect_id: MachinaModels.getUint16(struct.data, 280),
-        sourceActorId: MachinaModels.getUint32(struct.data, 282),
-    };
-    struct.effect_24 = {
-        effect_id: MachinaModels.getUint16(struct.data, 286),
-        sourceActorId: MachinaModels.getUint32(struct.data, 288),
-    };
-    struct.effect_25 = {
-        effect_id: MachinaModels.getUint16(struct.data, 292),
-        sourceActorId: MachinaModels.getUint32(struct.data, 294),
-    };
-    struct.effect_26 = {
-        effect_id: MachinaModels.getUint16(struct.data, 298),
-        sourceActorId: MachinaModels.getUint32(struct.data, 300),
-    };
-    struct.effect_27 = {
-        effect_id: MachinaModels.getUint16(struct.data, 304),
-        sourceActorId: MachinaModels.getUint32(struct.data, 306),
-    };
-    struct.effect_28 = {
-        effect_id: MachinaModels.getUint16(struct.data, 310),
-        sourceActorId: MachinaModels.getUint32(struct.data, 312),
-    };
-    struct.effect_29 = {
-        effect_id: MachinaModels.getUint16(struct.data, 316),
-        sourceActorId: MachinaModels.getUint32(struct.data, 318),
-    };
-    struct.effect_30 = {
-        effect_id: MachinaModels.getUint16(struct.data, 322),
-        sourceActorId: MachinaModels.getUint32(struct.data, 324),
-    };
-    struct.effect_id = MachinaModels.getUint16(struct.data, 476);
-    struct.sourceActorId = MachinaModels.getUint32(struct.data, 478);
-    struct.pos = MachinaModels.getUint16(struct.data, 482);
-    struct.models_1 = MachinaModels.getUint32(struct.data, 484);    struct.models_2 = MachinaModels.getUint32(struct.data, 488);    struct.models_3 = MachinaModels.getUint32(struct.data, 492);    struct.models_4 = MachinaModels.getUint32(struct.data, 496);    struct.models_5 = MachinaModels.getUint32(struct.data, 500);    struct.models_6 = MachinaModels.getUint32(struct.data, 504);    struct.models_7 = MachinaModels.getUint32(struct.data, 508);    struct.models_8 = MachinaModels.getUint32(struct.data, 512);    struct.models_9 = MachinaModels.getUint32(struct.data, 516);    struct.models_10 = MachinaModels.getUint32(struct.data, 520);
-    struct.name = String.fromCodePoint(struct.data.slice(524, 525));
-    struct.look_1 = struct.data[525];    struct.look_2 = struct.data[526];    struct.look_3 = struct.data[527];    struct.look_4 = struct.data[528];    struct.look_5 = struct.data[529];    struct.look_6 = struct.data[530];    struct.look_7 = struct.data[531];    struct.look_8 = struct.data[532];    struct.look_9 = struct.data[533];    struct.look_10 = struct.data[534];    struct.look_11 = struct.data[535];    struct.look_12 = struct.data[536];    struct.look_13 = struct.data[537];    struct.look_14 = struct.data[538];    struct.look_15 = struct.data[539];    struct.look_16 = struct.data[540];    struct.look_17 = struct.data[541];    struct.look_18 = struct.data[542];    struct.look_19 = struct.data[543];    struct.look_20 = struct.data[544];    struct.look_21 = struct.data[545];    struct.look_22 = struct.data[546];    struct.look_23 = struct.data[547];    struct.look_24 = struct.data[548];    struct.look_25 = struct.data[549];    struct.look_26 = struct.data[550];
-    struct.fcTag = String.fromCodePoint(struct.data.slice(551, 552));
+    struct.mPMax = MachinaModels.getUint16(struct.data, 108);
+    struct.unk = MachinaModels.getUint16(struct.data, 110); // == 0
+    struct.modelChara = MachinaModels.getUint16(struct.data, 112);
+    struct.rotation = MachinaModels.getUint16(struct.data, 114);
+    struct.activeMinion = MachinaModels.getUint16(struct.data, 116);
+    struct.spawnIndex = struct.data[118];
+    struct.state = struct.data[119];
+    struct.persistentEmote = struct.data[120];
+    struct.modelType = struct.data[121];
+    struct.subtype = struct.data[122];
+    struct.voice = struct.data[123];
+    struct.u25c = MachinaModels.getUint16(struct.data, 124);
+    struct.enemyType = struct.data[125];
+    struct.level = struct.data[126];
+    struct.classJob = struct.data[127];
+    struct.u26d = struct.data[128];
+    struct.u27a = MachinaModels.getUint16(struct.data, 129);
+    struct.currentMount = struct.data[130];
+    struct.mountHead = struct.data[131];
+    struct.mountBody = struct.data[132];
+    struct.mountFeet = struct.data[133];
+    struct.mountColor = struct.data[134];
+    struct.scale = struct.data[135];
+
+    //struct.elementalLevel; one of these two field changed to 16bit
+    //struct.element;
+    struct.elementData = struct.data.slice(136, 141);
+
+    struct.effect = [];
+    for (let i = 0; i < 30; i++) {
+        struct.effect.push({
+            effect_id: MachinaModels.getUint16(struct.data, 142 + (i * 12)),
+            param: MachinaModels.getUint16(struct.data, 144 + (i * 12)),
+            duration: MachinaModels.getFloat(struct.data, 146 + (i * 12)),
+            sourceActorId: MachinaModels.getUint32(struct.data, 150 + (i * 12)), // last: 510
+        });
+    }
+    struct.pos = MachinaModels.Position3(struct.data, 514);
+    struct.models = [];
+    for (let i = 0; i < 10; i++) {
+        struct.effect.push(MachinaModels.getUint32(struct.data, 526 + (i * 4))); // last: 566
+    }
+    struct.name = MachinaModels.getString(struct.data, 570, 32);
+    struct.look = struct.data.slice(602, 628);
+    struct.fcTag = MachinaModels.getString(struct.data, 628, 634);
+    struct.unk30 = MachinaModels.getUint32(struct.data, 634);
 };
