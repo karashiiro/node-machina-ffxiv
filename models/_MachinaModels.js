@@ -88,6 +88,7 @@ this.emoteEventHandler             = require('./emoteEventHandler.js');
 this.inventoryModifyHandler        = require('./inventoryModifyHandler.js');
 this.persistentEffect              = require('./persistentEffect.js');
 this.updatePositionHandler         = require('./updatePositionHandler.js');
+this.updatePositionInstance        = require('./updatePositionInstance.js');
 
 // Client trigger packets
 this.cameraMode                    = require('./clientTrigger/cameraMode.js');
