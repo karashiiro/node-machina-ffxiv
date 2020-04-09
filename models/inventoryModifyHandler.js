@@ -2,7 +2,7 @@ const MachinaModels = require("./_MachinaModels.js");
 
 module.exports = async (struct) => {
     struct.sequence = MachinaModels.getUint32(struct.data, 0x00);
-    struct.action = inventoryOperation(struct.region, struct.data[0x04]);
+    struct.action = inventoryOperation(struct.region, MachinaModels.getUint16(struct.data,0x04));
     struct.fromContainer = MachinaModels.getUint16(struct.data, 0x0C);
     struct.fromSlot = struct.data[0x10];
     struct.toContainer = MachinaModels.getUint16(struct.data, 0x20);
