@@ -2,7 +2,7 @@ const MachinaModels = require("./_MachinaModels.js");
 
 module.exports = async (struct) => {
     struct.sequence = MachinaModels.getUint32(struct.data, 0x00);
-    struct.action = inventoryOperation(struct.region, MachinaModels.getUint16(struct.data,0x04));
+    struct.action = inventoryOperation(struct.region, MachinaModels.getUint16(struct.data, 0x04));
     struct.fromContainer = MachinaModels.getUint16(struct.data, 0x0C);
     struct.fromSlot = struct.data[0x10];
     struct.toContainer = MachinaModels.getUint16(struct.data, 0x20);
@@ -32,6 +32,7 @@ const inventoryOperation = (region, action) => {
         return "swap";
     if (action === offset + 5)
         return "merge";
-    if (action === offset + 10)
+    if (action === offset + 10 || action === offset + 3)
         return "split";
+    return `unknown${action}`;
 };
