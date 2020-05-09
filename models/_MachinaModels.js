@@ -281,8 +281,8 @@ module.exports.getString = (uint8Array, offset, length) => {
         length = uint8Array.length - offset;
     }
 
-    // Remove the suffix zeros
-    while (length > 0 && uint8Array[offset + length - 1] === 0) {
+    // Remove the suffix zeros and 255s
+    while (length > 0 && (uint8Array[offset + length - 1] === 0 || uint8Array[offset + length - 1] === 255)) {
         --length;
     }
 
