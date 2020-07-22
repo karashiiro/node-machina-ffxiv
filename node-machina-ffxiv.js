@@ -245,7 +245,12 @@ const MachinaFFXIV = (() => {
 
         stop(callback) {
             if (!this[monitor]) throw "MachinaWrapper is uninitialized.";
-            this[monitor].stdin.write("stop\n", callback);
+            try {
+                this[monitor].stdin.write("stop\n", callback);
+            } catch {
+                this[logger](`Server already closed.`);
+                return;
+            }
             this[server].close(() => {
                 this[logger](`Server on port ${this[port]} closed.`);
             });
