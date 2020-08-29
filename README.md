@@ -14,10 +14,12 @@ NOTE: Most features besides the `raw` data event will break after every patch re
 npm install node-machina-ffxiv
 ```
 
-Be sure to also install [Visual Studio 2017 Community Edition](https://docs.microsoft.com/en-us/visualstudio/releasenotes/vs2017-relnotes) to build [MachinaWrapperJSON](https://github.com/karashiiro/MachinaWrapperJSON) and place the output in the MachinaWrapper folder.
+If you don't trust the copy of MachinaWrapperJSON that is built in the Github Action, feel free to also install [Visual Studio 2017 Community Edition](https://docs.microsoft.com/en-us/visualstudio/releasenotes/vs2017-relnotes) to build [MachinaWrapperJSON](https://github.com/karashiiro/MachinaWrapperJSON) and place the output in the MachinaWrapper folder.
 
 ## Usage
-When using this module, your application must be run in Administrator mode, and the .exe needs firewall in/out privileges, since it works with FFXIV's network data.
+Installing [WinPCap](https://nmap.org/npcap/windows-10.html) is highly recommended, as it reduces the amount of additional setup that needs to be done. Set `monitorType` to `"WinPCap"` to enable WinPCap mode.
+
+Otherwise, your application must be run in Administrator mode, and the .exe needs firewall in/out privileges, since it operates on Windows sockets.
 
 Please refer to the [wiki](https://github.com/karashiiro/node-machina-ffxiv/wiki) for usage.
 
