@@ -14,7 +14,6 @@ const MachinaModels = require('./models/_MachinaModels.js');
 const MachinaFFXIV = (() => {
     const monitor = Symbol();
     const ws = Symbol();
-    const timeout = Symbol();
     const filter = Symbol();
     const port = Symbol();
 
@@ -145,19 +144,31 @@ const MachinaFFXIV = (() => {
             } else {
                 this[monitor] = spawn(this[exePath], this[args]);
             }
-            this[logger](`MachinaWrapper spawned with arguments "${this[args].toString()}"`);
+            this[logger]({
+                level: "info",
+                message: `MachinaWrapper spawned with arguments "${this[args].toString()}"`,
+            });
 
             this[monitor].stderr.on('data', (err) => {
-                this[logger](err.toString());
+                this[logger]({
+                    level: "error",
+                    message: err.toString(),
+                });
             });
 
             this[monitor]
                 .once('close', (code) => {
                     this[ws].close(0);
-                    this[logger](`MachinaWrapper closed with code: ${code}`);
+                    this[logger]({
+                        level: "info",
+                        message: `MachinaWrapper closed with code: ${code}`,
+                    });
                 })
                 .on('error', (err) => {
-                    this[logger](err);
+                    this[logger]({
+                        level: "error",
+                        message: err.toString(),
+                    });
                 });
 
             MachinaModels.loadDefinitions(options && options.definitionsDir);
@@ -189,7 +200,10 @@ const MachinaFFXIV = (() => {
                     try {
                         content = JSON.parse(data.toString());
                     } catch (err) {
-                        this[logger](`Message threw an error: ${err}\n${err.stack}\nMessage content:\n${data.toString()}`);
+                        this[logger]({
+                            level: "error",
+                            message: `Message threw an error: ${err}\n${err.stack}\nMessage content:\n${data.toString()}`,
+                        });
                         return;
                     }
                     if (this[filter].length === 0 ||
@@ -212,14 +226,23 @@ const MachinaFFXIV = (() => {
                     }
                 })
                 .on("open", () =>
-                    this[logger](`Connected to MachinaWrapper on ws://${this[ip]? this[ip] : "localhost"}:${this[port]}!`),
+                    this[logger]({
+                        level: "info",
+                        message: `Connected to MachinaWrapper on ws://${this[ip]? this[ip] : "localhost"}:${this[port]}!`,
+                    }),
                 )
                 .on("upgrade", () =>
-                    this[logger]("MachinaWrapper connection protocol upgraded."),
+                    this[logger]({
+                        level: "info",
+                        message: "MachinaWrapper connection protocol upgraded.",
+                    }),
                 )
                 .on("close", () => this[logger]("Connection with MachinaWrapper closed."))
                 .on("error", (err) => {
-                    this[logger](`Connection errored with message ${err.message}, reconnecting in 1 second...`);
+                    this[logger]({
+                        level: "error",
+                        message: `Connection errored with message ${err.message}, reconnecting in 1 second...`,
+                    });
                     setTimeout(() => this.connect(), 1000); // This cannot be reduced since we need to maintain "this" context.
                 });
         }
@@ -242,24 +265,36 @@ const MachinaFFXIV = (() => {
             this.kill();
             this[monitor] = spawn(this[exePath], this[args]);
             this.start(callback);
-            this[logger](`MachinaWrapper reset!`);
+            this[logger]({
+                level: "info",
+                message: `MachinaWrapper reset!`,
+            });
         }
 
         async start(callback) {
             await this.sendMessage("start", callback);
-            this[logger](`MachinaWrapper started!`);
+            this[logger]({
+                level: "info",
+                message: `MachinaWrapper started!`,
+            });
         }
     
         async stop(callback) {
             await this.sendMessage("stop", callback);
             this[ws].close(0);
-            this[logger](`MachinaWrapper stopped!`);
+            this[logger]({
+                level: "info",
+                message: `MachinaWrapper stopped!`
+            });
         }
     
         async kill(callback) {
             await this.sendMessage("kill", callback);
             this[ws].close(0);
-            this[logger](`MachinaWrapper killed!`);
+            this[logger]({
+                level: "info",
+                message: `MachinaWrapper killed!`
+            });
         }
 
         async sendMessage(message, callback) {

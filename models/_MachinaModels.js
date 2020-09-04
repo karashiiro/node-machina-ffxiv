@@ -114,7 +114,10 @@ module.exports.loadDefinitions = (definitionsDir) => {
 
 module.exports.parse = async (logger, struct, noData) => {
     if (struct.segmentType !== 0x03) {
-        logger(`Packet recieved with no IPC data, ignoring...`)
+        logger({
+            level: "warn",
+            message: `Packet recieved with no IPC data, ignoring...`,
+        })
         return;
     } // No IPC data
 
@@ -155,18 +158,30 @@ module.exports.parse = async (logger, struct, noData) => {
     if (this[struct.type]) {
         try {
             await this[struct.type](struct);
-            logger(`Processed packet ${struct.type}, firing event...`);
+            logger({
+                level: "info",
+                message: `Processed packet ${struct.type}, firing event...`,
+            });
         } catch (err) {
-            logger(`Failed to process packet ${struct.type}, got error ${err}`);
+            logger({
+                level: "error",
+                message: `Failed to process packet ${struct.type}, got error ${err}`,
+            });
         }
     }
 
     if (this[struct.subType]) {
         try {
             await this[struct.subType](struct);
-            logger(`Processed packet ${struct.subType}, firing event...`);
+            logger({
+                level: "info",
+                message: `Processed packet ${struct.subType}, firing event...`,
+            });
         } catch (err) {
-            logger(`Failed to process packet ${struct.subType}, got error ${err}`);
+            logger({
+                level: "error",
+                message: `Failed to process packet ${struct.subType}, got error ${err}`,
+            });
         }
     }
 
@@ -177,7 +192,10 @@ module.exports.parse = async (logger, struct, noData) => {
 
 module.exports.parseAndEmit = async (logger, struct, noData, context) => {
     if (struct.segmentType !== 0x03) {
-        logger(`Packet recieved with no IPC data, ignoring...`)
+        logger({
+            level: "warn",
+            message: `Packet recieved with no IPC data, ignoring...`,
+        });
         return;
     } // No IPC data
 
