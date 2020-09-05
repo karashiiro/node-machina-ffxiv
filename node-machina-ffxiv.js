@@ -237,7 +237,13 @@ const MachinaFFXIV = (() => {
                         message: "MachinaWrapper connection protocol upgraded.",
                     }),
                 )
-                .on("close", () => this[logger]("Connection with MachinaWrapper closed."))
+                .on("close", () => {
+                    this[logger]({
+                        level: "info",
+                        message: "Connection with MachinaWrapper closed, reconnecting in 1 second...",
+                    })
+                    setTimeout(() => this.connect(), 1000);
+                })
                 .on("error", (err) => {
                     this[logger]({
                         level: "error",
