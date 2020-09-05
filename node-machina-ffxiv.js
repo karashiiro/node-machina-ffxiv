@@ -139,11 +139,28 @@ const MachinaFFXIV = (() => {
                 throw new Error(`MachinaWrapper not found in ${this[exePath]}`);
             }
 
+            this.spawnChild();
+
+            MachinaModels.loadDefinitions(options && options.definitionsDir);
+
+            this[filter] = [];
+
+            this.connect();
+        }
+
+        spawnChild() {
+            if (this[monitor] != null) {
+                try {
+                    this.kill();
+                } catch {};
+            }
+
             if (this[hasWine]) {
                 this[monitor] = spawn(`WINEPREFIX="${this[winePrefix]}" wine ${this[exePath]}`, this[args]);
             } else {
                 this[monitor] = spawn(this[exePath], this[args]);
             }
+
             this[logger]({
                 level: "info",
                 message: `MachinaWrapper spawned with arguments "${this[args].toString()}"`,
@@ -170,15 +187,15 @@ const MachinaFFXIV = (() => {
                         message: err.toString(),
                     });
                 });
-
-            MachinaModels.loadDefinitions(options && options.definitionsDir);
-
-            this[filter] = [];
-
-            this.connect();
         }
 
         connect() {
+            if (this[ws] != null) {
+                try {
+                    this[ws].close();
+                } catch {};
+            }
+
             // { type: raw,
             //   opcode: number,
             //   region: Global/KR/CN,
@@ -268,8 +285,8 @@ const MachinaFFXIV = (() => {
 
         reset(callback) {
             if (!this[exePath] || !this[args]) throw "No instance to reset.";
-            this.kill();
-            this[monitor] = spawn(this[exePath], this[args]);
+            this.spawnChild();
+            this.connect();
             this.start(callback);
             this[logger]({
                 level: "info",
