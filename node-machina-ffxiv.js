@@ -191,9 +191,7 @@ const MachinaFFXIV = (() => {
 
         connect() {
             if (this[ws] != null) {
-                try {
-                    this[ws].close();
-                } catch {};
+                delete this[ws];
             }
 
             // { type: raw,
