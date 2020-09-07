@@ -26,6 +26,8 @@ const MachinaFFXIV = (() => {
     const logger = Symbol();
     const region = Symbol();
 
+    const closedIntentionally = Symbol();
+
     const hasWine = Symbol();
     const winePrefix = Symbol();
 
@@ -113,6 +115,8 @@ const MachinaFFXIV = (() => {
                 }
             }
 
+            this[closedIntentionally] = false;
+
             if (!this[port]) {
                 this[port] = 13346;
             }
@@ -150,9 +154,8 @@ const MachinaFFXIV = (() => {
 
         spawnChild() {
             if (this[monitor] != null) {
-                try {
-                    this.kill();
-                } catch {};
+                this[monitor].kill();
+                delete this[monitor];
             }
 
             if (this[hasWine]) {
@@ -191,6 +194,7 @@ const MachinaFFXIV = (() => {
 
         connect() {
             if (this[ws] != null) {
+                this[ws].close();
                 delete this[ws];
             }
 
@@ -253,18 +257,26 @@ const MachinaFFXIV = (() => {
                     }),
                 )
                 .on("close", () => {
-                    this[logger]({
-                        level: "info",
-                        message: "Connection with MachinaWrapper closed, reconnecting in 1 second...",
-                    })
-                    setTimeout(() => this.connect(), 1000);
+                    if (!this[closedIntentionally]) {
+                        this[logger]({
+                            level: "info",
+                            message: "Connection with MachinaWrapper closed, reconnecting in 1 second...",
+                        });
+                        setTimeout(() => {
+                            this.reset();
+                        }, 1000);
+                    } else {
+                        this[logger]({
+                            level: "info",
+                            message: "Connection with MachinaWrapper closed.",
+                        });
+                    }
                 })
                 .on("error", (err) => {
                     this[logger]({
                         level: "error",
-                        message: `Connection errored with message ${err.message}, reconnecting in 1 second...`,
-                    });
-                    setTimeout(() => this.connect(), 1000); // This cannot be reduced since we need to maintain "this" context.
+                        message: `Connection errored with message\n ${err.message}`,
+                    }); // This will also trigger the "close" event, so we don't need to reconnect here as well.
                 });
         }
 
@@ -302,7 +314,6 @@ const MachinaFFXIV = (() => {
     
         async stop(callback) {
             await this.sendMessage("stop", callback);
-            this[ws].close(0);
             this[logger]({
                 level: "info",
                 message: `MachinaWrapper stopped!`
@@ -310,8 +321,14 @@ const MachinaFFXIV = (() => {
         }
     
         async kill(callback) {
+            this[closedIntentionally] = true;
+
             await this.sendMessage("kill", callback);
-            this[ws].close(0);
+            delete this[monitor];
+
+            this[ws].close();
+            delete this[ws];
+
             this[logger]({
                 level: "info",
                 message: `MachinaWrapper killed!`
