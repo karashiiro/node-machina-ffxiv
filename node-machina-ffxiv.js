@@ -3,8 +3,9 @@
 const { spawn }    = require('child_process');
 const EventEmitter = require('events');
 const fs           = require('fs');
+const http         = require('http');
 const path         = require('path');
-const WebSocket    = require('ws');
+const readline     = require('readline');
 
 require('./polyfill.js');
 
@@ -13,7 +14,8 @@ const MachinaModels = require('./models/_MachinaModels.js');
 // Public class
 const MachinaFFXIV = (() => {
     const monitor = Symbol();
-    const ws = Symbol();
+    const server = Symbol();
+    const timeout = Symbol();
     const filter = Symbol();
     const port = Symbol();
 
@@ -25,8 +27,6 @@ const MachinaFFXIV = (() => {
     const noData = Symbol();
     const logger = Symbol();
     const region = Symbol();
-
-    const closedIntentionally = Symbol();
 
     const hasWine = Symbol();
     const winePrefix = Symbol();
@@ -115,8 +115,6 @@ const MachinaFFXIV = (() => {
                 }
             }
 
-            this[closedIntentionally] = false;
-
             if (!this[port]) {
                 this[port] = 13346;
             }
@@ -131,31 +129,16 @@ const MachinaFFXIV = (() => {
             }
 
             this[args] = [];
-            if (this[monitorType]) this[args].push("--MonitorType", this[monitorType]);
-            if (this[pid]) this[args].push("--ProcessID", this[pid]);
-            if (this[ip]) this[args].push("--LocalIP", this[ip]);
+            if (this[monitorType]) this[args].push(...["--MonitorType", this[monitorType]]);
+            if (this[pid]) this[args].push(...["--ProcessID", this[pid]]);
+            if (this[ip]) this[args].push(...["--LocalIP", this[ip]]);
             if (this[useSocketFilter]) this[args].push("--UseSocketFilter");
-            if (this[parseAlgorithm]) this[args].push("--ParseAlgorithm", this[parseAlgorithm]);
-            if (this[region]) this[args].push("--Region", this[region]);
-            if (this[port]) this[args].push("--Port", this[port]);
+            if (this[parseAlgorithm]) this[args].push(...["--ParseAlgorithm", this[parseAlgorithm]]);
+            if (this[region]) this[args].push(...["--Region", this[region]]);
+            if (this[port]) this[args].push(...["--Port", this[port]]);
             this[exePath] = (options && options.machinaExePath) || path.join(__dirname, '/MachinaWrapper/MachinaWrapper.exe');
             if (!fs.existsSync(this[exePath])) {
                 throw new Error(`MachinaWrapper not found in ${this[exePath]}`);
-            }
-
-            this.spawnChild();
-
-            MachinaModels.loadDefinitions(options && options.definitionsDir);
-
-            this[filter] = [];
-
-            this.connect();
-        }
-
-        spawnChild() {
-            if (this[monitor] != null) {
-                this[monitor].kill();
-                delete this[monitor];
             }
 
             if (this[hasWine]) {
@@ -163,40 +146,22 @@ const MachinaFFXIV = (() => {
             } else {
                 this[monitor] = spawn(this[exePath], this[args]);
             }
-
             this[logger]({
                 level: "info",
                 message: `MachinaWrapper spawned with arguments "${this[args].toString()}"`,
             });
 
-            this[monitor].stderr.on('data', (err) => {
+            MachinaModels.loadDefinitions(options && options.definitionsDir);
+
+            this[filter] = [];
+
+            // Create events to route outputs.
+            this[monitor].on('error', (err) => {
                 this[logger]({
                     level: "error",
-                    message: err.toString(),
+                    message: err,
                 });
             });
-
-            this[monitor]
-                .once('close', (code) => {
-                    this[ws].close(0);
-                    this[logger]({
-                        level: "info",
-                        message: `MachinaWrapper closed with code: ${code}`,
-                    });
-                })
-                .on('error', (err) => {
-                    this[logger]({
-                        level: "error",
-                        message: err.toString(),
-                    });
-                });
-        }
-
-        connect() {
-            if (this[ws] != null) {
-                this[ws].close();
-                delete this[ws];
-            }
 
             // { type: raw,
             //   opcode: number,
@@ -207,17 +172,15 @@ const MachinaFFXIV = (() => {
             //   packetSize,
             //   segmentType,
             //   data }
-            this[ws] = new WebSocket(
-                `ws://${this[ip] ? this[ip] : "localhost"}:${this[port]}`,
-                {
-                    perMessageDeflate: false,
-                },
-            );
-            this[ws]
-                .on("message", (data) => {
+            this[server] = http.createServer((req, res) => {
+                const data = [];
+                req.on('data', (chunk) => {
+                    data.push(chunk);
+                });
+                req.on('end', () => {
                     let content;
                     try {
-                        content = JSON.parse(data.toString());
+                        content = JSON.parse(data);
                     } catch (err) {
                         this[logger]({
                             level: "error",
@@ -243,45 +206,29 @@ const MachinaFFXIV = (() => {
                         MachinaModels.parseAndEmit(this[logger], content, this[noData], this); // Parse packet data
                         this.emit('raw', content); // Emit a catch-all event
                     }
-                })
-                .on("open", () =>
-                    this[logger]({
-                        level: "info",
-                        message: `Connected to MachinaWrapper on ws://${this[ip]? this[ip] : "localhost"}:${this[port]}!`,
-                    }),
-                )
-                .on("upgrade", () =>
-                    this[logger]({
-                        level: "info",
-                        message: "MachinaWrapper connection protocol upgraded.",
-                    }),
-                )
-                .on("close", () => {
-                    if (!this[closedIntentionally]) {
-                        this[logger]({
-                            level: "info",
-                            message: "Connection with MachinaWrapper closed, reconnecting in 1 second...",
-                        });
-                        setTimeout(() => {
-                            this.reset();
-                        }, 1000);
-                    } else {
-                        this[logger]({
-                            level: "info",
-                            message: "Connection with MachinaWrapper closed.",
-                        });
-                    }
-                })
-                .on("error", (err) => {
-                    this[logger]({
-                        level: "error",
-                        message: `Connection errored with message\n ${err.message}`,
-                    }); // This will also trigger the "close" event, so we don't need to reconnect here as well.
+
+                    res.end();
                 });
+            });
+
+            this[monitor].stderr.on('data', (err) => {
+                this[logger]({
+                    level: "error",
+                    message: err,
+                });
+            });
+
+            this[monitor].once('close', (code) => {
+                this[server].close();
+                this[logger]({
+                    level: "info",
+                    message: `MachinaWrapper closed with code: ${code}`,
+                });
+            });
         }
 
-        parse(struct) {
-            return MachinaModels.parse(this[logger], struct, this[noData], this);
+        async parse(struct) {
+            return await MachinaModels.parse(this[logger], struct, this[noData], this);
         }
 
         oncePacket(packetName) {
@@ -295,8 +242,8 @@ const MachinaFFXIV = (() => {
 
         reset(callback) {
             if (!this[exePath] || !this[args]) throw "No instance to reset.";
-            this.spawnChild();
-            this.connect();
+            this.kill();
+            this[monitor] = spawn(this[exePath], this[args]);
             this.start(callback);
             this[logger]({
                 level: "info",
@@ -304,54 +251,56 @@ const MachinaFFXIV = (() => {
             });
         }
 
-        async start(callback) {
-            await this.sendMessage("start", callback);
+        start(callback) {
+            if (!this[monitor]) throw "MachinaWrapper is uninitialized.";
+            this[server].listen(this[port], (err) => {
+                if (err) return this[logger]({
+                    level: "error",
+                    message: err,
+                });
+                this[logger]({
+                    level: "info",
+                    message: `Server started on port ${this[port]}.`,
+                });
+            });
+            this[monitor].stdin.write("start\n", callback);
             this[logger]({
                 level: "info",
                 message: `MachinaWrapper started!`,
             });
         }
-    
-        async stop(callback) {
-            await this.sendMessage("stop", callback);
-            this[logger]({
-                level: "info",
-                message: `MachinaWrapper stopped!`
-            });
-        }
-    
-        async kill(callback) {
-            this[closedIntentionally] = true;
 
-            await this.sendMessage("kill", callback);
-            delete this[monitor];
-
-            this[ws].close();
-            delete this[ws];
-
-            this[logger]({
-                level: "info",
-                message: `MachinaWrapper killed!`
-            });
-        }
-
-        async sendMessage(message, callback) {
+        stop(callback) {
+            if (!this[monitor]) throw "MachinaWrapper is uninitialized.";
             try {
-                if (!this[monitor]) {
-                    throw new Error("MachinaWrapper is uninitialized.");
-                }
-                await this.waitForWebSocketReady();
-                this[ws].send(message, callback);
-            } catch (err) {
-                if (callback) callback(err);
-                else throw err;
+                this[monitor].stdin.write("stop\n", callback);
+            } catch {
+                this[logger]({
+                    level: "error",
+                    message: `Server already closed.`,
+                });
+                return;
             }
+            this[server].close(() => {
+                this[logger]({
+                    level: "info",
+                    message: `Server on port ${this[port]} closed.`,
+                });
+            });
+            this[logger]({
+                level: "info",
+                message: `MachinaWrapper stopped!`,
+            });
         }
-    
-        async waitForWebSocketReady() {
-            while (this[ws].readyState !== 1)
-                await new Promise((resolve) => setTimeout(resolve, 1));
-            return;
+
+        kill(callback) {
+            if (!this[monitor]) throw "MachinaWrapper is uninitialized.";
+            this[monitor].stdin.end("kill\n", callback);
+            this[monitor] = undefined;
+            this[logger]({
+                level: "info",
+                message: `MachinaWrapper killed!`,
+            });
         }
     };
 
