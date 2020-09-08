@@ -14,7 +14,7 @@ module.exports = async (struct) => {
 const operationsOffset = (region) => {
     switch (region) {
         case "Global":
-            return 0x380;
+            return 0x377;
         case "CN":
             return 0x6d;
         case "KR":
