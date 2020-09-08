@@ -218,11 +218,11 @@ const MachinaFFXIV = (() => {
                 });
             });
 
-            this[monitor].once('close', (code) => {
+            this[monitor].once('close', (code, signal) => {
                 this[server].close();
                 this[logger]({
                     level: "info",
-                    message: `MachinaWrapper closed with code: ${code}`,
+                    message: `MachinaWrapper closed with code: ${code || signal}`,
                 });
             });
         }
