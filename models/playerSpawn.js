@@ -77,7 +77,7 @@ module.exports = async (struct) => {
     struct.pos = MachinaModels.Position3(struct.data, 514);
     struct.models = [];
     for (let i = 0; i < 10; i++) {
-        struct.effect.push(MachinaModels.getUint32(struct.data, 526 + (i * 4))); // last: 566
+        struct.models.push(MachinaModels.getUint32(struct.data, 526 + (i * 4))); // last: 566
     }
     struct.name = MachinaModels.getString(struct.data, 570, 32);
     struct.look = struct.data.slice(602, 628);
