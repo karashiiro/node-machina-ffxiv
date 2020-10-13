@@ -60,6 +60,7 @@ this.effectResult                  = require('./effectResult.js');
 this.eventPlay                     = require('./eventPlay.js');
 this.eventPlay4                    = require('./eventPlay4.js');
 this.eventPlay8                    = require('./eventPlay8.js');
+this.eventPlay32                    = require('./eventPlay32.js');
 this.someDirectorUnk4              = require('./someDirectorUnk4.js');
 this.inventoryTransaction          = require('./inventoryTransaction.js');
 
@@ -328,6 +329,19 @@ module.exports.Position3Uint16 = (uint8Array, offset) => {
         z: this.getUint16(uint8Array, offset + 4)
     };
 };
+
+module.exports.parseEventPlay = (struct) => {
+    struct.actorId = this.getUint64(struct.data, 0x00);
+    struct.eventId = this.getUint32(struct.data, 0x08);
+    struct.scene = this.getUint16(struct.data, 0x0C);
+    struct.padding = this.getUint16(struct.data, 0x0E);
+    struct.sceneFlags = this.getUint32(struct.data, 0x10);
+    struct.unknown = this.getUint32(struct.data, 0x14);
+    struct.paramSize = struct.data[0x18];
+    for (let i = 0; i < struct.paramSize; i++) {
+        struct[`param${i + 1}`] = this.getUint32(struct.data, 0x1C + i * 0x04);
+    }
+}
 
 module.exports.getEffectHeader = (uint8Array, offset) => { // 36 (0x24) bytes
     if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
