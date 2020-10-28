@@ -5,7 +5,7 @@ Many features are unimplemented, and chat-related messages aren't completely wor
 
 If you so choose, you can use it exclusively as a wrapper for Machina with minimal data processing by assigning the `raw` data event as shown below.
 
-Event type names and all packet structures are taken from the [Sapphire](https://github.com/SapphireServer/Sapphire) project.
+Event type names and all packet structures are taken from the [Sapphire](https://github.com/SapphireServer/Sapphire) server project.
 
 NOTE: Most features besides the `raw` data event will break after every patch release until the [IPC opcodes](https://github.com/SapphireServer/Sapphire/blob/develop/src/common/Network/PacketDef/Ipcs.h) are updated in the Sapphire repo.
 
