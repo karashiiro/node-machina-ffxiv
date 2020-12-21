@@ -1,6 +1,6 @@
 'use strict';
 
-const { spawn }    = require('child_process');
+const childProcess = require('child_process');
 const EventEmitter = require('events');
 const fs           = require('fs');
 const http         = require('http');
@@ -33,6 +33,8 @@ const MachinaFFXIV = (() => {
 
     const args = Symbol();
     const exePath = Symbol();
+
+    const spawn = Symbol();
 
     class MachinaFFXIV extends EventEmitter {
         constructor(options) {
@@ -113,6 +115,14 @@ const MachinaFFXIV = (() => {
                 } else if (options.winePrefix) {
                     this[winePrefix] = options.winePrefix;
                 }
+
+                if (options.spawn && typeof options.spawn !== 'function') {
+                    throw new TypeError("spawn must be a Function.");
+                } else if (options.spawn) {
+                    this[spawn] = options.spawn;
+                } else {
+                    this[spawn] = childProcess.spawn;
+                }
             }
 
             if (!this[port]) {
@@ -142,9 +152,12 @@ const MachinaFFXIV = (() => {
             }
 
             if (this[hasWine]) {
-                this[monitor] = spawn(`WINEPREFIX="${this[winePrefix]}" wine ${this[exePath]}`, this[args]);
+                this[monitor] = this[spawn](`WINEPREFIX="${this[winePrefix]}" wine ${this[exePath]}`, this[args]);
             } else {
-                this[monitor] = spawn(this[exePath], this[args]);
+                this[monitor] = this[spawn](this[exePath], this[args]);
+                if(!this[monitor]) {
+                    throw new Error('spawn function must return the spawned process.');
+                }
             }
             this[logger]({
                 level: "info",
