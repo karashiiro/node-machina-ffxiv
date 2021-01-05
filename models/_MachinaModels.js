@@ -60,9 +60,11 @@ this.effectResult                  = require('./effectResult.js');
 this.eventPlay                     = require('./eventPlay.js');
 this.eventPlay4                    = require('./eventPlay4.js');
 this.eventPlay8                    = require('./eventPlay8.js');
-this.eventPlay32                    = require('./eventPlay32.js');
+this.eventPlay32                   = require('./eventPlay32.js');
 this.someDirectorUnk4              = require('./someDirectorUnk4.js');
 this.inventoryTransaction          = require('./inventoryTransaction.js');
+this.desynthResult                 = require('./desynthResult.js');
+this.reductionResult               = require('./reductionResult.js');
 
 // Actor control packets
 this.actionStart                   = require('./actorControl/actionStart.js');
