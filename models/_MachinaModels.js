@@ -34,6 +34,7 @@ this.equipDisplayFlags             = require('./equipDisplayFlags.js');
 this.examineSearchInfo             = require('./examineSearchInfo.js');
 this.freeCompanyEvent              = require('./freeCompanyEvent.js');
 this.freeCompanyUpdateShortMessage = require('./freeCompanyUpdateShortMessage.js');
+this.housingWardInfo               = require('./housingWardInfo.js');
 this.initZone                      = require('./initZone.js');
 this.itemInfo                      = require('./itemInfo.js');
 this.logMessage                    = require('./logMessage.js');
