@@ -67,6 +67,7 @@ this.desynthResult                 = require('./desynthResult.js');
 this.resultDialog                  = require('./resultDialog.js');
 this.submarineExplorationResult    = require('./submarineExplorationResult.js');
 this.submarineStatusList           = require('./submarineStatusList.js');
+this.airshipStatusList             = require('./airshipStatusList.js');
 
 // Actor control packets
 this.actionStart                   = require('./actorControl/actionStart.js');
