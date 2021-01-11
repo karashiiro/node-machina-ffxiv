@@ -64,7 +64,9 @@ this.eventPlay32                   = require('./eventPlay32.js');
 this.someDirectorUnk4              = require('./someDirectorUnk4.js');
 this.inventoryTransaction          = require('./inventoryTransaction.js');
 this.desynthResult                 = require('./desynthResult.js');
-this.resultDialog               = require('./resultDialog.js');
+this.resultDialog                  = require('./resultDialog.js');
+this.submarineExplorationResult    = require('./submarineExplorationResult.js');
+this.submarineStatusList           = require('./submarineStatusList.js');
 
 // Actor control packets
 this.actionStart                   = require('./actorControl/actionStart.js');
