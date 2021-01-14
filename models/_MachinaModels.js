@@ -42,7 +42,6 @@ this.marketBoardItemListing        = require('./marketBoardItemListing.js');
 this.marketBoardItemListingCount   = require('./marketBoardItemListingCount.js');
 this.marketBoardItemListingHistory = require('./marketBoardItemListingHistory.js');
 this.marketBoardSearchResult       = require('./marketBoardSearchResult.js');
-this.marketTaxRates                = require('./marketTaxRates.js');
 this.mount                         = require('./mount.js');
 this.messageFC                     = require('./messageFC.js');
 this.npcSpawn                      = require('./npcSpawn.js');
@@ -65,7 +64,7 @@ this.eventPlay32                   = require('./eventPlay32.js');
 this.someDirectorUnk4              = require('./someDirectorUnk4.js');
 this.inventoryTransaction          = require('./inventoryTransaction.js');
 this.desynthResult                 = require('./desynthResult.js');
-this.reductionResult               = require('./reductionResult.js');
+this.resultDialog               = require('./resultDialog.js');
 
 // Actor control packets
 this.actionStart                   = require('./actorControl/actionStart.js');
@@ -84,6 +83,10 @@ this.setFestival                   = require('./actorControl/setFestival.js');
 this.setMountSpeed                 = require('./actorControl/setMountSpeed.js');
 this.toggleWeapon                  = require('./actorControl/toggleWeapon.js');
 this.updateRestedExp               = require('./actorControl/updateRestedExp.js');
+
+// Result dialog packets
+this.marketTaxRates                = require('./resultDialog/marketTaxRates.js');
+this.reductionResult               = require('./resultDialog/reductionResult.js');
 
 // Client-zone packets
 this.chatHandler                   = require('./chatHandler.js');
