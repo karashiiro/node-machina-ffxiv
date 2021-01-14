@@ -1,8 +1,6 @@
-const MachinaModels = require("./_MachinaModels.js");
+const MachinaModels = require("../_MachinaModels.js");
 
 module.exports = async (struct) => {
-    struct.unknown0 = MachinaModels.getUint32(struct.data, 0x00);
-    struct.unknown1 = MachinaModels.getUint32(struct.data, 0x04);
     struct.itemID = MachinaModels.getUint32(struct.data, 0x08) % 500000;
     struct.unknown2 = MachinaModels.getUint32(struct.data, 0x12);
     struct.result = [];
