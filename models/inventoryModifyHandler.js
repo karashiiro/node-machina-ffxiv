@@ -1,6 +1,24 @@
 const MachinaModels = require("./_MachinaModels.js");
 
+const uri = "https://raw.githubusercontent.com/karashiiro/FFXIVOpcodes/master/constants.min.json";
+
+let constants = null;
+const imhInit = () => {
+    return new Promise(resolve => {
+        const req = https.request(new URL(uri), (res) => {
+            const data = [];
+            res.setEncoding("utf8");
+            res.on("data", (chunk) => data.push(chunk));
+            res.on("end", () => resolve(JSON.parse(data.join(""))));
+        });
+        req.end();
+    });
+};
+
 module.exports = async (struct) => {
+    if (constants == null)
+        constants = await imhInit();
+
     struct.sequence = MachinaModels.getUint32(struct.data, 0x00);
     struct.action = inventoryOperation(struct.region, MachinaModels.getUint16(struct.data, 0x04));
     struct.fromContainer = MachinaModels.getUint16(struct.data, 0x0C);
@@ -12,14 +30,7 @@ module.exports = async (struct) => {
 
 // https://github.com/SapphireServer/Sapphire/blob/develop/src/common/Common.h#L50-L57
 const operationsOffset = (region) => {
-    switch (region) {
-        case "Global":
-            return 0x0198;
-        case "CN":
-            return 0x02CC;
-        case "KR":
-            return 0x01A1;
-    }
+    return constants[region].InventoryOperationBaseValue;
 };
 
 const inventoryOperation = (region, action) => {
