@@ -1,3 +1,4 @@
+const https = require("https");
 const MachinaModels = require("./_MachinaModels.js");
 
 const uri = "https://raw.githubusercontent.com/karashiiro/FFXIVOpcodes/master/constants.min.json";
