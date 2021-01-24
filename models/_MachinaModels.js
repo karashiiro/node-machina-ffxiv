@@ -66,6 +66,7 @@ this.inventoryTransaction          = require('./inventoryTransaction.js');
 this.desynthResult                 = require('./desynthResult.js');
 this.resultDialog                  = require('./resultDialog.js');
 this.submarineExplorationResult    = require('./submarineExplorationResult.js');
+this.submarineProgressionStatus    = require('./submarineProgressionStatus.js');
 this.submarineStatusList           = require('./submarineStatusList.js');
 this.airshipExplorationResult      = require('./airshipExplorationResult.js');
 this.airshipStatusList             = require('./airshipStatusList.js');
