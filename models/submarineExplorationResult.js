@@ -43,7 +43,7 @@ module.exports = async (struct) => {
 
             // Both to indicate whether loot 1 or 2 is in the tier 3 pool
             // 0 = yes, 1 = no
-            unknown6: data[0x22 + (i * DESTINATION_DATA_LENGTH)],
+            unknown7: data[0x22 + (i * DESTINATION_DATA_LENGTH)],
             unknown8: data[0x23 + (i * DESTINATION_DATA_LENGTH)],
 
             loot1SurveillanceResult: MachinaModels.getUint32(data, 0x24 + (i * DESTINATION_DATA_LENGTH)),
