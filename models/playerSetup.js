@@ -1,7 +1,7 @@
 const MachinaModels = require('./_MachinaModels.js');
 
 module.exports = (struct) => {
-    struct.contentID = MachinaModels.getUint64(struct.data, 0x00, false);
+    struct.contentID = MachinaModels.getUint64(struct.data, 0x00, true);
     struct.unknown8 = MachinaModels.getUint32(struct.data, 0x08);
     struct.unknownC = MachinaModels.getUint32(struct.data, 0x0C);
     struct.charID = MachinaModels.getUint32(struct.data, 0x10);
