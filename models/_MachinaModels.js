@@ -273,7 +273,7 @@ module.exports.getUint32 = (uint8Array, offset) => {
     return buffer.getUint32(0, true);
 };
 
-module.exports.getUint64 = (uint8Array, offset) => {
+module.exports.getUint64 = (uint8Array, offset, includelastBit = false) => {
     if (typeof offset === 'undefined') throw "Parameter 'offset' not provided.";
 
     let buffer = new DataView(new ArrayBuffer(8));
@@ -282,7 +282,10 @@ module.exports.getUint64 = (uint8Array, offset) => {
     }
 
     let num = `${buffer.getBigUint64(0, true)}`;
-    return num.substr(0, num.length - 1);
+    if(!includelastBit){
+        return num.substr(0, num.length - 1);
+    }
+    return num;
 };
 
 module.exports.getFloat = (uint8Array, offset) => {
