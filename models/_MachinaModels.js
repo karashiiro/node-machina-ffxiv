@@ -70,6 +70,7 @@ this.submarineProgressionStatus    = require('./submarineProgressionStatus.js');
 this.submarineStatusList           = require('./submarineStatusList.js');
 this.airshipExplorationResult      = require('./airshipExplorationResult.js');
 this.airshipStatusList             = require('./airshipStatusList.js');
+this.airshipStatus                 = require('./airshipStatus.js');
 
 // Actor control packets
 this.actionStart                   = require('./actorControl/actionStart.js');

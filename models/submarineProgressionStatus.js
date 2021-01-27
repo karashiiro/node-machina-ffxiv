@@ -2,7 +2,7 @@ const SECTORS_DATA_LENGTH = 10;
 const MASK = 0b00000001;
 
 module.exports = async (struct) => {
-    struct.submarineCount = struct.data[0];
+    struct.unlockedSubmarinesCount = struct.data[0];
     struct.unlockedSectors = [];
     struct.exploredSectors = [];
 
