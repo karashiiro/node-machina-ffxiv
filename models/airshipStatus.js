@@ -13,7 +13,7 @@ module.exports = async (struct) => {
 
     struct.currentExp = MachinaModels.getUint32(struct.data, 0x0C);
     struct.totalExpForNextRank = MachinaModels.getUint32(struct.data, 0x10);
-    struct.unlockedAirshipsCount = MachinaModels.getUint16(struct.data, 0x14);
+    struct.unlockedAirshipCount = MachinaModels.getUint16(struct.data, 0x14);
     struct.hull = MachinaModels.getUint16(struct.data, 0x16);
     struct.rigging = MachinaModels.getUint16(struct.data, 0x18);
     struct.forecastle = MachinaModels.getUint16(struct.data, 0x1A);

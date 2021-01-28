@@ -12,8 +12,10 @@ module.exports = async (struct) => {
             exp: MachinaModels.getUint32(struct.data, 0x04 + (i * DESTINATION_DATA_LENGTH)),
             favorResult: MachinaModels.getUint32(struct.data, 0x08 + (i * DESTINATION_DATA_LENGTH)),
             // -1 = no sector
-            sectorId: struct.data[0x0C] === 128 ? -1 : struct.data[0x0C],
-            discoveredSectorId: struct.data[0x0D] === 128 ? -1 : struct.data[0x0D],
+            sectorId: struct.data[0x0C + (i * DESTINATION_DATA_LENGTH)] === 128 ? -1 : struct.data[0x0C + (i * DESTINATION_DATA_LENGTH)],
+            // if sectorId > -1, the default value is -1, else it's 0
+            discoveredSectorId: struct.data[0x0D + (i * DESTINATION_DATA_LENGTH)] === 128 ? -1 : struct.data[0x0D + (i * DESTINATION_DATA_LENGTH)],
+            // 2 = 100%, 3 = 50%
             expRating: struct.data[0x0E + (i * DESTINATION_DATA_LENGTH)],
 
             unknown0: struct.data[0x0F + (i * DESTINATION_DATA_LENGTH)],
