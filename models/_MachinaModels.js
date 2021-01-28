@@ -68,8 +68,11 @@ this.resultDialog                  = require('./resultDialog.js');
 this.submarineExplorationResult    = require('./submarineExplorationResult.js');
 this.submarineProgressionStatus    = require('./submarineProgressionStatus.js');
 this.submarineStatusList           = require('./submarineStatusList.js');
+this.submarineTimers               = require('./submarineTimers.js');
 this.airshipExplorationResult      = require('./airshipExplorationResult.js');
 this.airshipStatusList             = require('./airshipStatusList.js');
+this.airshipStatus                 = require('./airshipStatus.js');
+this.airshipTimers                 = require('./airshipTimers.js');
 
 // Actor control packets
 this.actionStart                   = require('./actorControl/actionStart.js');
