@@ -28,8 +28,8 @@ module.exports = async (struct) => {
 
     struct.name = MachinaModels.getString(struct.data, 0x23, 20);
 
-    struct.unknown2 = struct.data[0x37];
-    struct.unknown3 = MachinaModels.getUint16(struct.data, 0x38);
+    struct.padding1 = struct.data[0x37];
+    struct.padding2 = MachinaModels.getUint16(struct.data, 0x38);
 
     struct.unlockedSectors = [];
     struct.exploredSectors = [];
@@ -44,6 +44,6 @@ module.exports = async (struct) => {
         }
     }
 
-    struct.unknown4 = MachinaModels.getUint16(struct.data, 0x42);
-    struct.unknown5 = MachinaModels.getUint32(struct.data, 0x44);
+    struct.unknown1 = MachinaModels.getUint16(struct.data, 0x42);
+    struct.unknown2 = MachinaModels.getUint32(struct.data, 0x44);
 };

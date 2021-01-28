@@ -11,8 +11,8 @@ module.exports = async (struct) => {
             airshipSpeed: MachinaModels.getUint16(struct.data, 0x04 + (i * AIRSHIP_DATA_LENGTH)),
             name: MachinaModels.getString(struct.data, 0x06 + (i * AIRSHIP_DATA_LENGTH), 20),
 
-            unknown0: MachinaModels.getUint16(0x1A + (i * AIRSHIP_DATA_LENGTH)),
-            unknown1: struct.data[0x1C + (i * AIRSHIP_DATA_LENGTH)],
+            padding1: MachinaModels.getUint16(struct.data, 0x1A + (i * AIRSHIP_DATA_LENGTH)),
+            padding2: struct.data[0x1C + (i * AIRSHIP_DATA_LENGTH)],
 
             dest1: struct.data[0x1D + (i * AIRSHIP_DATA_LENGTH)] === 128 ? -1 : struct.data[0x1D + (i * AIRSHIP_DATA_LENGTH)],
             dest2: struct.data[0x1E + (i * AIRSHIP_DATA_LENGTH)] === 128 ? -1 : struct.data[0x1E + (i * AIRSHIP_DATA_LENGTH)],

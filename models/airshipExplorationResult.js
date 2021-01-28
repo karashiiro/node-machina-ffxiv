@@ -6,9 +6,9 @@ module.exports = async (struct) => {
     struct.rating = MachinaModels.getUint16(struct.data, 0x00);
     struct.airshipSpeed = MachinaModels.getUint16(struct.data, 0x02);
 
-    destinations = [];
+    struct.explorationResult = [];
     for (let i = 0; i < 5; i++) {
-        destinations.push({
+        struct.explorationResult.push({
             exp: MachinaModels.getUint32(struct.data, 0x04 + (i * DESTINATION_DATA_LENGTH)),
             favorResult: MachinaModels.getUint32(struct.data, 0x08 + (i * DESTINATION_DATA_LENGTH)),
             // -1 = no sector
@@ -48,6 +48,4 @@ module.exports = async (struct) => {
             unknown3: MachinaModels.getUint16(struct.data, 0x3A + (i * DESTINATION_DATA_LENGTH)),
         });
     }
-
-    struct.explorationResult = destinations;
 };
