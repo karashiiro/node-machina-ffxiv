@@ -73,6 +73,7 @@ this.airshipExplorationResult      = require('./airshipExplorationResult.js');
 this.airshipStatusList             = require('./airshipStatusList.js');
 this.airshipStatus                 = require('./airshipStatus.js');
 this.airshipTimers                 = require('./airshipTimers.js');
+this.freeCompanyInfo               = require('./freeCompanyInfo.js');
 
 // Actor control packets
 this.actionStart                   = require('./actorControl/actionStart.js');
