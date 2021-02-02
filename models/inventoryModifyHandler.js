@@ -1,7 +1,7 @@
 const https = require("https");
 const MachinaModels = require("./_MachinaModels.js");
 
-const uri = "https://cdn.jsdelivr.net/gh/karashiiro/FFXIVOpcodes/constants.min.json";
+const uri = "https://cdn.jsdelivr.net/gh/karashiiro/FFXIVOpcodes@latest/constants.min.json";
 
 let constants = null;
 const imhInit = () => {
