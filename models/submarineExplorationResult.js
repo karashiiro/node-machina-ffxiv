@@ -4,7 +4,7 @@ const DESTINATION_DATA_LENGTH = 56;
 
 module.exports = async (struct) => {
     // 0 = SS, 1 = S, A = 2, B = 3, 4 = C
-    struct.explorationRating = MachinaModels.getUint16(struct.data, 0x00);
+    struct.rating = MachinaModels.getUint16(struct.data, 0x00);
     struct.submarineSpeed = MachinaModels.getUint16(struct.data, 0x02);
 
     struct.explorationResult = [];
@@ -46,5 +46,5 @@ module.exports = async (struct) => {
             loot2ItemDiscoveryDescription: MachinaModels.getUint32(struct.data, 0x38 + (i * DESTINATION_DATA_LENGTH)),
         });
     }
-    struct.unknown3 = MachinaModels.getUint16(struct.data, 0x11C + (i * DESTINATION_DATA_LENGTH));
+    struct.unknown3 = MachinaModels.getUint32(struct.data, 0x11C);
 };
