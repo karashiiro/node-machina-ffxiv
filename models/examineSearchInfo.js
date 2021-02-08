@@ -6,7 +6,7 @@ module.exports = (struct) => {
     struct.worldID = MachinaModels.getUint16(struct.data, 0x22);
     struct.world = ProcessingHelper.getWorldByID(struct.worldID);
 
-    struct.searchComment = MachinaModels.getString(struct.data, 0x24, 0x30);
+    struct.searchComment = MachinaModels.getString(struct.data, 0x24, 192);
     struct.fc = MachinaModels.getString(struct.data, 0xE5, 0x17);
 
     struct.classJobs = [];
