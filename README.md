@@ -1,3 +1,5 @@
+**Please use [ffxiv-teamcraft/pcap-ffxiv](https://github.com/ffxiv-teamcraft/pcap-ffxiv) for all new projects. This package is no longer actively maintained.**
+
 # node-machina-ffxiv
 A WIP Node.js wrapper for revahn's [Machina](https://github.com/ravahn/machina) network capture library.
 
