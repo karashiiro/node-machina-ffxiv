@@ -26,7 +26,7 @@ Please refer to the [wiki](https://github.com/karashiiro/node-machina-ffxiv/wiki
 ## Example
 ```
 const MachinaFFXIV = require('node-machina-ffxiv');
-const Machina = new MachinaFFXIV();
+const Machina = new MachinaFFXIV({}); // An object must be provided, even if it is empty.
 Machina.start(() => {
     console.log("Machina started!");
 });
